@@ -47,20 +47,12 @@
   
 
   
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
-  
 
   
 
   <!-- import link -->
   
 
-  
-    
-      
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.18.1/styles/solarized-light.css">
-
-    
   
   
     
@@ -369,9 +361,9 @@
             
               
 <div class='new-meta-item author'>
-  <a href="https://xaoxuu.com" target="_blank" rel="nofollow noopener">
-    <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png">
-    <p>Mr. X</p>
+  <a href="https://leverimmy.top" rel="nofollow">
+    <img src="https://leverimmy.top/gallery/avatar.jpg">
+    <p>Clever_Jimmy</p>
   </a>
 </div>
 
@@ -432,34 +424,24 @@
 <li>$S_i$ 表示 $S[1..i]$，即 $S$ 的第 $i$ 个前缀。</li>
 </ol>
 <p>特殊地，本文的字符串下标、$\pi$ 数组下标 <strong>均从 $1$ 开始</strong>。</p>
-<blockquote>
-<p>一些例子：对于 $S = \mathtt{ABCBAD}$ 而言：</p>
-<ol>
-<li>$\left|S\right| = 6$；</li>
-<li>$\left|\Sigma\right| = 4$；</li>
-<li>$S[2..4] = \mathtt{BCBA}$；</li>
-<li>$S_4 = \mathtt{ABCB}$。</li>
-</ol>
-</blockquote>
-<h3 id="前缀函数数组"><a href="#前缀函数数组" class="headerlink" title="前缀函数数组"></a>前缀函数数组</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>对于一个字符串 $S$，我们定义其前缀函数 $\pi(S)$ 的值为 $S$ 的最长相等的真前缀和真后缀的长度，即：<br>$$<br>\begin{aligned}<br>\pi(S) &amp; = \mathop{\operatorname{argmax}}\limits_{k &lt; \left|S\right|}\{S[1..k] = S[\left|S\right| - k + 1..\left|S\right|]\}<br>\\<br>&amp; = \mathop{\operatorname{argmax}}\limits_{k &lt; \left|S\right|}\{S_k \sqsupset S\}<br>\end{aligned}<br>$$<br>对于一个字符串 $S$，我们定义其前缀函数数组 $\pi$ 为 $\pi[i] = \pi(S_i)$。</p>
-<blockquote>
-<p>特殊地，当 $\left|S\right| = 1$ 时 $\pi(S) = \mathop{\operatorname{argmax}}\limits_{k &lt; 1}\{S[1..k] = S[2 - k..1]\}$</p>
-<p>当 $k = 0$ 时 $S[1..0] = S[2..1] = \epsilon$，故 $\pi(S) = 0$。</p>
-</blockquote>
-<hr>
-<blockquote>
-<p>性质 1：$\pi(S_i) = \pi[i] &lt; i$。</p>
-</blockquote>
-<div class='spoiler collapsed'>
-    <div class='spoiler-title'>
-        证明
-    </div>
-    <div class='spoiler-content'>
-        <p>由定义知 $\pi[i] &lt; i$，即得证。</p>
-<p align="right">$\blacksquare$ </p>
+<div class="note ">
+            <p>一些例子：对于 $S = \mathtt{ABCBAD}$ 而言：</p><ol><li>$\left|S\right| = 6$；</li><li>$\left|\Sigma\right| = 4$；</li><li>$S[2..4] = \mathtt{BCBA}$；</li><li>$S_4 = \mathtt{ABCB}$。</li></ol>
+          </div>
 
-    </div>
-</div>
+<h3 id="前缀函数数组"><a href="#前缀函数数组" class="headerlink" title="前缀函数数组"></a>前缀函数数组</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>对于一个字符串 $S$，我们定义其前缀函数 $\pi(S)$ 的值为 $S$ 的最长相等的真前缀和真后缀的长度，即：<br>$$<br>\begin{aligned}<br>\pi(S) &amp; = \mathop{\operatorname{argmax}}\limits_{k &lt; \left|S\right|}\{S[1..k] = S[\left|S\right| - k + 1..\left|S\right|]\}<br>\\<br>&amp; = \mathop{\operatorname{argmax}}\limits_{k &lt; \left|S\right|}\{S_k \sqsupset S\}<br>\end{aligned}<br>$$<br>对于一个字符串 $S$，我们定义其前缀函数数组 $\pi$ 为 $\pi[i] = \pi(S_i)$。</p>
+<div class="note warning">
+            <p>特殊地，当 $\left|S\right| = 1$ 时 $\pi(S) = \mathop{\operatorname{argmax}}\limits_{k &lt; 1}\{S[1..k] = S[2 - k..1]\}$</p><p>当 $k = 0$ 时 $S[1..0] = S[2..1] = \epsilon$，故 $\pi(S) = 0$。</p>
+          </div>
+
+<div class="note success">
+            <p>性质 1：$\pi(S_i) = \pi[i] &lt; i$。</p>
+          </div>
+
+<details ><summary> <p>证明</p> </summary>
+              <div class='content'>
+              <p>由定义知 $\pi[i] &lt; i$，即得证。</p><p align="right">$\blacksquare$ </p>
+              </div>
+            </details>
 
 <h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><ol>
 <li><p>根据定义，$\pi[1] = 0$；</p>
@@ -476,86 +458,41 @@
 <li><p>至此，我们求出了字符串 $S$ 的前缀函数数组 $\pi$。</p>
 </li>
 </ol>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code class="cpp">void calcPi(char* S) {
-    pi[1] = 0;
-    int len = strlen(S + 1);
-    for(int i = 2, k = 0; i &lt;= len; ++i) {
-        while(k &gt; 0 &amp;&amp; S[k + 1] != T[i])
-            k = pi[k];
-           if(S[k + 1] == S[i])
-            ++k;
-           pi[i] = k;
-    }
-}</code></pre>
-<h4 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h4><blockquote>
-<p>引理 1（后缀重叠引理）：对于 $x, y$ 满足 $x \sqsupset z, y \sqsupset z$ 而言，若 $\left|x\right| \le \left|y\right|$，则 $x \sqsupset y$；若 $\left|x\right| \ge \left|y\right|$，则 $y \sqsupset x$；若 $\left|x\right| = \left|y\right|$，则 $x = y$。</p>
-</blockquote>
-<p>过于显然，证明略。</p>
-<p align="right">$\blacksquare$ </p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calcPi</span><span class="params">(<span class="keyword">char</span>* S)</span> </span>&#123;</span><br><span class="line">    pi[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">strlen</span>(S + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>, k = <span class="number">0</span>; i &lt;= len; ++i) &#123;</span><br><span class="line">        <span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; S[k + <span class="number">1</span>] != T[i])</span><br><span class="line">            k = pi[k];</span><br><span class="line">       	<span class="keyword">if</span>(S[k + <span class="number">1</span>] == S[i])</span><br><span class="line">            ++k;</span><br><span class="line">       	pi[i] = k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<hr>
+<h4 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h4><div class="note success">
+            <p>引理 1（后缀重叠引理）：对于 $x, y$ 满足 $x \sqsupset z, y \sqsupset z$ 而言：</p><ul><li>若 $\left|x\right| \le \left|y\right|$，则 $x \sqsupset y$；</li><li>若 $\left|x\right| \ge \left|y\right|$，则 $y \sqsupset x$；</li><li>若 $\left|x\right| = \left|y\right|$，则 $x = y$。</li></ul>
+          </div>
+
+<details ><summary> <p>证明</p> </summary>
+              <div class='content'>
+              <p>过于显然，证明略。</p><p align="right">$\blacksquare$ </p>
+              </div>
+            </details>
+
 <p>设<br>$$<br>\pi^{\star}[q] = \{\pi[q], \pi^{(2)}[q], \cdots, \pi^{(t)}[q]\}<br>$$<br>其中<br>$$<br>\pi^{(i)}[q] = \begin{cases}q &amp; i = 0 \\ \pi[\pi^{(i - 1)}[q]] &amp; i \ge 1\end{cases}<br>$$</p>
 <p>当 $\pi^{(t)}[q] = 0$ 时 $\pi^{\star}[q]$ 中的序列终止。</p>
-<blockquote>
-<p>引理 2（前缀函数迭代引理）：对任意长度为 $n$ 的字符串 $S$，有 $\forall q \in [1, n], \pi^{\star}[q] = \{k: k &lt; q \land S_k \sqsupset S_q\}$。</p>
-</blockquote>
-<div class='spoiler collapsed'>
-    <div class='spoiler-title'>
-        证明
-    </div>
-    <div class='spoiler-content'>
-        <ul>
-<li><p>先证明 $\pi^{\star}[q] \subseteq \{k:k &lt; q \land S_k \sqsupset S_q\}$，</p>
-<p>即证明 $\forall x \in \pi^{\star}[q], x &lt; q \land S_x \sqsupset S_q$。</p>
-<p>任取 $x \in \pi^{\star}[q]$，不妨设 $x = \pi^{u}[q] \quad (u &gt; 0)$，下面通过对 $u$ 的数学归纳法证明命题成立。</p>
-<p>（基础）当 $u = 1$ 时，$x = \pi[q]$，由 $\pi$ 数组的定义可知 $\pi[q] &lt; q \land S_{\pi[q]} \sqsupset S_q$。</p>
-<p>（假设）假设当 $u = v$ 时 $\pi^{v}[q] &lt; q \land S_{\pi^{v}[q]} \sqsupset S_q$。</p>
-<p>（推导）则当 $u = v + 1$ 时，$\pi^{v + 1}[q] = \pi[\pi^{v}[q]] &lt; \pi^{v}[q] &lt; q$（性质 1）；$S_{\pi^{v + 1}[q]} \sqsupset S_{\pi^{v}[q]} \sqsupset S_q$（由性质 1 得到下标的大小关系，由引理 1 得到前缀之间的关系）</p>
-<p>因此 $\forall x \in \pi^{\star}[q], x &lt; q \land S_x \sqsupset S_q$。</p>
-</li>
-<li><p>再证明 $\{k:k &lt; q \land S_k \sqsupset S_q\} \subseteq \pi^{\star}[q]$，</p>
-<p>即证明 $\forall x \in \{k:k &lt; q \land S_x \sqsupset S_q\}, x \in\pi^{\star}[q]$</p>
-<p>考虑使用反证法来证明命题成立。</p>
-<p>假设集合 $M = \{k:k &lt; q \land S_k \sqsupset S_q\} - \pi^{\star}[q]$ 非空，$j$ 是 $M$ 中的最大值。</p>
-<p>$\because$ $\pi[q]$ 是 $\{k:k &lt; q \land S_x \sqsupset S_q\}$ 中的最大值，且 $j \in \{k:k &lt; q \land S_x \sqsupset S_q\}$</p>
-<p>$\therefore j &lt; \pi[q], S_j \sqsupset S_q$</p>
-<p>又 $\because \pi[q] \in \pi^{\star}[q]$</p>
-<p>$\therefore \exists j’ \in \pi^{\star}[q], \text{s.t. }j’ &gt; j$</p>
-<p>设 $j’$ 表示 $\pi^{\star}[q]$ 中比 $j$ 大的最小整数。</p>
-<p>$\because \{k:k &lt; q \land S_k \sqsupset S_q\} \subseteq \pi^{\star}[q]$ 且 $j’ \in \pi^{\star}[q]$</p>
-<p>$\therefore S_{j’} \sqsupset S_q$</p>
-<p>$\because j’ &gt; j$ 且 $j$ 是小于 $j’$ 的最大值</p>
-<p>$\therefore S_j \sqsupset S_{j’}$（引理 1）</p>
-<p>由 $\pi$ 数组的定义知 $\pi[j’] = j$</p>
-<p>$\because j’ \in \pi^{\star}[q]$</p>
-<p>$\therefore j = \pi[j’] \in \pi^{\star}[q]$，与假设矛盾</p>
-<p>因此 $\{k:k &lt; q \land S_k \sqsupset S_q\} \subseteq \pi^{\star}[q]$。</p>
-<p>综上所述，对任意长度为 $n$ 的字符串 $S$，有 $\forall q \in [1, n], \pi^{\star}[q] = \{k: k &lt; q \land S_k \sqsupset S_q\}$。</p>
-<p align="right">$\blacksquare$ </p>
+<div class="note success">
+            <p>引理 2（前缀函数迭代引理）：对任意长度为 $n$ 的字符串 $S$，有 $\forall q \in [1, n], \pi^{\star}[q] = \{k: k &lt; q \land S_k \sqsupset S_q\}$。</p>
+          </div>
+
+<details ><summary> <p>证明</p> </summary>
+              <div class='content'>
+              <ul><li><p>先证明 $\pi^{\star}[q] \subseteq \{k:k &lt; q \land S_k \sqsupset S_q\}$，</p><p>即证明 $\forall x \in \pi^{\star}[q], x &lt; q \land S_x \sqsupset S_q$。</p><p>任取 $x \in \pi^{\star}[q]$，不妨设 $x = \pi^{u}[q] \quad (u &gt; 0)$，下面通过对 $u$ 的数学归纳法证明命题成立。</p><p>（基础）当 $u = 1$ 时，$x = \pi[q]$，由 $\pi$ 数组的定义可知 $\pi[q] &lt; q \land S_{\pi[q]} \sqsupset S_q$。</p><p>（假设）假设当 $u = v$ 时 $\pi^{v}[q] &lt; q \land S_{\pi^{v}[q]} \sqsupset S_q$。</p><p>（推导）则当 $u = v + 1$ 时，$\pi^{v + 1}[q] = \pi[\pi^{v}[q]] &lt; \pi^{v}[q] &lt; q$（性质 1）；$S_{\pi^{v + 1}[q]} \sqsupset S_{\pi^{v}[q]} \sqsupset S_q$（由性质 1 得到下标的大小关系，由引理 1 得到前缀之间的关系）</p><p>因此 $\forall x \in \pi^{\star}[q], x &lt; q \land S_x \sqsupset S_q$。</p></li><li><p>再证明 $\{k:k &lt; q \land S_k \sqsupset S_q\} \subseteq \pi^{\star}[q]$，</p><p>即证明 $\forall x \in \{k:k &lt; q \land S_x \sqsupset S_q\}, x \in\pi^{\star}[q]$</p><p>考虑使用反证法来证明命题成立。</p><p>假设集合 $M = \{k:k &lt; q \land S_k \sqsupset S_q\} - \pi^{\star}[q]$ 非空，$j$ 是 $M$ 中的最大值。</p><p>$\because$ $\pi[q]$ 是 $\{k:k &lt; q \land S_x \sqsupset S_q\}$ 中的最大值，且 $j \in \{k:k &lt; q \land S_x \sqsupset S_q\}$</p><p>$\therefore j &lt; \pi[q], S_j \sqsupset S_q$</p><p>又 $\because \pi[q] \in \pi^{\star}[q]$</p><p>$\therefore \exists j’ \in \pi^{\star}[q], \text{s.t. }j’ &gt; j$</p><p>设 $j’$ 表示 $\pi^{\star}[q]$ 中比 $j$ 大的最小整数。</p><p>$\because \{k:k &lt; q \land S_k \sqsupset S_q\} \subseteq \pi^{\star}[q]$ 且 $j’ \in \pi^{\star}[q]$</p><p>$\therefore S_{j’} \sqsupset S_q$</p><p>$\because j’ &gt; j$ 且 $j$ 是小于 $j’$ 的最大值</p><p>$\therefore S_j \sqsupset S_{j’}$（引理 1）</p><p>由 $\pi$ 数组的定义知 $\pi[j’] = j$</p><p>$\because j’ \in \pi^{\star}[q]$</p><p>$\therefore j = \pi[j’] \in \pi^{\star}[q]$，与假设矛盾</p><p>因此 $\{k:k &lt; q \land S_k \sqsupset S_q\} \subseteq \pi^{\star}[q]$。</p><p>综上所述，对任意长度为 $n$ 的字符串 $S$，有 $\forall q \in [1, n], \pi^{\star}[q] = \{k: k &lt; q \land S_k \sqsupset S_q\}$。</p><p align="right">$\blacksquare$ </p>
+              </div>
+            </details>
+
 </li>
 </ul>
+<div class="note success">
+            <p>引理 3：对任意长度为 $n$ 的字符串 $S$，有 $\forall q \in [1, n]$，若 $\pi[q] &gt; 0$，则 $\pi[q] - 1 \in \pi^{\star}[q - 1]$。</p>
+          </div>
 
-    </div>
-</div>
-
-<hr>
-<blockquote>
-<p>引理 3：对任意长度为 $n$ 的字符串 $S$，有 $\forall q \in [1, n]$，若 $\pi[q] &gt; 0$，则 $\pi[q] - 1 \in \pi^{\star}[q - 1]$。</p>
-</blockquote>
-<div class='spoiler collapsed'>
-    <div class='spoiler-title'>
-        证明
-    </div>
-    <div class='spoiler-content'>
-        <p>令 $x = \pi[q] &gt; 0$，则 $x &lt; q, S_x \sqsupset S_q$</p>
-<p>$\because x &gt; 0$，则 $x - 1$ 有意义</p>
-<p>$\therefore x - 1 &lt; q - 1, S_{x - 1} \sqsupset S_{q - 1}$（把 $S_x$ 和 $S_q$ 的最后一个字符去掉） </p>
-<p>由引理 2 知 $x - 1 \in \pi^{\star}[q - 1]$</p>
-<p>$\therefore \forall q \in [1, n] \land \pi[q] &gt; 0,\pi[q] - 1 \in \pi^{\star}[q - 1]$</p>
-<p align="right">$\blacksquare$ </p>
-
-    </div>
-</div>
+<details ><summary> <p>证明</p> </summary>
+              <div class='content'>
+              <p>令 $x = \pi[q] &gt; 0$，则 $x &lt; q, S_x \sqsupset S_q$</p><p>$\because x &gt; 0$，则 $x - 1$ 有意义</p><p>$\therefore x - 1 &lt; q - 1, S_{x - 1} \sqsupset S_{q - 1}$（把 $S_x$ 和 $S_q$ 的最后一个字符去掉） </p><p>由引理 2 知 $x - 1 \in \pi^{\star}[q - 1]$</p><p>$\therefore \forall q \in [1, n] \land \pi[q] &gt; 0,\pi[q] - 1 \in \pi^{\star}[q - 1]$</p><p align="right">$\blacksquare$ </p>
+              </div>
+            </details>
 
 <hr>
 <p>对 $q \in [2, n]$ 定义子集 $E_{q - i} \subseteq \pi^{\star}[q - 1]$ 为：</p>
@@ -563,91 +500,26 @@
 <p>则有：</p>
 <p>$$<br>\begin{aligned}<br> E_{q - 1} &amp; = \{k\in\pi^{\star}[q - 1]:S_{k + 1} = S_k\}<br> \\<br> &amp; = \{k: k &lt; q - 1, S_k \sqsupset S_{q - 1}, S[k + 1] = S[q]\}<br> \\<br> &amp; = \{k: k &lt; q - 1, S_{k + 1} \sqsupset S_q\}<br>\end{aligned}<br>$$</p>
 <p>因此，$E_{q - 1}$ 是由 $\pi^{\star}[q - 1]$ 中的值组成的、能满足 $S_{k + 1}$ 与 $S_q$ 的某个后缀相等的 $k$ 组成的集合。</p>
-<blockquote>
-<p>推论 1：对任意长度为 $n$ 的字符串 $S$，有<br>$$<br>\forall q \in [2, n],\pi[q] = \begin{cases}0 &amp; E_{q - 1} = \varnothing \\ 1 + \max\{k \in E_{q - 1}\} &amp; E_{q - 1} \neq \varnothing\end{cases}<br>$$</p>
-</blockquote>
-<div class='spoiler collapsed'>
-    <div class='spoiler-title'>
-        证明
-    </div>
-    <div class='spoiler-content'>
-        <ul>
-<li><p>当 $E_{q - 1} = \varnothing$ 时，不存在任何一个 $k \in \pi^{\star}[q - 1]$，使得 $S_{k + 1} \sqsupset S_q$。</p>
-<p>显然此时 $\pi[q]$ 只能为 $0$。</p>
-</li>
-<li><p>当 $E_{q - 1} \neq \varnothing$ 时，</p>
-<ul>
-<li><p>$\forall k \in E_{q - 1}, k &lt; q - 1 \land S_{k + 1} \sqsupset S_q \Longrightarrow k + 1 &lt; q$</p>
-<p>则由 $\pi[q]$ 的定义，$k$ 是拓展到 $S_q$ 的某一后缀的备选项，$\pi[q] \ge 1 + \max\{k \in E_{q - 1}\}$。</p>
-</li>
-<li><p>注意到此时 $\pi[q] &gt; 0$，设 $r = \pi[q] - 1$。</p>
-<p>则 $r + 1 = \pi[q] &lt; q, S_{r + 1} = S_{\pi[q]} \sqsupset S_q$。</p>
-<p>$\because r + 1 &gt; 0$</p>
-<p>$\therefore S_{r + 1} = S_q$</p>
-<p>由引理 3 可得 $r = \pi[q] - 1 \in \pi^{\star}[q - 1]$</p>
-<p>$\therefore r \in E_{q - 1}$</p>
-<p>$\therefore \pi[q] - 1 = r \le \max\{k \in E_{q - 1}\}$</p>
-<p>即 $\pi[q] \le 1 + \max\{k \in E_{q - 1}\}$</p>
-</li>
-</ul>
-<p>综上所述，当 $E_{q - 1} \neq \varnothing$，$\pi[q] = 1 + \max\{k \in E_{q - 1}\}$。</p>
-</li>
-</ul>
-<p align="right">$\blacksquare$ </p>
+<div class="note success">
+            <p>推论 1：对任意长度为 $n$ 的字符串 $S$，有<br>$$<br>\forall q \in [2, n],\pi[q] = \begin{cases}0 &amp; E_{q - 1} = \varnothing \\ 1 + \max\{k \in E_{q - 1}\} &amp; E_{q - 1} \neq \varnothing\end{cases}<br>$$</p>
+          </div>
 
-    </div>
-</div>
+<details ><summary> <p>证明</p> </summary>
+              <div class='content'>
+              <ul><li><p>当 $E_{q - 1} = \varnothing$ 时，不存在任何一个 $k \in \pi^{\star}[q - 1]$，使得 $S_{k + 1} \sqsupset S_q$。</p><p>显然此时 $\pi[q]$ 只能为 $0$。</p></li><li><p>当 $E_{q - 1} \neq \varnothing$ 时，</p><ul><li><p>$\forall k \in E_{q - 1}, k &lt; q - 1 \land S_{k + 1} \sqsupset S_q \Longrightarrow k + 1 &lt; q$</p><p>则由 $\pi[q]$ 的定义，$k$ 是拓展到 $S_q$ 的某一后缀的备选项，$\pi[q] \ge 1 + \max\{k \in E_{q - 1}\}$。</p></li><li><p>注意到此时 $\pi[q] &gt; 0$，设 $r = \pi[q] - 1$。</p><p>则 $r + 1 = \pi[q] &lt; q, S_{r + 1} = S_{\pi[q]} \sqsupset S_q$。</p><p>$\because r + 1 &gt; 0$</p><p>$\therefore S_{r + 1} = S_q$</p><p>由引理 3 可得 $r = \pi[q] - 1 \in \pi^{\star}[q - 1]$</p><p>$\therefore r \in E_{q - 1}$</p><p>$\therefore \pi[q] - 1 = r \le \max\{k \in E_{q - 1}\}$</p><p>即 $\pi[q] \le 1 + \max\{k \in E_{q - 1}\}$</p></li></ul><p>综上所述，当 $E_{q - 1} \neq \varnothing$，$\pi[q] = 1 + \max\{k \in E_{q - 1}\}$。</p></li></ul><p align="right">$\blacksquare$ </p>
+              </div>
+            </details>
 
 <hr>
 <p>再来看看代码：</p>
-<pre><code class="cpp">void calcPi(char* S) {
-    pi[1] = 0;
-    int len = strlen(S + 1);
-    for(int i = 2, k = 0; i &lt;= len; ++i) {
-        while(k &gt; 0 &amp;&amp; S[k + 1] != S[i])
-            k = pi[k];
-           if(S[k + 1] == S[i])
-            ++k;
-           pi[i] = k;
-    }
-}</code></pre>
-<p>接下来我们将使用循环不变式来证明上述代码的正确性。</p>
-<div class='spoiler collapsed'>
-    <div class='spoiler-title'>
-        证明
-    </div>
-    <div class='spoiler-content'>
-        <ul>
-<li><p>初始化</p>
-<p>在第 4 行的迭代开始前，有 $i = 1, k = \pi[i] = 0$，不变式成立。</p>
-</li>
-<li><p>保持</p>
-<p>在每次迭代开始前，有 $k = \pi[i - 1]$：</p>
-<ul>
-<li>若是第一次迭代，此等式由第 4 行保证；</li>
-<li>其余迭代均由第 9 行保证。</li>
-</ul>
-<p>接下来要证明每次迭代结束后均有 $k = \pi[i]$ 成立。</p>
-<p>若 $k \neq \pi[i]$，则会在第 5-8 行将 $k$ 调整至 $\pi[i]$。</p>
-<ul>
-<li>第 5 行的 <code>while</code> 循环遍历每一个 $k \in \pi^{\star}[i - 1]$，直至找到一个 $k$，使得 $S[k + 1] = S[i]$。（引理 2）<ul>
-<li>若找不到这样的值，则在第 7 行 $k = 0$。</li>
-<li>若找到了这样的值，此时 $k$ 为满足条件的集合中的最大值，应将 $\pi[i] \gets k + 1$。（推论 1）</li>
-</ul>
-</li>
-</ul>
-<p>第 9 行的赋值语句使得 $k = \pi[i]$ 恒成立。</p>
-</li>
-<li><p>终止</p>
-<p>当 $i = n + 1$ 时，迭代终止，此时我们求出了 $\pi[1..n]$。</p>
-<p>至此，算法结束。</p>
-</li>
-</ul>
-<p>因此，上述代码实现能正确地求出字符串 $S$ 的前缀函数数组。</p>
-<p align="right">$\blacksquare$ </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calcPi</span><span class="params">(<span class="keyword">char</span>* S)</span> </span>&#123;</span><br><span class="line">    pi[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">strlen</span>(S + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>, k = <span class="number">0</span>; i &lt;= len; ++i) &#123;</span><br><span class="line">        <span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; S[k + <span class="number">1</span>] != S[i])</span><br><span class="line">            k = pi[k];</span><br><span class="line">       	<span class="keyword">if</span>(S[k + <span class="number">1</span>] == S[i])</span><br><span class="line">            ++k;</span><br><span class="line">       	pi[i] = k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    </div>
-</div>
+<p>接下来我们将使用循环不变式来证明上述代码的正确性。</p>
+<details ><summary> <p>证明</p> </summary>
+              <div class='content'>
+              <ul><li><p>初始化</p><p>在第 4 行的迭代开始前，有 $i = 1, k = \pi[i] = 0$，不变式成立。</p></li><li><p>保持</p><p>在每次迭代开始前，有 $k = \pi[i - 1]$：</p><ul><li>若是第一次迭代，此等式由第 4 行保证；</li><li>其余迭代均由第 9 行保证。</li></ul><p>接下来要证明每次迭代结束后均有 $k = \pi[i]$ 成立。</p><p>若 $k \neq \pi[i]$，则会在第 5-8 行将 $k$ 调整至 $\pi[i]$。</p><ul><li>第 5 行的 <code>while</code> 循环遍历每一个 $k \in \pi^{\star}[i - 1]$，直至找到一个 $k$，使得 $S[k + 1] = S[i]$。（引理 2）<ul><li>若找不到这样的值，则在第 7 行 $k = 0$。</li><li>若找到了这样的值，此时 $k$ 为满足条件的集合中的最大值，应将 $\pi[i] \gets k + 1$。（推论 1）</li></ul></li></ul><p>第 9 行的赋值语句使得 $k = \pi[i]$ 恒成立。</p></li><li><p>终止</p><p>当 $i = n + 1$ 时，迭代终止，此时我们求出了 $\pi[1..n]$。</p><p>至此，算法结束。</p></li></ul><p>因此，上述代码实现能正确地求出字符串 $S$ 的前缀函数数组。</p><p align="right">$\blacksquare$ </p>
+              </div>
+            </details>
 
 <h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>不难发现，第 7-9 行代码的时间复杂度均为 $O(n)$，唯一棘手的是第 6-7 行代码。</p>
 <p>考虑 $k$ 的变化，$k$ 在第 7-8 行增加的次数不超过 $n$ 次，即 $k \le n$；</p>
@@ -701,32 +573,6 @@
   
 
   
-    
-    
-
-<section class="widget qrcode  desktop mobile">
-  
-
-  <div class='content article-entry'>
-    
-      
-        <div class='fancybox'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
-        
-          height='64px'
-        ></div>
-      
-    
-      
-        <div class='fancybox'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
-        
-          height='64px'
-        ></div>
-      
-    
-  </div>
-</section>
-
-  
 
 
               
@@ -741,7 +587,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-02T00:15:00+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-02T16:52:41+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2020年7月2日</p>
@@ -826,24 +672,7 @@
 
 
 
-  <article class="post white-box reveal comments shadow">
-    <section class="article typo">
-      <p ct><i class='fas fa-comments'></i> 评论</p>
-      
-      
-      
-      
-      
-      
-        <section id="comments">
-          <div id="valine_container" class="valine_thread">
-            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
-          </div>
-        </section>
-      
-      
-    </section>
-  </article>
+  
 
 
   
@@ -937,7 +766,7 @@
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前缀函数数组"><span class="toc-text">前缀函数数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#算法流程"><span class="toc-text">算法流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正确性"><span class="toc-text">正确性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间复杂度"><span class="toc-text">时间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空间复杂度"><span class="toc-text">空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP-算法"><span class="toc-text">KMP 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#算法流程-1"><span class="toc-text">算法流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现-1"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正确性-1"><span class="toc-text">正确性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间复杂度-1"><span class="toc-text">时间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空间复杂度-1"><span class="toc-text">空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用"><span class="toc-text">应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写在最后"><span class="toc-text">写在最后</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前缀函数数组"><span class="toc-number">2.</span> <span class="toc-text">前缀函数数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#算法流程"><span class="toc-number">2.2.</span> <span class="toc-text">算法流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-number">2.3.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正确性"><span class="toc-number">2.4.</span> <span class="toc-text">正确性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间复杂度"><span class="toc-number">2.5.</span> <span class="toc-text">时间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空间复杂度"><span class="toc-number">2.6.</span> <span class="toc-text">空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP-算法"><span class="toc-number">3.</span> <span class="toc-text">KMP 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#算法流程-1"><span class="toc-number">3.1.</span> <span class="toc-text">算法流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现-1"><span class="toc-number">3.2.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正确性-1"><span class="toc-number">3.3.</span> <span class="toc-text">正确性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间复杂度-1"><span class="toc-number">3.4.</span> <span class="toc-text">时间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空间复杂度-1"><span class="toc-number">3.5.</span> <span class="toc-text">空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用"><span class="toc-number">4.</span> <span class="toc-text">应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写在最后"><span class="toc-number">5.</span> <span class="toc-text">写在最后</span></a></li></ol>
     </div>
   </section>
 
@@ -956,22 +785,6 @@
         <div class="aplayer-container">
           
 
-  
-    <meting-js
-      theme='#1BCDFC'
-      autoplay='false'
-      volume='0.7'
-      loop='all'
-      order='list'
-      fixed='false'
-      list-max-height='340px'
-      server='netease'
-      type='playlist'
-      id='3175833810'
-      list-folded='true'>
-    </meting-js>
-  
-
 
         </div>
       
@@ -989,7 +802,7 @@
             
           
             
-              <a href="mailto:me@xaoxuu.com"
+              <a href="mailto:506503360@qq.com"
                 class="social fas fa-envelope flat-btn"
                 target="_blank"
                 rel="external nofollow noopener noreferrer">
@@ -997,16 +810,8 @@
             
           
             
-              <a href="https://github.com/xaoxuu"
+              <a href="https://github.com/LeverImmy"
                 class="social fab fa-github flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-              </a>
-            
-          
-            
-              <a href="https://music.163.com/#/user/home?id=63035382"
-                class="social fas fa-headphones-alt flat-btn"
                 target="_blank"
                 rel="external nofollow noopener noreferrer">
               </a>
@@ -1031,7 +836,7 @@
     
       
         <div class='copyright'>
-        <p><a href="https://xaoxuu.com" target="_blank" rel="noopener">Copyright © 2017-2020 Mr. X</a></p>
+        <p><a href="https://leverimmy.top">Copyright © 2018-2020 Clever_Jimmy</a></p>
 
         </div>
       
@@ -1096,58 +901,6 @@
 
 
 
-  
-  
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
-
-    <script type="text/javascript">
-      $(function(){
-        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg"];
-        if ('true' == 'true') {
-          function shuffle(arr){
-            /*From countercurrent-time*/
-            var n = arr.length;
-            while(n--) {
-              var index = Math.floor(Math.random() * n);
-              var temp = arr[index];
-              arr[index] = arr[n];
-              arr[n] = temp;
-            }
-          }
-          shuffle(imgs);
-        }
-        if ('.cover') {
-          $('.cover').backstretch(
-            imgs,
-          {
-            duration: "20000",
-            fade: "1500"
-          });
-        } else {
-          $.backstretch(
-            imgs,
-          {
-            duration: "20000",
-            fade: "1500"
-          });
-        }
-      });
-    </script>
-  
-
-
-
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
-
-  
-    
-<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
-
-  
 
 
 
@@ -1157,59 +910,6 @@
 
 
 
-  
-    
-<script src="/js/valine.js"></script>
-
-  
-  <script>
-  var GUEST_INFO = ['nick','mail','link'];
-  var meta = 'nick,mail,link'.split(',').filter(function(item){
-    return GUEST_INFO.indexOf(item) > -1
-  });
-  var REQUIRED_FIELDS = ['nick','mail','link'];
-  var requiredFields = 'nick,mail'.split(',').filter(function(item){
-    return REQUIRED_FIELDS.indexOf(item) > -1
-  });
-  var valine = new Valine();
-  function emoji(path, idx, ext) {
-      return path + "/" + path + "-" + idx + "." + ext;
-  }
-  var emojiMaps = {};
-  for (var i = 1; i <= 54; i++) {
-    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
-  }
-  for (var i = 1; i <= 101; i++) {
-    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
-  }
-  for (var i = 1; i <= 116; i++) {
-    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
-  }
-  for (var i = 1; i <= 125; i++) {
-    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
-  }
-  for (var i = 1; i <= 4; i++) {
-    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
-  }
-  valine.init({
-    el: '#valine_container',
-    meta: meta,
-    
-    appId: "dogUA2FSKGTo029M1SEwGROT-MdYXbMMI",
-    appKey: "u0NdtQ8nvHoMdJPSYqm1LRxE",
-    placeholder: "快来评论吧~",
-    pageSize:'10',
-    avatar:'robohash',
-    lang:'zh-cn',
-    visitor: 'true',
-    highlight: 'true',
-    mathJax: 'false',
-    enableQQ: 'true',
-    requiredFields: requiredFields,
-    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
-    emojiMaps: emojiMaps
-  })
-  </script>
 
 
 
@@ -1230,13 +930,6 @@
 
 
 
-
-  
-    
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
-
-    <script>hljs.initHighlightingOnLoad();</script>
-  
 
 
 
