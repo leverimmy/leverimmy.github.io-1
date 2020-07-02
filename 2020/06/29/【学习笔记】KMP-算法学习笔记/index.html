@@ -461,7 +461,7 @@
 <h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calcPi</span><span class="params">(<span class="keyword">char</span>* S)</span> </span>&#123;</span><br><span class="line">    pi[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> len = <span class="built_in">strlen</span>(S + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>, k = <span class="number">0</span>; i &lt;= len; ++i) &#123;</span><br><span class="line">        <span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; S[k + <span class="number">1</span>] != T[i])</span><br><span class="line">            k = pi[k];</span><br><span class="line">       	<span class="keyword">if</span>(S[k + <span class="number">1</span>] == S[i])</span><br><span class="line">            ++k;</span><br><span class="line">       	pi[i] = k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h4><div class="note success">
-            <p>引理 1（后缀重叠引理）：对于 $x, y$ 满足 $x \sqsupset z, y \sqsupset z$ 而言：</p><ul><li>若 $\left|x\right| \le \left|y\right|$，则 $x \sqsupset y$；</li><li>若 $\left|x\right| \ge \left|y\right|$，则 $y \sqsupset x$；</li><li>若 $\left|x\right| = \left|y\right|$，则 $x = y$。</li></ul>
+            <p>引理 1（后缀重叠引理）：对于 $x, y$ 满足 $x \sqsupset z, y \sqsupset z$ 而言，有</p><ul><li>若 $\left|x\right| \le \left|y\right|$，则 $x \sqsupset y$；</li><li>若 $\left|x\right| \ge \left|y\right|$，则 $y \sqsupset x$；</li><li>若 $\left|x\right| = \left|y\right|$，则 $x = y$。</li></ul>
           </div>
 
 <details ><summary> <p>证明</p> </summary>
@@ -473,7 +473,7 @@
 <p>设<br>$$<br>\pi^{\star}[q] = \{\pi[q], \pi^{(2)}[q], \cdots, \pi^{(t)}[q]\}<br>$$<br>其中<br>$$<br>\pi^{(i)}[q] = \begin{cases}q &amp; i = 0 \\ \pi[\pi^{(i - 1)}[q]] &amp; i \ge 1\end{cases}<br>$$</p>
 <p>当 $\pi^{(t)}[q] = 0$ 时 $\pi^{\star}[q]$ 中的序列终止。</p>
 <div class="note success">
-            <p>引理 2（前缀函数迭代引理）：对任意长度为 $n$ 的字符串 $S$，有 $\forall q \in [1, n], \pi^{\star}[q] = \{k: k &lt; q \land S_k \sqsupset S_q\}$。</p>
+            <p>引理 2（前缀函数迭代引理）：对任意长度为 $n$ 的字符串 $S$，有<br>$$<br>\forall q \in [1, n], \pi^{\star}[q] = \{k: k &lt; q \land S_k \sqsupset S_q\}<br>$$</p>
           </div>
 
 <details ><summary> <p>证明</p> </summary>
@@ -557,7 +557,7 @@
       <blockquote>
         
           
-            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+            <p>许可证：署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
 
           
         
@@ -587,7 +587,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-02T16:52:41+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-02T18:47:54+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2020年7月2日</p>
@@ -782,24 +782,8 @@
     <br><br>
     
       
-        <div class="aplayer-container">
-          
-
-
-        </div>
-      
-    
-      
         <br>
         <div class="social-wrapper">
-          
-            
-              <a href="/atom.xml"
-                class="social fas fa-rss flat-btn"
-                target="_blank"
-                rel="external nofollow noopener noreferrer">
-              </a>
-            
           
             
               <a href="mailto:506503360@qq.com"
@@ -821,17 +805,14 @@
       
     
       
-        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+        <div><p>许可证：<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
 </div>
       
     
       
         本站使用
         <a href="https://volantis.js.org/" target="_blank" class="codename">Volantis</a>
-        作为主题，总访问量为
-          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
-          次
-        
+        作为主题
       
     
       
@@ -896,8 +877,6 @@
     });
   </script>
 
-
-  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
 
 
 
