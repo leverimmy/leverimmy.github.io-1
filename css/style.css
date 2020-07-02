@@ -2090,7 +2090,7 @@ div.gallery.stretch>p img {
 .article mjx-container {
   font-family: Menlo, UbuntuMono, Monaco, monospace, courier, sans-serif;
   background: rgba(255,255,255,0);
-  padding: 16px 8px;
+  padding: 16px 0px;
   border-radius: 4px;
   min-width: 0 !important;
 }
