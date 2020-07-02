@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#2.6.6'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>【学习笔记】KMP 算法学习笔记 - Clever_Jimmy&#39;s blog</title>
+  
+    <meta name="keywords" content="KMP,字符串,前缀函数">
+  
+  
+    <meta name="description" content="发现自己不会 KMP 的模板了，借此机会复习一下 KMP，顺便更深入地研究前缀函数 $\pi$ 的应用。">
+  
+
+  <!-- feed -->
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+  <link rel="shortcut icon" type='image/x-icon' href="https://leverimmy.top/gallery/favicon.jpg">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+    
+      
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.18.1/styles/solarized-light.css">
+
+    
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+          
+            VOLANTIS <b><sup style='color:#3AA757'>2.6.6</sup></b>
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/categories/
+                  
+                  
+                  
+                    id="categories"
+                  >
+                  <i class='fas fa-folder-open fa-fw'></i>分类
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/friends/
+                  
+                  
+                  
+                    id="friends"
+                  >
+                  <i class='fas fa-link fa-fw'></i>友链
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2020/06/29/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91KMP-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+      【学习笔记】KMP 算法学习笔记
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="https://xaoxuu.com" target="_blank" rel="nofollow noopener">
+    <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/avatar/avatar.png">
+    <p>Mr. X</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+  
+  <div class='new-meta-item category'>
+    <a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/' rel="nofollow">
+      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
+      <p>学习笔记</p>
+    </a>
+  </div>
+
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2020年6月29日</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <p>发现自己不会 KMP 的模板了，借此机会复习一下 KMP，顺便更深入地研究前缀函数 $\pi$ 的应用。</p>
+<a id="more"></a>
+
+<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>为了更方便地描述字符串相关内容，我们做出以下规定：</p>
+<ol>
+<li>$S, T$ 通常表示一个字符串，$c$ 通常表示一个字符，$\Sigma$ 表示字符集；</li>
+<li>$\left|S\right|$ 表示字符串长度；</li>
+<li>$\left|\Sigma\right|$ 表示字符集大小；</li>
+<li>$S[l..r]$ 表示 $S[l], S[l + 1], \ldots, S[r - 1], S[r]$；</li>
+<li>$\epsilon$ 表示空串；</li>
+<li>$S$ 是 $T$ 的前缀，用 $S \sqsubset T$ 表示；$S$ 是 $T$ 的后缀，用 $S \sqsupset T$ 表示；</li>
+<li>$S_i$ 表示 $S[1..i]$，即 $S$ 的第 $i$ 个前缀。</li>
+</ol>
+<p>特殊地，本文的字符串下标、$\pi$ 数组下标 <strong>均从 $1$ 开始</strong>。</p>
+<blockquote>
+<p>一些例子：对于 $S = \mathtt{ABCBAD}$ 而言：</p>
+<ol>
+<li>$\left|S\right| = 6$；</li>
+<li>$\left|\Sigma\right| = 4$；</li>
+<li>$S[2..4] = \mathtt{BCBA}$；</li>
+<li>$S_4 = \mathtt{ABCB}$。</li>
+</ol>
+</blockquote>
+<h3 id="前缀函数数组"><a href="#前缀函数数组" class="headerlink" title="前缀函数数组"></a>前缀函数数组</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>对于一个字符串 $S$，我们定义其前缀函数 $\pi(S)$ 的值为 $S$ 的最长相等的真前缀和真后缀的长度，即：<br>$$<br>\begin{aligned}<br>\pi(S) &amp; = \mathop{\operatorname{argmax}}\limits_{k &lt; \left|S\right|}\{S[1..k] = S[\left|S\right| - k + 1..\left|S\right|]\}<br>\\<br>&amp; = \mathop{\operatorname{argmax}}\limits_{k &lt; \left|S\right|}\{S_k \sqsupset S\}<br>\end{aligned}<br>$$<br>对于一个字符串 $S$，我们定义其前缀函数数组 $\pi$ 为 $\pi[i] = \pi(S_i)$。</p>
+<blockquote>
+<p>特殊地，当 $\left|S\right| = 1$ 时 $\pi(S) = \mathop{\operatorname{argmax}}\limits_{k &lt; 1}\{S[1..k] = S[2 - k..1]\}$</p>
+<p>当 $k = 0$ 时 $S[1..0] = S[2..1] = \epsilon$，故 $\pi(S) = 0$。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>性质 1：$\pi(S_i) = \pi[i] &lt; i$。</p>
+</blockquote>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>由定义知 $\pi[i] &lt; i$，即得证。</p>
+<p align="right">$\blacksquare$ </p>
+
+    </div>
+</div>
+
+<h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><ol>
+<li><p>根据定义，$\pi[1] = 0$；</p>
+</li>
+<li><p>假设我们循环到了要求 $\pi[i]\quad(i \ge 2)$，令 $k \gets \pi[i - 1]$。</p>
+<p>由 $\pi$ 数组的定义得，此时 $S[1..k] = S[i - k, i - 1]$。</p>
+<p>我们现在要做的，就是从 $\pi[1..i - 1]$ 递推到 $\pi[i]$：</p>
+<p>考虑到 $\pi$ 数组的定义，我们不断地枚举共同的前后缀（即使用 $k = \pi[k]$ 来迭代）。</p>
+<p>结束这个迭代，有且仅有两种情况：$k = 0$ 或 $S[k + 1] = S[i]$。</p>
+<hr>
+<p>对于前者，说明对于字符串 $S[1..i]$，不存在任何两个真前缀与真后缀相同，$\pi[i] = 0$。</p>
+<p>对于后者，说明我们找到了一个 $k$，使得 $S[1..k + 1] = S[i - k..i]$，根据定义，有 $\pi[i] = k + 1$。</p>
+</li>
+<li><p>至此，我们求出了字符串 $S$ 的前缀函数数组 $\pi$。</p>
+</li>
+</ol>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><pre><code class="cpp">void calcPi(char* S) {
+    pi[1] = 0;
+    int len = strlen(S + 1);
+    for(int i = 2, k = 0; i &lt;= len; ++i) {
+        while(k &gt; 0 &amp;&amp; S[k + 1] != T[i])
+            k = pi[k];
+           if(S[k + 1] == S[i])
+            ++k;
+           pi[i] = k;
+    }
+}</code></pre>
+<h4 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h4><blockquote>
+<p>引理 1（后缀重叠引理）：对于 $x, y$ 满足 $x \sqsupset z, y \sqsupset z$ 而言，若 $\left|x\right| \le \left|y\right|$，则 $x \sqsupset y$；若 $\left|x\right| \ge \left|y\right|$，则 $y \sqsupset x$；若 $\left|x\right| = \left|y\right|$，则 $x = y$。</p>
+</blockquote>
+<p>过于显然，证明略。</p>
+<p align="right">$\blacksquare$ </p>
+
+<hr>
+<p>设<br>$$<br>\pi^{\star}[q] = \{\pi[q], \pi^{(2)}[q], \cdots, \pi^{(t)}[q]\}<br>$$<br>其中<br>$$<br>\pi^{(i)}[q] = \begin{cases}q &amp; i = 0 \\ \pi[\pi^{(i - 1)}[q]] &amp; i \ge 1\end{cases}<br>$$</p>
+<p>当 $\pi^{(t)}[q] = 0$ 时 $\pi^{\star}[q]$ 中的序列终止。</p>
+<blockquote>
+<p>引理 2（前缀函数迭代引理）：对任意长度为 $n$ 的字符串 $S$，有 $\forall q \in [1, n], \pi^{\star}[q] = \{k: k &lt; q \land S_k \sqsupset S_q\}$。</p>
+</blockquote>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <ul>
+<li><p>先证明 $\pi^{\star}[q] \subseteq \{k:k &lt; q \land S_k \sqsupset S_q\}$，</p>
+<p>即证明 $\forall x \in \pi^{\star}[q], x &lt; q \land S_x \sqsupset S_q$。</p>
+<p>任取 $x \in \pi^{\star}[q]$，不妨设 $x = \pi^{u}[q] \quad (u &gt; 0)$，下面通过对 $u$ 的数学归纳法证明命题成立。</p>
+<p>（基础）当 $u = 1$ 时，$x = \pi[q]$，由 $\pi$ 数组的定义可知 $\pi[q] &lt; q \land S_{\pi[q]} \sqsupset S_q$。</p>
+<p>（假设）假设当 $u = v$ 时 $\pi^{v}[q] &lt; q \land S_{\pi^{v}[q]} \sqsupset S_q$。</p>
+<p>（推导）则当 $u = v + 1$ 时，$\pi^{v + 1}[q] = \pi[\pi^{v}[q]] &lt; \pi^{v}[q] &lt; q$（性质 1）；$S_{\pi^{v + 1}[q]} \sqsupset S_{\pi^{v}[q]} \sqsupset S_q$（由性质 1 得到下标的大小关系，由引理 1 得到前缀之间的关系）</p>
+<p>因此 $\forall x \in \pi^{\star}[q], x &lt; q \land S_x \sqsupset S_q$。</p>
+</li>
+<li><p>再证明 $\{k:k &lt; q \land S_k \sqsupset S_q\} \subseteq \pi^{\star}[q]$，</p>
+<p>即证明 $\forall x \in \{k:k &lt; q \land S_x \sqsupset S_q\}, x \in\pi^{\star}[q]$</p>
+<p>考虑使用反证法来证明命题成立。</p>
+<p>假设集合 $M = \{k:k &lt; q \land S_k \sqsupset S_q\} - \pi^{\star}[q]$ 非空，$j$ 是 $M$ 中的最大值。</p>
+<p>$\because$ $\pi[q]$ 是 $\{k:k &lt; q \land S_x \sqsupset S_q\}$ 中的最大值，且 $j \in \{k:k &lt; q \land S_x \sqsupset S_q\}$</p>
+<p>$\therefore j &lt; \pi[q], S_j \sqsupset S_q$</p>
+<p>又 $\because \pi[q] \in \pi^{\star}[q]$</p>
+<p>$\therefore \exists j’ \in \pi^{\star}[q], \text{s.t. }j’ &gt; j$</p>
+<p>设 $j’$ 表示 $\pi^{\star}[q]$ 中比 $j$ 大的最小整数。</p>
+<p>$\because \{k:k &lt; q \land S_k \sqsupset S_q\} \subseteq \pi^{\star}[q]$ 且 $j’ \in \pi^{\star}[q]$</p>
+<p>$\therefore S_{j’} \sqsupset S_q$</p>
+<p>$\because j’ &gt; j$ 且 $j$ 是小于 $j’$ 的最大值</p>
+<p>$\therefore S_j \sqsupset S_{j’}$（引理 1）</p>
+<p>由 $\pi$ 数组的定义知 $\pi[j’] = j$</p>
+<p>$\because j’ \in \pi^{\star}[q]$</p>
+<p>$\therefore j = \pi[j’] \in \pi^{\star}[q]$，与假设矛盾</p>
+<p>因此 $\{k:k &lt; q \land S_k \sqsupset S_q\} \subseteq \pi^{\star}[q]$。</p>
+<p>综上所述，对任意长度为 $n$ 的字符串 $S$，有 $\forall q \in [1, n], \pi^{\star}[q] = \{k: k &lt; q \land S_k \sqsupset S_q\}$。</p>
+<p align="right">$\blacksquare$ </p>
+</li>
+</ul>
+
+    </div>
+</div>
+
+<hr>
+<blockquote>
+<p>引理 3：对任意长度为 $n$ 的字符串 $S$，有 $\forall q \in [1, n]$，若 $\pi[q] &gt; 0$，则 $\pi[q] - 1 \in \pi^{\star}[q - 1]$。</p>
+</blockquote>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <p>令 $x = \pi[q] &gt; 0$，则 $x &lt; q, S_x \sqsupset S_q$</p>
+<p>$\because x &gt; 0$，则 $x - 1$ 有意义</p>
+<p>$\therefore x - 1 &lt; q - 1, S_{x - 1} \sqsupset S_{q - 1}$（把 $S_x$ 和 $S_q$ 的最后一个字符去掉） </p>
+<p>由引理 2 知 $x - 1 \in \pi^{\star}[q - 1]$</p>
+<p>$\therefore \forall q \in [1, n] \land \pi[q] &gt; 0,\pi[q] - 1 \in \pi^{\star}[q - 1]$</p>
+<p align="right">$\blacksquare$ </p>
+
+    </div>
+</div>
+
+<hr>
+<p>对 $q \in [2, n]$ 定义子集 $E_{q - i} \subseteq \pi^{\star}[q - 1]$ 为：</p>
+<p>$$<br>E_{q - 1} = \{k\in\pi^{\star}[q - 1]:S_{k + 1} = S_k\}<br>$$</p>
+<p>则有：</p>
+<p>$$<br>\begin{aligned}<br> E_{q - 1} &amp; = \{k\in\pi^{\star}[q - 1]:S_{k + 1} = S_k\}<br> \\<br> &amp; = \{k: k &lt; q - 1, S_k \sqsupset S_{q - 1}, S[k + 1] = S[q]\}<br> \\<br> &amp; = \{k: k &lt; q - 1, S_{k + 1} \sqsupset S_q\}<br>\end{aligned}<br>$$</p>
+<p>因此，$E_{q - 1}$ 是由 $\pi^{\star}[q - 1]$ 中的值组成的、能满足 $S_{k + 1}$ 与 $S_q$ 的某个后缀相等的 $k$ 组成的集合。</p>
+<blockquote>
+<p>推论 1：对任意长度为 $n$ 的字符串 $S$，有<br>$$<br>\forall q \in [2, n],\pi[q] = \begin{cases}0 &amp; E_{q - 1} = \varnothing \\ 1 + \max\{k \in E_{q - 1}\} &amp; E_{q - 1} \neq \varnothing\end{cases}<br>$$</p>
+</blockquote>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <ul>
+<li><p>当 $E_{q - 1} = \varnothing$ 时，不存在任何一个 $k \in \pi^{\star}[q - 1]$，使得 $S_{k + 1} \sqsupset S_q$。</p>
+<p>显然此时 $\pi[q]$ 只能为 $0$。</p>
+</li>
+<li><p>当 $E_{q - 1} \neq \varnothing$ 时，</p>
+<ul>
+<li><p>$\forall k \in E_{q - 1}, k &lt; q - 1 \land S_{k + 1} \sqsupset S_q \Longrightarrow k + 1 &lt; q$</p>
+<p>则由 $\pi[q]$ 的定义，$k$ 是拓展到 $S_q$ 的某一后缀的备选项，$\pi[q] \ge 1 + \max\{k \in E_{q - 1}\}$。</p>
+</li>
+<li><p>注意到此时 $\pi[q] &gt; 0$，设 $r = \pi[q] - 1$。</p>
+<p>则 $r + 1 = \pi[q] &lt; q, S_{r + 1} = S_{\pi[q]} \sqsupset S_q$。</p>
+<p>$\because r + 1 &gt; 0$</p>
+<p>$\therefore S_{r + 1} = S_q$</p>
+<p>由引理 3 可得 $r = \pi[q] - 1 \in \pi^{\star}[q - 1]$</p>
+<p>$\therefore r \in E_{q - 1}$</p>
+<p>$\therefore \pi[q] - 1 = r \le \max\{k \in E_{q - 1}\}$</p>
+<p>即 $\pi[q] \le 1 + \max\{k \in E_{q - 1}\}$</p>
+</li>
+</ul>
+<p>综上所述，当 $E_{q - 1} \neq \varnothing$，$\pi[q] = 1 + \max\{k \in E_{q - 1}\}$。</p>
+</li>
+</ul>
+<p align="right">$\blacksquare$ </p>
+
+    </div>
+</div>
+
+<hr>
+<p>再来看看代码：</p>
+<pre><code class="cpp">void calcPi(char* S) {
+    pi[1] = 0;
+    int len = strlen(S + 1);
+    for(int i = 2, k = 0; i &lt;= len; ++i) {
+        while(k &gt; 0 &amp;&amp; S[k + 1] != S[i])
+            k = pi[k];
+           if(S[k + 1] == S[i])
+            ++k;
+           pi[i] = k;
+    }
+}</code></pre>
+<p>接下来我们将使用循环不变式来证明上述代码的正确性。</p>
+<div class='spoiler collapsed'>
+    <div class='spoiler-title'>
+        证明
+    </div>
+    <div class='spoiler-content'>
+        <ul>
+<li><p>初始化</p>
+<p>在第 4 行的迭代开始前，有 $i = 1, k = \pi[i] = 0$，不变式成立。</p>
+</li>
+<li><p>保持</p>
+<p>在每次迭代开始前，有 $k = \pi[i - 1]$：</p>
+<ul>
+<li>若是第一次迭代，此等式由第 4 行保证；</li>
+<li>其余迭代均由第 9 行保证。</li>
+</ul>
+<p>接下来要证明每次迭代结束后均有 $k = \pi[i]$ 成立。</p>
+<p>若 $k \neq \pi[i]$，则会在第 5-8 行将 $k$ 调整至 $\pi[i]$。</p>
+<ul>
+<li>第 5 行的 <code>while</code> 循环遍历每一个 $k \in \pi^{\star}[i - 1]$，直至找到一个 $k$，使得 $S[k + 1] = S[i]$。（引理 2）<ul>
+<li>若找不到这样的值，则在第 7 行 $k = 0$。</li>
+<li>若找到了这样的值，此时 $k$ 为满足条件的集合中的最大值，应将 $\pi[i] \gets k + 1$。（推论 1）</li>
+</ul>
+</li>
+</ul>
+<p>第 9 行的赋值语句使得 $k = \pi[i]$ 恒成立。</p>
+</li>
+<li><p>终止</p>
+<p>当 $i = n + 1$ 时，迭代终止，此时我们求出了 $\pi[1..n]$。</p>
+<p>至此，算法结束。</p>
+</li>
+</ul>
+<p>因此，上述代码实现能正确地求出字符串 $S$ 的前缀函数数组。</p>
+<p align="right">$\blacksquare$ </p>
+
+    </div>
+</div>
+
+<h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>不难发现，第 7-9 行代码的时间复杂度均为 $O(n)$，唯一棘手的是第 6-7 行代码。</p>
+<p>考虑 $k$ 的变化，$k$ 在第 7-8 行增加的次数不超过 $n$ 次，即 $k \le n$；</p>
+<p>$k$ 在第 6 行的操作中，因为有 $\pi(S_i) &lt; i$ 的性质，导致每次迭代至少使 $k$ 减小 $1$，即最多迭代 $n$ 次。</p>
+<p>综上所述，用上述方法求一个字符串的前缀函数数组的时间复杂度为 $O(n)$。</p>
+<h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>易知用此种方法求前缀函数数组的空间复杂度为 $O(n)$。</p>
+<h3 id="KMP-算法"><a href="#KMP-算法" class="headerlink" title="KMP 算法"></a>KMP 算法</h3><h4 id="算法流程-1"><a href="#算法流程-1" class="headerlink" title="算法流程"></a>算法流程</h4><h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><h4 id="正确性-1"><a href="#正确性-1" class="headerlink" title="正确性"></a>正确性</h4><h4 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><h4 id="空间复杂度-1"><a href="#空间复杂度-1" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><link rel="stylesheet" href="/css/spoiler.css" type="text/css"><script src="/js/spoiler.js" type="text/javascript" async></script>
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://leverimmy.top/2020/06/29/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91KMP-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>https://leverimmy.top/2020/06/29/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91KMP-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+      
+        <div class='fancybox'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        
+          height='64px'
+        ></div>
+      
+    
+      
+        <div class='fancybox'><img src='https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/qrcode/wiki_volantis.png'
+        
+          height='64px'
+        ></div>
+      
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-02T00:15:00+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2020年7月2日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/KMP/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>KMP</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>字符串</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%89%8D%E7%BC%80%E5%87%BD%E6%95%B0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>前缀函数</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://leverimmy.top/2020/06/29/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91KMP-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=【学习笔记】KMP 算法学习笔记 - Clever_Jimmy's blog&summary=发现自己不会 KMP 的模板了，借此机会复习一下 KMP，顺便更深入地研究前缀函数 $\pi$ 的应用。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://leverimmy.top/2020/06/29/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91KMP-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=【学习笔记】KMP 算法学习笔记 - Clever_Jimmy's blog&summary=发现自己不会 KMP 的模板了，借此机会复习一下 KMP，顺便更深入地研究前缀函数 $\pi$ 的应用。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://leverimmy.top/2020/06/29/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91KMP-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=【学习笔记】KMP 算法学习笔记 - Clever_Jimmy's blog&summary=发现自己不会 KMP 的模板了，借此机会复习一下 KMP，顺便更深入地研究前缀函数 $\pi$ 的应用。"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script>
+    window.subData = {
+      title: '【学习笔记】KMP 算法学习笔记',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前缀函数数组"><span class="toc-text">前缀函数数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#算法流程"><span class="toc-text">算法流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正确性"><span class="toc-text">正确性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间复杂度"><span class="toc-text">时间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空间复杂度"><span class="toc-text">空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KMP-算法"><span class="toc-text">KMP 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#算法流程-1"><span class="toc-text">算法流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现-1"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正确性-1"><span class="toc-text">正确性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间复杂度-1"><span class="toc-text">时间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空间复杂度-1"><span class="toc-text">空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应用"><span class="toc-text">应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写在最后"><span class="toc-text">写在最后</span></a></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        <div class="aplayer-container">
+          
+
+  
+    <meting-js
+      theme='#1BCDFC'
+      autoplay='false'
+      volume='0.7'
+      loop='all'
+      order='list'
+      fixed='false'
+      list-max-height='340px'
+      server='netease'
+      type='playlist'
+      id='3175833810'
+      list-folded='true'>
+    </meting-js>
+  
+
+
+        </div>
+      
+    
+      
+        <br>
+        <div class="social-wrapper">
+          
+            
+              <a href="/atom.xml"
+                class="social fas fa-rss flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="mailto:me@xaoxuu.com"
+                class="social fas fa-envelope flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://github.com/xaoxuu"
+                class="social fab fa-github flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+            
+              <a href="https://music.163.com/#/user/home?id=63035382"
+                class="social fas fa-headphones-alt flat-btn"
+                target="_blank"
+                rel="external nofollow noopener noreferrer">
+              </a>
+            
+          
+        </div>
+      
+    
+      
+        <div><p>博客内容遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</a></p>
+</div>
+      
+    
+      
+        本站使用
+        <a href="https://volantis.js.org/" target="_blank" class="codename">Volantis</a>
+        作为主题，总访问量为
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          次
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://xaoxuu.com" target="_blank" rel="noopener">Copyright © 2017-2020 Mr. X</a></p>
+
+        </div>
+      
+    
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/41F215B9-261F-48B4-80B5-4E86E165259E.jpeg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('.cover') {
+          $('.cover').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+<script src="/js/valine.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "dogUA2FSKGTo029M1SEwGROT-MdYXbMMI",
+    appKey: "u0NdtQ8nvHoMdJPSYqm1LRxE",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.1/build/highlight.min.js"></script>
+
+    <script>hljs.initHighlightingOnLoad();</script>
+  
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
