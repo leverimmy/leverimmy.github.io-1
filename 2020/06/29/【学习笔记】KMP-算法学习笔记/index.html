@@ -373,9 +373,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/' rel="nofollow">
+    <a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AD%97%E7%AC%A6%E4%B8%B2/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>学习笔记</p>
+      <p>学习笔记/字符串</p>
     </a>
   </div>
 
@@ -415,19 +415,24 @@
 
 <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>为了更方便地描述字符串相关内容，我们做出以下规定：</p>
 <ol>
-<li>$S, T$ 通常表示一个字符串，$c$ 通常表示一个字符，$\Sigma$ 表示字符集；</li>
-<li>$\left|S\right|$ 表示字符串长度；</li>
-<li>$\left|\Sigma\right|$ 表示字符集大小；</li>
+<li>字符串通常用 $S, T$ 等表示，$c$ 通常表示一个字符，$\Sigma$ 表示字符集；</li>
+<li>字符串长度用 $\left|S\right|$ 表示；</li>
+<li>字符集大小用 $\left|\Sigma\right|$ 表示；</li>
 <li>$S[l..r]$ 表示 $S[l], S[l + 1], \ldots, S[r - 1], S[r]$；</li>
-<li>$\epsilon$ 表示空串；</li>
+<li>空串用 $\epsilon$ 表示；</li>
 <li>$S$ 是 $T$ 的前缀，用 $S \sqsubset T$ 表示；$S$ 是 $T$ 的后缀，用 $S \sqsupset T$ 表示；</li>
-<li>$S_i$ 表示 $S[1..i]$，即 $S$ 的第 $i$ 个前缀。</li>
+<li>$S$ 的第 $i$ 个前缀，即 $S[1..i]$，用 $S_i$ 表示。</li>
 </ol>
 <p>特殊地，本文的字符串下标、$\pi$ 数组下标 <strong>均从 $1$ 开始</strong>。</p>
-<div class="note ">
-            <p>一些例子：对于 $S = \mathtt{ABCBAD}$ 而言：</p><ol><li>$\left|S\right| = 6$；</li><li>$\left|\Sigma\right| = 4$；</li><li>$S[2..4] = \mathtt{BCBA}$；</li><li>$S_4 = \mathtt{ABCB}$。</li></ol>
-          </div>
-
+<blockquote>
+<p>一些例子：对于 $S = \mathtt{ABCBAD}$ 而言：</p>
+<ol>
+<li>$\left|S\right| = 6$；</li>
+<li>$\left|\Sigma\right| = 4$；</li>
+<li>$S[2..4] = \mathtt{BCBA}$；</li>
+<li>$S_4 = \mathtt{ABCB}$。</li>
+</ol>
+</blockquote>
 <h3 id="前缀函数数组"><a href="#前缀函数数组" class="headerlink" title="前缀函数数组"></a>前缀函数数组</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>对于一个字符串 $S$，我们定义其前缀函数 $\pi(S)$ 的值为 $S$ 的最长相等的真前缀和真后缀的长度，即：<br>$$<br>\begin{aligned}<br>\pi(S) &amp; = \mathop{\operatorname{argmax}}\limits_{k &lt; \left|S\right|}\{S[1..k] = S[\left|S\right| - k + 1..\left|S\right|]\}<br>\\<br>&amp; = \mathop{\operatorname{argmax}}\limits_{k &lt; \left|S\right|}\{S_k \sqsupset S\}<br>\end{aligned}<br>$$<br>对于一个字符串 $S$，我们定义其前缀函数数组 $\pi$ 为 $\pi[i] = \pi(S_i)$。</p>
 <div class="note warning">
             <p>特殊地，当 $\left|S\right| = 1$ 时 $\pi(S) = \mathop{\operatorname{argmax}}\limits_{k &lt; 1}\{S[1..k] = S[2 - k..1]\}$</p><p>当 $k = 0$ 时 $S[1..0] = S[2..1] = \epsilon$，故 $\pi(S) = 0$。</p>
@@ -587,10 +592,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-02T18:47:54+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-03T13:33:15+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年7月2日</p>
+    <p>更新于：2020年7月3日</p>
   </a>
 </div>
 
@@ -662,6 +667,16 @@
 
 
         
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/06/22/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91EERTREE-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+                <p class='title'>【学习笔记】EERTREE 学习笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>EERTREE，又称回文树（Palindrome tree）、回文自动机（PAM），是一种能在 $O(\left|S\right|\log{\left|\Sigma\right|})$ 的时间与...</p>
+              </a>
+            
+          </div>
         
       </section>
     </article>
