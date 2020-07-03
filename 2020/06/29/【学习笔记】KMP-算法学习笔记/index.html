@@ -531,7 +531,36 @@
 <p>$k$ 在第 6 行的操作中，因为有 $\pi(S_i) &lt; i$ 的性质，导致每次迭代至少使 $k$ 减小 $1$，即最多迭代 $n$ 次。</p>
 <p>综上所述，用上述方法求一个字符串的前缀函数数组的时间复杂度为 $O(n)$。</p>
 <h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>易知用此种方法求前缀函数数组的空间复杂度为 $O(n)$。</p>
-<h3 id="KMP-算法"><a href="#KMP-算法" class="headerlink" title="KMP 算法"></a>KMP 算法</h3><h4 id="算法流程-1"><a href="#算法流程-1" class="headerlink" title="算法流程"></a>算法流程</h4><h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><h4 id="正确性-1"><a href="#正确性-1" class="headerlink" title="正确性"></a>正确性</h4><h4 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><h4 id="空间复杂度-1"><a href="#空间复杂度-1" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3>
+<h3 id="KMP-算法"><a href="#KMP-算法" class="headerlink" title="KMP 算法"></a>KMP 算法</h3><h4 id="算法流程-1"><a href="#算法流程-1" class="headerlink" title="算法流程"></a>算法流程</h4><p>我们举一个例子：用 $S = \mathtt{CCFCCFMONEY}$ 被 $T = \mathtt{CCFCCFSB}$ 匹配。</p>
+<p>我们定义两个指针 $i,k$，表示 $S[i - k..i - 1] = T[1..k]$。</p>
+<p>我们要拓展的，就是 $S[i]$ 与 $T[k + 1]$ 之间的关系。</p>
+<p>首先我们考虑朴素算法的弊端：当你匹配到了 $i = 8, k = 7$ 时：<br>$$<br>\begin{aligned}<br>S &amp; = \mathtt{\color{green}CCFXCCF\color{red}M\color{black}ONEY}<br>\<br>T &amp; = \mathtt{\color{green}CCFXCCF\color{red}S\color{black}B}<br>\<br>\text{index} &amp; =\mathtt{123456789}<br>\end{aligned}<br>$$<br>你发现 $S[i] = S[8] = \mathtt{M}$，可 $T[k + 1] = T[8] = \mathtt{S}$，我们前功尽弃，只能将 $T$ 往右平移一格。</p>
+<p>而且要重新开始：$i = 1, k = 1$。<br>$$<br>\begin{aligned}<br>S &amp; = \mathtt{CCFXCCFMONEY}<br>\<br>T &amp; = \mathtt{\text{ }CCFXCCFSB}<br>\<br>\text{index} &amp; =\mathtt{123456789}<br>\end{aligned}<br>$$<br>显然朴素算法的时间复杂度为 $O(nm)$。</p>
+<hr>
+<p>再考虑使用前缀函数 $\pi$ 来优化匹配的过程。</p>
+<p>不难求出 $T$ 的前缀数组 $\pi[1..n] = \{0, 1, 0, 0, 1, 2, 3, 0, 0\}$。</p>
+<p>考虑前缀数组的意义：$T_i$ 的最长的相等的前后缀长度。</p>
+<p>你知道了当 $i = 8, k = 7$ 时，有 $S[1..7] = T[1..7]$，而且 $T[1..3] = T[5..7]$。</p>
+<p>在上述的例子中，也就是我们可以把 $T[1..3]$ 这个地方匹配到的 $\mathtt{\color{green}CCF}$ 移动到 $S[5..8]$ 去。</p>
+<p>这样就直接节省了三次移动。</p>
+<hr>
+<p>总结一下使用前缀函数 $\pi$ 时我们的匹配过程：</p>
+<ol>
+<li><p>使用 $i, k$ 来表示当前 $S[i - k..i - 1] = T[1..k]$；</p>
+</li>
+<li><p>如果 $S[i] \neq T[k + 1]$，我们就用 $\pi$ 函数来实现大幅度的跳跃；</p>
+<p>否则 $k’ \gets k + 1$，表示 $S[i - k..i] = T[1..k + 1]$；</p>
+</li>
+<li><p>当 $k = m$ 时，说明找到了一个匹配 $S[i - m + 1..i] = T[1..m]$。</p>
+</li>
+</ol>
+<h4 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>, k = <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">	<span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; T[k + <span class="number">1</span>] != S[i])</span><br><span class="line">		k = pi[k];</span><br><span class="line">	<span class="keyword">if</span>(T[k + <span class="number">1</span>] == S[i])</span><br><span class="line">		++k;</span><br><span class="line">	<span class="keyword">if</span>(k == m) &#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, i - m + <span class="number">1</span>); <span class="comment">// S[i - m + 1..i] = T[1..m]</span></span><br><span class="line">		k = pi[k];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="正确性-1"><a href="#正确性-1" class="headerlink" title="正确性"></a>正确性</h4><p>可以证明，上述代码实现是正确的。</p>
+<h4 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>依葫芦画瓢地使用求前缀函数数组时的摊还分析方法，不难得出 KMP 算法的时间复杂度为 $O(n + m)$。</p>
+<h4 id="空间复杂度-1"><a href="#空间复杂度-1" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>不难发现 KMP 算法的空间复杂度为 $O(n + m)$。</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>《算法导论》是本好书，上面的算法均有使用循环不变式的正确性证明，很值得一看。</p>
+
           
             <div class='article_footer'>
               
@@ -592,7 +621,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-03T13:43:10+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-03T22:02:39+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2020年7月3日</p>
