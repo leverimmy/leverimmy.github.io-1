@@ -24,8 +24,6 @@
             
             <tag> KMP </tag>
             
-            <tag> 字符串 </tag>
-            
             <tag> 前缀函数 </tag>
             
         </tags>
@@ -52,8 +50,6 @@
       
       
         <tags>
-            
-            <tag> 字符串 </tag>
             
             <tag> 回文树 </tag>
             
