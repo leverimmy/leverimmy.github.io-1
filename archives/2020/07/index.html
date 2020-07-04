@@ -456,7 +456,7 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个长度为 $n$ 的字符串 $S$，求<br>$$<br>\prod_{i = 2}^{n}(\left|{k:\pi[k] \in \pi^{\star}[i] \land \pi[k] \le \left\lfloor\dfrac{k}{2}\right\rfloor}\right| + 1)\pmod{10^9 + 7}<br>$$<br>每个测试点有 $T$ 组数据。</p>
+        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个长度为 $n$ 的字符串 $S$，求<br>$$<br>\prod_{i = 2}^{n}(\left|\{x \in \pi^{\star}[i] : x \le \left\lfloor\dfrac{i}{2}\right\rfloor\}\right| + 1)\pmod{10^9 + 7}<br>$$<br>每个测试点有 $T$ 组数据。</p>
 <p>$1 \le T \le 5$，$1 \le n \le 10^6$。</p>
 <p><a href="">题目链接</a></p>
       
