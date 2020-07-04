@@ -18,7 +18,7 @@
 
   <!-- 页面元数据 -->
   
-    <title>标签：HBOI2020 - Clever_Jimmy&#39;s Blog</title>
+    <title>归档：2020/7 - Clever_Jimmy&#39;s Blog</title>
   
   
 
@@ -70,7 +70,39 @@
 
 <body>
   
-  <div id="loading-bar-wrapper">
+  <div class="cover-wrapper">
+    
+      <cover class='cover  half'>
+        <div class='cover-body'>
+  <div class='a'>
+    
+    
+      <p class="title">Clever_Jimmy 的博客</p>
+    
+    
+      <p class="subtitle">放下成见。</p>
+    
+  </div>
+  <div class='b'>
+    
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <input type="text" class="input u-search-input" placeholder="" />
+          <i class="icon fas fa-search fa-fw"></i>
+        </form>
+      </div>
+    
+    <div class='menu navigation'>
+      <ul class='cover-list-h'>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+      </cover>
+    
+    <div id="loading-bar-wrapper">
   <div id="loading-bar"></div>
 </div>
 <header class="l_header shadow blur">
@@ -323,17 +355,16 @@
 
 <script>setLoadingBarProgress(40);</script>
 
+  </div>
 
 
-  <div class="l_body nocover">
+  <div class="l_body">
     <div class='body-wrapper'>
       
 
-
 <div class='l_main'>
-  
-    
-      
+	
+		
   <section class="post-list ">
     
       
@@ -354,14 +385,12 @@
     
       
       
-        <a title='【游记】HBOI2020 游记' href='/2020/06/19/%E3%80%90%E6%B8%B8%E8%AE%B0%E3%80%91HBOI2020-%E6%B8%B8%E8%AE%B0/'><img class='thumbnail' src='/gallery/posts/donation.png'></a>
-      
       <div class="meta" id="header-meta">
         
           
   <h2 class="title">
-    <a href="/2020/06/19/%E3%80%90%E6%B8%B8%E8%AE%B0%E3%80%91HBOI2020-%E6%B8%B8%E8%AE%B0/">
-      【游记】HBOI2020 游记
+    <a href="/2020/07/04/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2375-NOI2014-%E5%8A%A8%E7%89%A9%E5%9B%AD/">
+      【洛谷】P2375 [NOI2014]动物园
     </a>
   </h2>
 
@@ -386,9 +415,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/%E6%9D%82%E7%AC%94/%E6%B8%B8%E8%AE%B0/' rel="nofollow">
+    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>杂笔/游记</p>
+      <p>题解/洛谷</p>
     </a>
   </div>
 
@@ -399,7 +428,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年6月19日</p>
+    <p>发布于：2020年7月4日</p>
   </a>
 </div>
 
@@ -427,16 +456,15 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>呐，又到了省选季了呢。</p>
-<p><img src="/gallery/posts/donation.png" alt="一起向 CCF 捐赠吧！"></p>
-</blockquote>
+        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个长度为 $n$ 的字符串 $S$，求<br>$$<br>\prod_{i = 2}^{n}(\left|{k:\pi[k] \in \pi^{\star}[i] \land \pi[k] \le \left\lfloor\dfrac{k}{2}\right\rfloor}\right| + 1)\pmod{10^9 + 7}<br>$$<br>每个测试点有 $T$ 组数据。</p>
+<p>$1 \le T \le 5$，$1 \le n \le 10^6$。</p>
+<p><a href="">题目链接</a></p>
       
     </div>
     
       
         <div class="button readmore">
-          <a href="/2020/06/19/%E3%80%90%E6%B8%B8%E8%AE%B0%E3%80%91HBOI2020-%E6%B8%B8%E8%AE%B0/">
+          <a href="/2020/07/04/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2375-NOI2014-%E5%8A%A8%E7%89%A9%E5%9B%AD/">
             阅读全文 <i class="fas fa-chevron-right"></i>
           </a>
         </div>
@@ -455,12 +483,64 @@
     <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
     
     
-
-  
-
+      <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
     
+
   
+
+
+	
 </div>
 <aside class='l_side'>
   
@@ -684,6 +764,67 @@
   </footer>
 
 <script>setLoadingBarProgress(80);</script>
+
+
+
+
+	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+	
+
+	
+	    <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+	
 
 
       <script>setLoadingBarProgress(60);</script>
