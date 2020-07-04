@@ -603,9 +603,11 @@ EERTREE 是一个 回文串...">
               </div>
             </details>
 
-<h3 id="高级应用"><a href="#高级应用" class="headerlink" title="高级应用"></a>高级应用</h3><h4 id="并回文树"><a href="#并回文树" class="headerlink" title="并回文树"></a>并回文树</h4><p>与多个串的回文串相关的问题，我们可以用 <strong>并回文树</strong> 来解决。</p>
-<p>我们用 $\text{eertree}(S_1, S_2, \ldots, S_n)$ 表示 $S_1, S_2, \ldots, S_n$ 的并回文树。</p>
-<h4 id="支持删除的回文树"><a href="#支持删除的回文树" class="headerlink" title="支持删除的回文树"></a>支持删除的回文树</h4><h4 id="富字符串计数"><a href="#富字符串计数" class="headerlink" title="富字符串计数"></a>富字符串计数</h4><h4 id="可持久化回文树"><a href="#可持久化回文树" class="headerlink" title="可持久化回文树"></a>可持久化回文树</h4><h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>回文树真的能很巧妙地解决与回文串有关的问题，</p>
+<div class="note bug red">
+            <p>有关回文树的高级应用，请查阅论文。</p>
+          </div>
+
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>回文树真的能很巧妙地解决与回文串有关的问题，</p>
 <p>而且很多与回文串有关的问题的暴力的时间复杂度极劣无比，</p>
 <p>这也能从侧面体现出回文树的巧妙。</p>
 <blockquote>
@@ -675,10 +677,10 @@ EERTREE 是一个 回文串...">
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-03T13:43:21+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-04T18:31:07+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年7月3日</p>
+    <p>更新于：2020年7月4日</p>
   </a>
 </div>
 
@@ -885,7 +887,7 @@ $1 ...</p>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结构、操作与建立"><span class="toc-number">2.</span> <span class="toc-text">结构、操作与建立</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么"><span class="toc-number">2.1.</span> <span class="toc-text">为什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#是什么"><span class="toc-number">2.2.</span> <span class="toc-text">是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#怎么做"><span class="toc-number">2.3.</span> <span class="toc-text">怎么做</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-number">2.4.</span> <span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性质"><span class="toc-number">3.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基础应用"><span class="toc-number">4.</span> <span class="toc-text">基础应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高级应用"><span class="toc-number">5.</span> <span class="toc-text">高级应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#并回文树"><span class="toc-number">5.1.</span> <span class="toc-text">并回文树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#支持删除的回文树"><span class="toc-number">5.2.</span> <span class="toc-text">支持删除的回文树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#富字符串计数"><span class="toc-number">5.3.</span> <span class="toc-text">富字符串计数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#可持久化回文树"><span class="toc-number">5.4.</span> <span class="toc-text">可持久化回文树</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写在最后"><span class="toc-number">6.</span> <span class="toc-text">写在最后</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结构、操作与建立"><span class="toc-number">2.</span> <span class="toc-text">结构、操作与建立</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#为什么"><span class="toc-number">2.1.</span> <span class="toc-text">为什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#是什么"><span class="toc-number">2.2.</span> <span class="toc-text">是什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#怎么做"><span class="toc-number">2.3.</span> <span class="toc-text">怎么做</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-number">2.4.</span> <span class="toc-text">代码实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#性质"><span class="toc-number">3.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基础应用"><span class="toc-number">4.</span> <span class="toc-text">基础应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写在最后"><span class="toc-number">5.</span> <span class="toc-text">写在最后</span></a></li></ol>
     </div>
   </section>
 
