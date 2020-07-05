@@ -5,9 +5,7 @@
   <!-- SEO相关 -->
   
     
-      
-        <meta name="robots" content="noindex,follow">
-      
+      <meta name="robots" content="noindex,follow">
     
   
   <!-- 渲染优化 -->
@@ -20,7 +18,7 @@
 
   <!-- 页面元数据 -->
   
-    <title>Clever_Jimmy&#39;s Blog</title>
+    <title>标签：线段树 - Clever_Jimmy&#39;s Blog</title>
   
   
 
@@ -331,10 +329,19 @@
     <div class='body-wrapper'>
       
 
+
 <div class='l_main'>
   
+    
+      
   <section class="post-list ">
     
+      
+        
+          
+        
+      
+    
     
       
         
@@ -351,8 +358,8 @@
         
           
   <h2 class="title">
-    <a href="/2020/04/11/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P1251-%E9%A4%90%E5%B7%BE%E8%AE%A1%E5%88%92%E9%97%AE%E9%A2%98/">
-      【洛谷】P1251 餐巾计划问题
+    <a href="/2020/07/05/%E3%80%90CodeForces%E3%80%91CF1326E-Bombs/">
+      【CodeForces】CF1326E Bombs
     </a>
   </h2>
 
@@ -377,9 +384,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
+    <a href='/categories/%E9%A2%98%E8%A7%A3/CodeForces/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/洛谷</p>
+      <p>题解/CodeForces</p>
     </a>
   </div>
 
@@ -390,7 +397,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年4月11日</p>
+    <p>发布于：2020年7月5日</p>
   </a>
 </div>
 
@@ -418,834 +425,17 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>有一家餐厅，在接下来的 $N$ 天中，每天需要 $a_i$ 条餐巾。</p>
-<p>每天你可以进行下列四种操作之一：</p>
-<ol>
-<li>以 $p$ 元/条的单价购买新的毛巾（数量自选）；</li>
-<li>延一天洗手上已有的毛巾（数量自选）；</li>
-<li>将脏毛巾（数量自选）以 $f$ 元/条的单价送到慢洗店，$n$ 天后送回来；</li>
-<li>将脏毛巾（数量自选）以 $s$ 元/条的单价送到快洗店，$m$ 天后送回来。</li>
-</ol>
-<p>在第 $i$ 天买的餐巾可以供第 $j\quad(j \in [i + 1, N])$ 天使用，但 <strong>曾被用过的餐巾</strong> 在第二次用之前必须要洗一下。</p>
-<p>餐厅需要保证每天 <strong>不能供不应需</strong>，求最小花费。</p>
-<p>$1 \le N \le 10^3$，$1 \le a_i \le 10^9$。</p>
-<p><a href="https://www.luogu.com.cn/problem/P1251" target="_blank" rel="noopener">题目链接</a></p>
+        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定两个长度为 $n$ 的排列 $p, q$。</p>
+<p>第 $i$ 次询问，求在 $\forall j \in [1, i], b_j$ 这些位置安置炸弹，$p$ 的结果。</p>
+<p>一个排列 $p$ 对于一个埋炸弹序列的「结果」指：将 $p$ 从左至右每个位置上的数加入集合 $A$，若当前位置上有炸弹，则删除 $A$ 中的最大值；经历上述操作后 $A$ 中的最大值。</p>
+<p>$1 \le n \le 3\cdot 10^5$。</p>
+<p><a href="http://codeforces.com/problemset/problem/1326/E" target="_blank" rel="noopener">题目链接</a></p>
       
     </div>
     
       
         <div class="button readmore">
-          <a href="/2020/04/11/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P1251-%E9%A4%90%E5%B7%BE%E8%AE%A1%E5%88%92%E9%97%AE%E9%A2%98/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/04/11/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2761-%E8%BD%AF%E4%BB%B6%E8%A1%A5%E4%B8%81%E9%97%AE%E9%A2%98/">
-      【洛谷】P2761 软件补丁问题
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://leverimmy.top" rel="nofollow">
-    <img src="https://leverimmy.top/gallery/avatar.jpg">
-    <p>Clever_Jimmy</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/洛谷</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年4月11日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>题意比较复杂，建议到 OJ 上查看。</p>
-<p><a href="https://www.luogu.com.cn/problem/P2761" target="_blank" rel="noopener">题目链接</a></p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/04/11/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2761-%E8%BD%AF%E4%BB%B6%E8%A1%A5%E4%B8%81%E9%97%AE%E9%A2%98/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/04/10/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2762-%E5%A4%AA%E7%A9%BA%E9%A3%9E%E8%A1%8C%E8%AE%A1%E5%88%92%E9%97%AE%E9%A2%98/">
-      【洛谷】P2762 太空飞行计划问题
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://leverimmy.top" rel="nofollow">
-    <img src="https://leverimmy.top/gallery/avatar.jpg">
-    <p>Clever_Jimmy</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/洛谷</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年4月10日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个二分图 $G = (V_1, V_2, E)$，其中 $V_{1, i}$ 有 <strong>正</strong> 权值 $a_i$，$V_{2, i}$ 有 <strong>负</strong> 权值 $b_i$。</p>
-<p>若选择了 $V_{1, i}$ 则必须选择与 $V_{1, i}$ 相连的所有 $V_{2, j}$，问能达到的权值和最大为多少。</p>
-<p>$1 \le \left|V_1\right|, \left|V_2\right| \le 50$。</p>
-<p><a href="https://www.luogu.com.cn/problem/P2762" target="_blank" rel="noopener">题目链接</a></p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/04/10/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2762-%E5%A4%AA%E7%A9%BA%E9%A3%9E%E8%A1%8C%E8%AE%A1%E5%88%92%E9%97%AE%E9%A2%98/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/04/08/%E3%80%90%E6%96%87%E5%8C%96%E8%AF%BE%E3%80%91%E6%95%B0%E5%88%97%E4%B8%8D%E5%8A%A8%E7%82%B9%E6%B5%85%E6%8E%A2/">
-      【文化课】数列不动点浅探
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://leverimmy.top" rel="nofollow">
-    <img src="https://leverimmy.top/gallery/avatar.jpg">
-    <p>Clever_Jimmy</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E6%96%87%E5%8C%96%E8%AF%BE/%E6%95%B0%E5%AD%A6/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>文化课/数学</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年4月8日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>数列不动点可以辅助我们快速解题。</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/04/08/%E3%80%90%E6%96%87%E5%8C%96%E8%AF%BE%E3%80%91%E6%95%B0%E5%88%97%E4%B8%8D%E5%8A%A8%E7%82%B9%E6%B5%85%E6%8E%A2/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/04/07/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P4015-%E8%BF%90%E8%BE%93%E9%97%AE%E9%A2%98/">
-      【洛谷】P4015 运输问题
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://leverimmy.top" rel="nofollow">
-    <img src="https://leverimmy.top/gallery/avatar.jpg">
-    <p>Clever_Jimmy</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/洛谷</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年4月7日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定两个长度分别为 $m$ 和 $n$ 的序列 $A$ 和 $B$，</p>
-<p>每次操作，使 $A_i \gets A_i - 1$，且 $B_j \gets B_j + 1$ 有代价 $C_{i, j}$，</p>
-<p>求使得 $\sum_{j = 1}^{m}A_j = \sum_{j = 1}^{n}B_j$ 的最小费用。</p>
-<p>$1 \le m, n \le 100$。</p>
-<p><a href="https://www.luogu.com.cn/problem/P4015" target="_blank" rel="noopener">题目链接</a></p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/04/07/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P4015-%E8%BF%90%E8%BE%93%E9%97%AE%E9%A2%98/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/">
-      【洛谷】P6216 回文匹配
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://leverimmy.top" rel="nofollow">
-    <img src="https://leverimmy.top/gallery/avatar.jpg">
-    <p>Clever_Jimmy</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/洛谷</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年4月6日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定 $S, T$，求 $T$ 在 $S$ 的所有奇数长度的回文子串中出现的次数之和。</p>
-<p>$1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。</p>
-<p><a href="https://www.luogu.com.cn/problem/P6216" target="_blank" rel="noopener">题目链接</a></p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/03/27/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3649-APIO2014-%E5%9B%9E%E6%96%87%E4%B8%B2/">
-      【洛谷】P3649 [APIO2014]回文串
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://leverimmy.top" rel="nofollow">
-    <img src="https://leverimmy.top/gallery/avatar.jpg">
-    <p>Clever_Jimmy</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/洛谷</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年3月27日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个字符串 $S$，求其所有回文子串的出现次数与其长度的乘积之和。</p>
-<p>$1 \le \left|S\right| \le 3\cdot10^5$。</p>
-<p><a href="https://www.luogu.com.cn/problem/P3649" target="_blank" rel="noopener">题目链接</a></p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/03/27/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3649-APIO2014-%E5%9B%9E%E6%96%87%E4%B8%B2/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/03/26/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3355-%E9%AA%91%E5%A3%AB%E5%85%B1%E5%AD%98%E9%97%AE%E9%A2%98/">
-      【洛谷】P3355 骑士共存问题
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://leverimmy.top" rel="nofollow">
-    <img src="https://leverimmy.top/gallery/avatar.jpg">
-    <p>Clever_Jimmy</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/洛谷</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年3月26日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个大小为 $n \times n$ 的棋盘，其中 $m$ 个格子上有障碍，问最多能放多少个骑士（即「马」）。</p>
-<p>$1 \le n \le 200$，$0 \le m \le n^2$。</p>
-<p><a href="https://www.luogu.com.cn/problem/P3355" target="_blank" rel="noopener">题目链接</a></p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/03/26/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3355-%E9%AA%91%E5%A3%AB%E5%85%B1%E5%AD%98%E9%97%AE%E9%A2%98/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/03/19/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P4430-%E5%B0%8F%E7%8C%B4%E6%89%93%E6%9E%B6/">
-      【洛谷】P4430 小猴打架
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://leverimmy.top" rel="nofollow">
-    <img src="https://leverimmy.top/gallery/avatar.jpg">
-    <p>Clever_Jimmy</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/洛谷</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年3月19日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>求点数为 $n$ 的完全图中，构成生成树的不同连接方式的方案数。</p>
-<p>$1 \le n \le 10^6$。</p>
-<p><a href="https://www.luogu.com.cn/problem/P4430" target="_blank" rel="noopener">题目链接</a></p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/03/19/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P4430-%E5%B0%8F%E7%8C%B4%E6%89%93%E6%9E%B6/">
+          <a href="/2020/07/05/%E3%80%90CodeForces%E3%80%91CF1326E-Bombs/">
             阅读全文 <i class="fas fa-chevron-right"></i>
           </a>
         </div>
@@ -1260,27 +450,6 @@
     
   </section>
   
-    
-      <br>
-      <div class="prev-next">
-        
-          <a class="prev" rel="prev" href="/page/2/">
-            <section class="post prev white-box shadow" >
-              <i class="fas fa-chevron-left" aria-hidden="true"></i>&nbsp;上一页&nbsp;
-            </section>
-          </a>
-        
-        <p class="current">
-          3 / 4
-        </p>
-        
-          <a class="next" rel="next" href="/page/4/">
-            <section class="post next white-box shadow">
-              &nbsp;下一页&nbsp;<i class="fas fa-chevron-right" aria-hidden="true"></i>
-            </section>
-          </a>
-        
-      </div>
     
     <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
     
@@ -1342,6 +511,8 @@
   
 
 
+    
+  
 </div>
 <aside class='l_side'>
   

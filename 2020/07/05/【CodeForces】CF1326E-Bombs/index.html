@@ -16,14 +16,14 @@
 
   <!-- 页面元数据 -->
   
-    <title>【洛谷】P6216 回文匹配 - Clever_Jimmy&#39;s Blog</title>
+    <title>【CodeForces】CF1326E Bombs - Clever_Jimmy&#39;s Blog</title>
   
-    <meta name="keywords" content="KMP,回文树,前缀和,差分">
+    <meta name="keywords" content="线段树">
   
   
-    <meta name="description" content="题意简述：给定 $S, T$，求 $T$ 在 $S$ 的所有奇数长度的回文子串中出现的次数之和。
-$1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
-题目链接">
+    <meta name="description" content="题意简述：给定两个长度为 $n$ 的排列 $p, q$。
+第 $i$ 次询问，求在 $\forall j \in [1, i], b_j$ 这些位置安置炸弹，$p$ 的结果。
+一个排列 $p$ 对于一个埋炸弹序列的「结果」指：将 $p$ 从左至右每个位置上的数加入集合 $A$，若当前位置上有炸弹，则删除 $A$ ...">
   
 
   <!-- feed -->
@@ -349,8 +349,8 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
         
           
   <h1 class="title">
-    <a href="/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/">
-      【洛谷】P6216 回文匹配
+    <a href="/2020/07/05/%E3%80%90CodeForces%E3%80%91CF1326E-Bombs/">
+      【CodeForces】CF1326E Bombs
     </a>
   </h1>
 
@@ -375,9 +375,9 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
+    <a href='/categories/%E9%A2%98%E8%A7%A3/CodeForces/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/洛谷</p>
+      <p>题解/CodeForces</p>
     </a>
   </div>
 
@@ -388,7 +388,7 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年4月6日</p>
+    <p>发布于：2020年7月5日</p>
   </a>
 </div>
 
@@ -412,21 +412,27 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
         <div class="article-entry" itemprop="articleBody">
           
           
-          <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定 $S, T$，求 $T$ 在 $S$ 的所有奇数长度的回文子串中出现的次数之和。</p>
-<p>$1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。</p>
-<p><a href="https://www.luogu.com.cn/problem/P6216" target="_blank" rel="noopener">题目链接</a></p>
+          <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定两个长度为 $n$ 的排列 $p, q$。</p>
+<p>第 $i$ 次询问，求在 $\forall j \in [1, i], b_j$ 这些位置安置炸弹，$p$ 的结果。</p>
+<p>一个排列 $p$ 对于一个埋炸弹序列的「结果」指：将 $p$ 从左至右每个位置上的数加入集合 $A$，若当前位置上有炸弹，则删除 $A$ 中的最大值；经历上述操作后 $A$ 中的最大值。</p>
+<p>$1 \le n \le 3\cdot 10^5$。</p>
+<p><a href="http://codeforces.com/problemset/problem/1326/E" target="_blank" rel="noopener">题目链接</a></p>
 <a id="more"></a>
 
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>记 $n = \left|S\right|, m = \left|T\right|$。</p>
-<p>在回文树上，从长度为 $-1$ 的虚拟节点 $1$ 开始 dfs，即可遍历所有奇数长度的回文子串。</p>
-<p>注意到，即使回文树上的某个点对应的回文串在 $S$ 中多次出现，其本质上是相同的。</p>
-<p>我们考虑记录一下每个回文串在 $S$ 中对应的右界，并用 KMP 处理出 $T$ 在 $S$ 的每一个前缀中出现的次数。</p>
-<p>利用差分的思想，$T$ 在 $S[l..r]$ 中出现的次数就是 $sum_r - sum_{l + m - 2}$</p>
-<p>答案即为</p>
-<p>$$<br>  \sum_{u \in \text{subtree of node }1}(sum_r - sum_{l + m - 2})\cdot cnt_u<br>$$</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>注意到一个性质，就是答案从左至右是单调不增的。</p>
+<p>很好理解，因为当一个炸弹爆炸的时候总会删除 $A$ 中的最大值而不是次大值，利用反证法即可得到答案单调不增。</p>
+<p>因此我们可以维护当前答案 $ans$，若 $ans$ 被从 $A$ 中删掉就 $ans \gets ans - 1$。</p>
+<p>考虑什么时候 $ans$ 会从 $A$ 中被删掉。</p>
+<p>如果我们希望 $ans$ 被留下来，那么必须满足在 $ans$ 右边 <strong>存在</strong> 一个 $i$ 使得 $i$ 及以后的炸弹数 <strong>小于</strong> $i$ 及以后大于 $ans$ 的数的个数。</p>
+<p>也就是说，$i$ 及以后的炸弹炸不够 $ans$。</p>
+<p>因此我们只需要考虑是否 <strong>所有</strong> 的位置 $i$ 都有 $i$ 及以后的炸弹数 <strong>都大于等于</strong> $i$ 及以后大于 $ans$ 的数的个数。</p>
+<p>维护每个位置 $i$ 及以后的炸弹数与大于 $ans$ 的数的个数的差，然后如果最大值小于等于 $0$，则 $ans \gets ans - 1$。</p>
+<p>记 $\textrm{rev}(x) = i, \textrm{s.t. }p_i = x$。</p>
+<p>每个炸弹在处理的时候就是区间修改 $[1, q_i]$ 上的值减一，当 $ans \gets ans - 1$ 的时候要区间修改 $[1, \textrm{rev}(ans - 1)]$ 上的值加一。</p>
+<p>因为我们是实时更新的，所以每次输出 $ans$ 即可。</p>
 <h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><details ><summary> <p>Code</p> </summary>
               <div class='content'>
-              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uint64 unsigned int</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">3e6</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> C = <span class="number">26</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, sum[N], _next[N];</span><br><span class="line"><span class="keyword">char</span> str1[N], str2[N];</span><br><span class="line"></span><br><span class="line">uint64 ans;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">EERTREE</span> &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> MS = N;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">int</span> last;</span><br><span class="line">    <span class="keyword">int</span> cntNode;</span><br><span class="line">    <span class="keyword">int</span> len[MS];</span><br><span class="line">    <span class="keyword">int</span> R[MS];</span><br><span class="line">    <span class="keyword">int</span> cnt[MS];</span><br><span class="line">    <span class="keyword">int</span> link[MS];</span><br><span class="line">    <span class="keyword">int</span> ch[MS][C];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">make</span><span class="params">(<span class="keyword">int</span> l)</span> </span>&#123;</span><br><span class="line">        len[cntNode] = l;</span><br><span class="line">        <span class="keyword">return</span> cntNode++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">GetFail</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(str1[n] != str1[n - len[x] - <span class="number">1</span>]) x = link[x];</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">extend</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        ++n;</span><br><span class="line">        <span class="keyword">int</span> fa = GetFail(last);</span><br><span class="line">        <span class="keyword">if</span>(!ch[fa][x]) &#123;</span><br><span class="line">            <span class="keyword">int</span> now = make(len[fa] + <span class="number">2</span>);</span><br><span class="line">            link[now] = ch[ GetFail(link[fa]) ][x];</span><br><span class="line">            ch[fa][x] = now;</span><br><span class="line">        &#125;</span><br><span class="line">        last = ch[fa][x];</span><br><span class="line">        R[last] = n;</span><br><span class="line">        ++cnt[last];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        n = cntNode = last = <span class="number">0</span>;</span><br><span class="line">        make(<span class="number">0</span>), make(<span class="number">-1</span>);</span><br><span class="line">        link[<span class="number">0</span>] = <span class="number">1</span>, link[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        str1[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = cntNode - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) cnt[ link[i] ] += cnt[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(len[x] &gt;= m)</span><br><span class="line">           ans += (sum[ R[x] ] - sum[ R[x] - len[x] + m - <span class="number">1</span>]) * cnt[x];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= C; ++i) <span class="keyword">if</span> (ch[x][i])</span><br><span class="line">            dfs(ch[x][i]);</span><br><span class="line">    &#125;</span><br><span class="line">    EERTREE() &#123; init(); &#125;</span><br><span class="line">&#125; t;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Get_Next</span><span class="params">(<span class="keyword">char</span> *S, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>; i &lt; len; ++i, j = _next[i]) &#123;</span><br><span class="line">        <span class="keyword">while</span>(j &gt; <span class="number">0</span> &amp;&amp; S[i + <span class="number">1</span>] != S[j + <span class="number">1</span>])</span><br><span class="line">            j = _next[j];</span><br><span class="line">        <span class="keyword">if</span>(S[i + <span class="number">1</span>] == S[j + <span class="number">1</span>])</span><br><span class="line">            j++;</span><br><span class="line">        _next[i + <span class="number">1</span>] = j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">KMP</span><span class="params">(<span class="keyword">char</span> *S, <span class="keyword">int</span> len1, <span class="keyword">char</span> *T, <span class="keyword">int</span> len2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt;= len1; ) &#123;</span><br><span class="line">        <span class="keyword">if</span>(j == len2)</span><br><span class="line">            sum[i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(S[i + <span class="number">1</span>] == T[j + <span class="number">1</span>])</span><br><span class="line">            ++i, ++j;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (j == <span class="number">0</span>) ++i;</span><br><span class="line">            <span class="keyword">else</span> j = _next[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s %s"</span>, str1 + <span class="number">1</span>, str2 + <span class="number">1</span>);</span><br><span class="line">    Get_Next(str2, m);</span><br><span class="line">    KMP(str1, n, str2, m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) sum[i] += sum[i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) t.extend(str1[i] - <span class="string">'a'</span> + <span class="number">1</span>);</span><br><span class="line">    t.refresh();</span><br><span class="line">    t.dfs(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%u"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">10 2</span></span><br><span class="line"><span class="comment">ccbccbbcbb bc</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">20 2</span></span><br><span class="line"><span class="comment">cbcaacabcbacbbabacca ba</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">3e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, p[N], q[N], rev[N], ans;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">SEGTREE</span> &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> MS = N &lt;&lt; <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> lc[MS], rc[MS], dat[MS], tag[MS];</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">        dat[p] = <span class="built_in">std</span>::max(dat[p &lt;&lt; <span class="number">1</span>], dat[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        lc[p] = l, rc[p] = r, dat[p] = tag[p] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(l == r)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        build(p &lt;&lt; <span class="number">1</span>, l, mid);</span><br><span class="line">        build(p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, mid + <span class="number">1</span>, r);</span><br><span class="line">        pushup(p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">spread</span><span class="params">(<span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(tag[p]) &#123;</span><br><span class="line">            tag[p &lt;&lt; <span class="number">1</span>] += tag[p], tag[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] += tag[p];</span><br><span class="line">            dat[p &lt;&lt; <span class="number">1</span>] += tag[p], dat[p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>] += tag[p];</span><br><span class="line">            tag[p] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(l &lt;= lc[p] &amp;&amp; rc[p] &lt;= r) &#123;</span><br><span class="line">            tag[p] += v, dat[p] += v;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        spread(p);</span><br><span class="line">        <span class="keyword">int</span> mid = lc[p] + rc[p] &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(l &lt;= mid)</span><br><span class="line">            add(p &lt;&lt; <span class="number">1</span>, l, r, v);</span><br><span class="line">        <span class="keyword">if</span>(mid &lt; r)</span><br><span class="line">            add(p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, l, r, v);</span><br><span class="line">        pushup(p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> p, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(l &lt;= lc[p] &amp;&amp; rc[p] &lt;= r)</span><br><span class="line">            <span class="keyword">return</span> dat[p];</span><br><span class="line">        spread(p);</span><br><span class="line">        <span class="keyword">int</span> mid = lc[p] + rc[p] &gt;&gt; <span class="number">1</span>, res = inf;</span><br><span class="line">        <span class="keyword">if</span>(l &lt;= mid)</span><br><span class="line">            res = <span class="built_in">std</span>::max(res, query(p &lt;&lt; <span class="number">1</span>, l, r));</span><br><span class="line">        <span class="keyword">if</span>(mid &lt; r)</span><br><span class="line">            res = <span class="built_in">std</span>::max(res, query(p &lt;&lt; <span class="number">1</span> | <span class="number">1</span>, l, r));</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; t;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;p[i]);</span><br><span class="line">        rev[p[i]] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;q[i]);</span><br><span class="line">    </span><br><span class="line">    t.build(<span class="number">1</span>, <span class="number">1</span>, n), t.add(<span class="number">1</span>, <span class="number">1</span>, rev[n], <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d "</span>, ans = n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        t.add(<span class="number">1</span>, <span class="number">1</span>, q[i], <span class="number">-1</span>);</span><br><span class="line">        <span class="keyword">while</span>(t.query(<span class="number">1</span>, <span class="number">1</span>, n) &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            --ans;</span><br><span class="line">            t.add(<span class="number">1</span>, <span class="number">1</span>, rev[ans], <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
               </div>
             </details>
 
@@ -465,7 +471,7 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
           
         
           
-            <p>本文永久链接是：<a href=https://leverimmy.top/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/>https://leverimmy.top/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/</a></p>
+            <p>本文永久链接是：<a href=https://leverimmy.top/2020/07/05/%E3%80%90CodeForces%E3%80%91CF1326E-Bombs/>https://leverimmy.top/2020/07/05/%E3%80%90CodeForces%E3%80%91CF1326E-Bombs/</a></p>
           
         
       </blockquote>
@@ -490,10 +496,10 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-03T16:30:52+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-05T23:58:18+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年7月3日</p>
+    <p>更新于：2020年7月5日</p>
   </a>
 </div>
 
@@ -502,7 +508,7 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/KMP/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>KMP</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%9B%9E%E6%96%87%E6%A0%91/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>回文树</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>前缀和</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%B7%AE%E5%88%86/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>差分</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>线段树</p></a></div>
 
 
         
@@ -520,8 +526,10 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://leverimmy.top/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/&title=【洛谷】P6216 回文匹配 - Clever_Jimmy's Blog&summary=题意简述：给定 $S, T$，求 $T$ 在 $S$ 的所有奇数长度的回文子串中出现的次数之和。
-$1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://leverimmy.top/2020/07/05/%E3%80%90CodeForces%E3%80%91CF1326E-Bombs/&title=【CodeForces】CF1326E Bombs - Clever_Jimmy's Blog&summary=题意简述：给定两个长度为 $n$ 的排列 $p, q$。
+第 $i$ 次询问，求在 $\forall j \in [1, i], b_j$ 这些位置安置炸弹，$p$ 的结果。
+一个排列 $p$ 对于一个埋炸弹序列的「结果」指：将 $p$ 从左至右每个位置上的数加入集合 $A$，若当前位置上有炸弹，则删除 $A$ 中的最大值；经历上述操作后 $A$ 中的最大值。
+$1 \le n \le 3\cdot 10^5$。
 题目链接"
           
           >
@@ -534,8 +542,10 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://leverimmy.top/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/&title=【洛谷】P6216 回文匹配 - Clever_Jimmy's Blog&summary=题意简述：给定 $S, T$，求 $T$ 在 $S$ 的所有奇数长度的回文子串中出现的次数之和。
-$1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://leverimmy.top/2020/07/05/%E3%80%90CodeForces%E3%80%91CF1326E-Bombs/&title=【CodeForces】CF1326E Bombs - Clever_Jimmy's Blog&summary=题意简述：给定两个长度为 $n$ 的排列 $p, q$。
+第 $i$ 次询问，求在 $\forall j \in [1, i], b_j$ 这些位置安置炸弹，$p$ 的结果。
+一个排列 $p$ 对于一个埋炸弹序列的「结果」指：将 $p$ 从左至右每个位置上的数加入集合 $A$，若当前位置上有炸弹，则删除 $A$ 中的最大值；经历上述操作后 $A$ 中的最大值。
+$1 \le n \le 3\cdot 10^5$。
 题目链接"
           
           >
@@ -548,8 +558,10 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://leverimmy.top/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/&title=【洛谷】P6216 回文匹配 - Clever_Jimmy's Blog&summary=题意简述：给定 $S, T$，求 $T$ 在 $S$ 的所有奇数长度的回文子串中出现的次数之和。
-$1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
+          href="http://service.weibo.com/share/share.php?url=https://leverimmy.top/2020/07/05/%E3%80%90CodeForces%E3%80%91CF1326E-Bombs/&title=【CodeForces】CF1326E Bombs - Clever_Jimmy's Blog&summary=题意简述：给定两个长度为 $n$ 的排列 $p, q$。
+第 $i$ 次询问，求在 $\forall j \in [1, i], b_j$ 这些位置安置炸弹，$p$ 的结果。
+一个排列 $p$ 对于一个埋炸弹序列的「结果」指：将 $p$ 从左至右每个位置上的数加入集合 $A$，若当前位置上有炸弹，则删除 $A$ 中的最大值；经历上述操作后 $A$ 中的最大值。
+$1 \le n \le 3\cdot 10^5$。
 题目链接"
           
           >
@@ -574,25 +586,13 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/04/07/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P4015-%E8%BF%90%E8%BE%93%E9%97%AE%E9%A2%98/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>【洛谷】P4015 运输问题</p>
-                <p class='content'>题意简述：给定两个长度分别为 $m$ 和 $n$ 的序列 $A$ 和 $B$，
-每次操作，使 $A_i \gets A_i - 1$，且 $B_j \gets B_j + 1$ 有代价 $C_{...</p>
-              </a>
             
-            
-              <a class='next' href='/2020/03/30/%E3%80%90%E7%BD%AE%E9%A1%B6%E3%80%91%E8%BF%91%E6%9C%9F%E7%9A%84%E5%B0%8F%E8%AE%A1%E5%88%92/'>
-                <p class='title'>【置顶】近期的小计划<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>众所周知，$\text{Clever_Jimmy}$ 是只鸽子。
-
-
-OI 相关字符串
- KMP 2020.07.04 完成
- AC 自动机
- 后缀树
- 后缀数组
- 最小表示法
- 回文树 202...</p>
+              <a class='next' href='/2020/07/05/%E3%80%90CodeForces%E3%80%91CF708C-Centroids/'>
+                <p class='title'>【CodeForces】CF708C Centroids<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>题意简述：给定一棵 $n$ 个点的树，你可以删除一条边并增加一条边，形成一棵新树。
+问每个点在进行这样的操作后，是否可能成为新树的重心。
+$1 \le n \le 4\cdot 10^5$。
+题...</p>
               </a>
             
           </div>
@@ -673,7 +673,7 @@ OI 相关字符串
 
   <script>
     window.subData = {
-      title: '【洛谷】P6216 回文匹配',
+      title: '【CodeForces】CF1326E Bombs',
       tools: true
     }
   </script>
