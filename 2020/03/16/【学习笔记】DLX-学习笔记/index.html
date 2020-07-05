@@ -640,8 +640,7 @@
 <h3 id="时间复杂度分-luan-析-che"><a href="#时间复杂度分-luan-析-che" class="headerlink" title="时间复杂度分 (luàn) 析 (chě)"></a>时间复杂度分 (luàn) 析 (chě)</h3><p>DLX 的时间复杂度是 <strong>指数级</strong> 的，它递归及回溯的次数与矩阵中 $1$ 的个数有关，与矩阵的 $r, c$ 等参数无关。</p>
 <p>因此理论复杂度大概在 $O(c^n)$ 左右，其中 $c$ 为某个非常接近于 $1$ 的常数，$n$ 为矩阵中 $1$ 的个数。</p>
 <p>但实际情况下 DLX 表现良好，一般能解决大部分的问题。</p>
-<p>###如何建模</p>
-<p>DLX 的难点，<del>除了垃圾链表连这连那</del>就是建模。</p>
+<h3 id="如何建模"><a href="#如何建模" class="headerlink" title="如何建模"></a>如何建模</h3><p>DLX 的难点，<del>除了垃圾链表连这连那</del>就是建模。</p>
 <p><strong>请确保已经完全掌握 DLX 模板后再继续阅读本文。</strong></p>
 <p>我们每拿到一个题，应该考虑行和列所表示的意义：</p>
 <ul>
@@ -750,10 +749,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-03T16:18:54+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-06T07:35:23+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年7月3日</p>
+    <p>更新于：2020年7月6日</p>
   </a>
 </div>
 
@@ -952,7 +951,7 @@ $1 \le m, n ...</p>
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题引入"><span class="toc-number">1.</span> <span class="toc-text">问题引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#精确覆盖问题"><span class="toc-number">2.</span> <span class="toc-text">精确覆盖问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#X-算法"><span class="toc-number">3.</span> <span class="toc-text">X 算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dancing-Links-优化的-X-算法"><span class="toc-number">4.</span> <span class="toc-text">Dancing Links 优化的 X 算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#时间复杂度分-luan-析-che"><span class="toc-number">5.</span> <span class="toc-text">时间复杂度分 (luàn) 析 (chě)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习"><span class="toc-number">6.</span> <span class="toc-text">练习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">7.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">8.</span> <span class="toc-text">参考资料</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题引入"><span class="toc-number">1.</span> <span class="toc-text">问题引入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#精确覆盖问题"><span class="toc-number">2.</span> <span class="toc-text">精确覆盖问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#X-算法"><span class="toc-number">3.</span> <span class="toc-text">X 算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dancing-Links-优化的-X-算法"><span class="toc-number">4.</span> <span class="toc-text">Dancing Links 优化的 X 算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#时间复杂度分-luan-析-che"><span class="toc-number">5.</span> <span class="toc-text">时间复杂度分 (luàn) 析 (chě)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何建模"><span class="toc-number">6.</span> <span class="toc-text">如何建模</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习"><span class="toc-number">7.</span> <span class="toc-text">练习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">8.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">9.</span> <span class="toc-text">参考资料</span></a></li></ol>
     </div>
   </section>
 
