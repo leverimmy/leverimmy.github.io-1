@@ -16,13 +16,14 @@
 
   <!-- 页面元数据 -->
   
-    <title>【洛谷】P6216 回文匹配 - Clever_Jimmy&#39;s Blog</title>
+    <title>【CodeForces】CF708C Centroids - Clever_Jimmy&#39;s Blog</title>
   
-    <meta name="keywords" content="回文树,KMP,前缀和,差分">
+    <meta name="keywords" content="动态规划,换根dp">
   
   
-    <meta name="description" content="题意简述：给定 $S, T$，求 $T$ 在 $S$ 的所有奇数长度的回文子串中出现的次数之和。
-$1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
+    <meta name="description" content="题意简述：给定一棵 $n$ 个点的树，你可以删除一条边并增加一条边，形成一棵新树。
+问每个点在进行这样的操作后，是否可能成为新树的重心。
+$1 \le n \le 4\cdot 10^5$。
 题目链接">
   
 
@@ -349,8 +350,8 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
         
           
   <h1 class="title">
-    <a href="/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/">
-      【洛谷】P6216 回文匹配
+    <a href="/2020/07/05/%E3%80%90CodeForces%E3%80%91CF708C-Centroids/">
+      【CodeForces】CF708C Centroids
     </a>
   </h1>
 
@@ -375,9 +376,9 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
+    <a href='/categories/%E9%A2%98%E8%A7%A3/CodeForces/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/洛谷</p>
+      <p>题解/CodeForces</p>
     </a>
   </div>
 
@@ -388,7 +389,7 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年4月6日</p>
+    <p>发布于：2020年7月5日</p>
   </a>
 </div>
 
@@ -412,21 +413,32 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
         <div class="article-entry" itemprop="articleBody">
           
           
-          <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定 $S, T$，求 $T$ 在 $S$ 的所有奇数长度的回文子串中出现的次数之和。</p>
-<p>$1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。</p>
-<p><a href="https://www.luogu.com.cn/problem/P6216" target="_blank" rel="noopener">题目链接</a></p>
+          <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一棵 $n$ 个点的树，你可以删除一条边并增加一条边，形成一棵新树。</p>
+<p>问每个点在进行这样的操作后，是否可能成为新树的重心。</p>
+<p>$1 \le n \le 4\cdot 10^5$。</p>
+<p><a href="https://codeforces.com/problemset/problem/708/C" target="_blank" rel="noopener">题目链接</a></p>
 <a id="more"></a>
 
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>记 $n = \left|S\right|, m = \left|T\right|$。</p>
-<p>在回文树上，从长度为 $-1$ 的虚拟节点 $1$ 开始 dfs，即可遍历所有奇数长度的回文子串。</p>
-<p>注意到，即使回文树上的某个点对应的回文串在 $S$ 中多次出现，其本质上是相同的。</p>
-<p>我们考虑记录一下每个回文串在 $S$ 中对应的右界，并用 KMP 处理出 $T$ 在 $S$ 的每一个前缀中出现的次数。</p>
-<p>利用差分的思想，$T$ 在 $S[l..r]$ 中出现的次数就是 $sum_r - sum_{l + m - 2}$</p>
-<p>答案即为</p>
-<p>$$<br>  \sum_{u \in \text{subtree of node }1}(sum_r - sum_{l + m - 2})\cdot cnt_u<br>$$</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>一个不可否认的事实是，如果一个节点 $u$ 是原树的重心，那么它一定可以成为新树的重心。</p>
+<p>如果一个节点 $u$ 有一棵子树 $v$ 的大小大于 $\left\lfloor\dfrac{n}{2}\right\rfloor$，我们可以尝试着将 $v$ 的子树中最大的一棵接到 $u$ 上，看能否使 $u$ 成为重心。</p>
+<p>显然这样的子树 $v$ 对于 $u$ 而言最多只有一个。</p>
+<p>令：<br>$$<br>\begin{aligned}<br> &amp; \textrm{siz}(u) =<br> \begin{cases}<br>  1 &amp; \textrm{son}(u) = \varnothing<br>  \\<br>  \sum\limits_{v \in \textrm{son}(u)}\textrm{siz}(v) &amp; \textrm{son}(u) \neq \varnothing<br> \end{cases}<br> \\<br> &amp; \textrm{maxson}(u) =<br> \begin{cases}<br>  0 &amp; \textrm{son}(u) = \varnothing<br>  \\<br>  \max\limits_{v \in \textrm{son}(u)}\textrm{siz}(v) &amp; \textrm{son}(u) \neq \varnothing<br> \end{cases}<br> \\<br> &amp; f(u, 0) = \max\limits_{v \in \textrm{son}(u)}<br> \begin{cases}<br>  \textrm{siz}(v) &amp; \textrm{siz}(v) \le \left\lfloor\dfrac{n}{2}\right\rfloor<br>  \\<br>  f(v, 0) &amp; \textrm{otherwise}<br>  \end{cases}<br> \\<br> &amp; f(u, 1) = \mathop{\operatorname{second max}}\limits_{v \in \textrm{son}(u)}<br> \begin{cases}<br>  \textrm{siz}(v) &amp; \textrm{siz}(v) \le \left\lfloor\dfrac{n}{2}\right\rfloor<br>  \\<br>  f(v, 0) &amp; \textrm{otherwise}<br> \end{cases}<br> \\<br> &amp; g(u) = \mathop{\operatorname{argmax}}\limits_{v \in \textrm{son}(u)}<br> \begin{cases}<br>  \textrm{siz}(v) &amp; \textrm{siz}(v) \le \left\lfloor\dfrac{n}{2}\right\rfloor<br>  \\<br>  f(v, 0) &amp; \textrm{otherwise}<br> \end{cases}<br>\end{aligned}<br>$$<br>至此，我们求出来了每个节点 $u$ 的重儿子 $\textrm{son}(u)$，最大的小于 $\left\lfloor\dfrac{n}{2}\right\rfloor$ 的子树 $g(u)$ 以及其大小 $f(u, 0)$，次大的小于 $\left\lfloor\dfrac{n}{2}\right\rfloor$ 的子树大小 $f(u, 1)$ 。</p>
+<p>对一个节点 $u$ 求上述所有值的时间复杂度为 $O(n)$。</p>
+<p>那么如何解决问题呢？</p>
+<p>考虑换根dp，用 $h(u)$ 来维护不是 $u$ 的子树中，小于等于 $\left\lfloor\dfrac{n}{2}\right\rfloor$ 的最大子树大小。</p>
+<p>令：<br>$$<br>u = \textrm{parent}(v), h(v) = \max\{<br>\begin{cases}<br> n - \textrm{siz}(u) &amp; n - \textrm{siz}(u) \le \left\lfloor\dfrac{n}{2}\right\rfloor<br> \\<br> h(u) &amp; n - \textrm{siz}(u) &gt; \left\lfloor\dfrac{n}{2}\right\rfloor<br> \\<br> f(u, 1) &amp; g(u) = v<br> \\<br> f(u, 0) &amp; g(u) \neq v<br>\end{cases}<br>\}<br>$$<br>这样我们就可以用 $h(u)$ 来解决「原来 $v$ 是 $u$ 的孩子但现在 $u$ 是 $v$ 的孩子」的情况了。</p>
+<p>最后，对于每个点：</p>
+<ul>
+<li><p>如果 $\textrm{siz}(\textrm{maxson}(u)) &gt; \left\lfloor\dfrac{n}{2}\right\rfloor$</p>
+<p>我们就只需要检查 $\textrm{siz}(\textrm{maxson}(u)) - f(\textrm{maxson}(u), 0)$ 是否小于等于 $\left\lfloor\dfrac{n}{2}\right\rfloor$ 即可；</p>
+</li>
+<li><p>如果 $n - \textrm{siz}(u) &gt; \left\lfloor\dfrac{n}{2}\right\rfloor$</p>
+<p>我们就只需要检查 $n - \textrm{siz}(u) - h(u)$ 是否小于等于 $\left\lfloor\dfrac{n}{2}\right\rfloor$ 即可；</p>
+</li>
+</ul>
 <h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><details ><summary> <p>Code</p> </summary>
               <div class='content'>
-              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> uint64 unsigned int</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">3e6</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> C = <span class="number">26</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, sum[N], _next[N];</span><br><span class="line"><span class="keyword">char</span> str1[N], str2[N];</span><br><span class="line"></span><br><span class="line">uint64 ans;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">EERTREE</span> &#123;</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">int</span> MS = N;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">int</span> last;</span><br><span class="line">    <span class="keyword">int</span> cntNode;</span><br><span class="line">    <span class="keyword">int</span> len[MS];</span><br><span class="line">    <span class="keyword">int</span> R[MS];</span><br><span class="line">    <span class="keyword">int</span> cnt[MS];</span><br><span class="line">    <span class="keyword">int</span> link[MS];</span><br><span class="line">    <span class="keyword">int</span> ch[MS][C];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">make</span><span class="params">(<span class="keyword">int</span> l)</span> </span>&#123;</span><br><span class="line">        len[cntNode] = l;</span><br><span class="line">        <span class="keyword">return</span> cntNode++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">GetFail</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span>(str1[n] != str1[n - len[x] - <span class="number">1</span>]) x = link[x];</span><br><span class="line">        <span class="keyword">return</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">extend</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        ++n;</span><br><span class="line">        <span class="keyword">int</span> fa = GetFail(last);</span><br><span class="line">        <span class="keyword">if</span>(!ch[fa][x]) &#123;</span><br><span class="line">            <span class="keyword">int</span> now = make(len[fa] + <span class="number">2</span>);</span><br><span class="line">            link[now] = ch[ GetFail(link[fa]) ][x];</span><br><span class="line">            ch[fa][x] = now;</span><br><span class="line">        &#125;</span><br><span class="line">        last = ch[fa][x];</span><br><span class="line">        R[last] = n;</span><br><span class="line">        ++cnt[last];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        n = cntNode = last = <span class="number">0</span>;</span><br><span class="line">        make(<span class="number">0</span>), make(<span class="number">-1</span>);</span><br><span class="line">        link[<span class="number">0</span>] = <span class="number">1</span>, link[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        str1[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = cntNode - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) cnt[ link[i] ] += cnt[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(len[x] &gt;= m)</span><br><span class="line">           ans += (sum[ R[x] ] - sum[ R[x] - len[x] + m - <span class="number">1</span>]) * cnt[x];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= C; ++i) <span class="keyword">if</span> (ch[x][i])</span><br><span class="line">            dfs(ch[x][i]);</span><br><span class="line">    &#125;</span><br><span class="line">    EERTREE() &#123; init(); &#125;</span><br><span class="line">&#125; t;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Get_Next</span><span class="params">(<span class="keyword">char</span> *S, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>; i &lt; len; ++i, j = _next[i]) &#123;</span><br><span class="line">        <span class="keyword">while</span>(j &gt; <span class="number">0</span> &amp;&amp; S[i + <span class="number">1</span>] != S[j + <span class="number">1</span>])</span><br><span class="line">            j = _next[j];</span><br><span class="line">        <span class="keyword">if</span>(S[i + <span class="number">1</span>] == S[j + <span class="number">1</span>])</span><br><span class="line">            j++;</span><br><span class="line">        _next[i + <span class="number">1</span>] = j;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">KMP</span><span class="params">(<span class="keyword">char</span> *S, <span class="keyword">int</span> len1, <span class="keyword">char</span> *T, <span class="keyword">int</span> len2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt;= len1; ) &#123;</span><br><span class="line">        <span class="keyword">if</span>(j == len2)</span><br><span class="line">            sum[i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(S[i + <span class="number">1</span>] == T[j + <span class="number">1</span>])</span><br><span class="line">            ++i, ++j;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (j == <span class="number">0</span>) ++i;</span><br><span class="line">            <span class="keyword">else</span> j = _next[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s %s"</span>, str1 + <span class="number">1</span>, str2 + <span class="number">1</span>);</span><br><span class="line">    Get_Next(str2, m);</span><br><span class="line">    KMP(str1, n, str2, m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) sum[i] += sum[i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) t.extend(str1[i] - <span class="string">'a'</span> + <span class="number">1</span>);</span><br><span class="line">    t.refresh();</span><br><span class="line">    t.dfs(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%u"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">10 2</span></span><br><span class="line"><span class="comment">ccbccbbcbb bc</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">20 2</span></span><br><span class="line"><span class="comment">cbcaacabcbacbbabacca ba</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">4e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">8e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, cnt, first[N], siz[N], maxson[N], f[N][<span class="number">2</span>], g[N], h[N], ans[N];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">EDGE</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> to, _next;</span><br><span class="line">&#125; e[M];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    e[cnt].to = v, e[cnt]._next = first[u];</span><br><span class="line">    first[u] = cnt++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    siz[x] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = first[x]; ~i; i = e[i]._next) &#123;</span><br><span class="line">        <span class="keyword">int</span> y = e[i].to;</span><br><span class="line">        <span class="keyword">if</span>(y == p)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        dfs1(y, x);</span><br><span class="line">        siz[x] += siz[y];</span><br><span class="line">        <span class="keyword">if</span>(siz[y] &gt; siz[maxson[x]])</span><br><span class="line">            maxson[x] = y;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> cur = (siz[y] &lt;= n / <span class="number">2</span>) ? siz[y] : f[y][<span class="number">0</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(cur &gt; f[x][<span class="number">0</span>]) &#123;</span><br><span class="line">            f[x][<span class="number">1</span>] = f[x][<span class="number">0</span>];</span><br><span class="line">            f[x][<span class="number">0</span>] = cur;</span><br><span class="line">            g[x] = y;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(cur &gt; f[x][<span class="number">1</span>])</span><br><span class="line">            f[x][<span class="number">1</span>] = cur;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    ans[x] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(siz[maxson[x]] &gt; n / <span class="number">2</span>)</span><br><span class="line">        ans[x] = (siz[maxson[x]] - f[maxson[x]][<span class="number">0</span>] &lt;= n / <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(n - siz[x] &gt; n / <span class="number">2</span>)</span><br><span class="line">        ans[x] = (n - siz[x] - h[x] &lt;= n / <span class="number">2</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = first[x]; ~i; i = e[i]._next) &#123;</span><br><span class="line">        <span class="keyword">int</span> y = e[i].to;</span><br><span class="line">        <span class="keyword">if</span>(y == p)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> cur = (n - siz[x] &lt;= n / <span class="number">2</span>) ? (n - siz[x]) : h[x];</span><br><span class="line">        </span><br><span class="line">        h[y] = <span class="built_in">std</span>::max(h[y], cur);</span><br><span class="line">        h[y] = <span class="built_in">std</span>::max(h[y], f[x][g[x] == y]);</span><br><span class="line">        </span><br><span class="line">        dfs2(y, x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">memset</span>(first, <span class="number">-1</span>, <span class="keyword">sizeof</span>(first));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;u, &amp;v);</span><br><span class="line">        add(u, v), add(v, u);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs1(<span class="number">1</span>, <span class="number">0</span>), dfs2(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, ans[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
               </div>
             </details>
 
@@ -465,7 +477,7 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
           
         
           
-            <p>本文永久链接是：<a href=https://leverimmy.top/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/>https://leverimmy.top/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/</a></p>
+            <p>本文永久链接是：<a href=https://leverimmy.top/2020/07/05/%E3%80%90CodeForces%E3%80%91CF708C-Centroids/>https://leverimmy.top/2020/07/05/%E3%80%90CodeForces%E3%80%91CF708C-Centroids/</a></p>
           
         
       </blockquote>
@@ -490,10 +502,10 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-03T16:30:52+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-05T21:55:47+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年7月3日</p>
+    <p>更新于：2020年7月5日</p>
   </a>
 </div>
 
@@ -502,7 +514,7 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%9B%9E%E6%96%87%E6%A0%91/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>回文树</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/KMP/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>KMP</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>前缀和</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%B7%AE%E5%88%86/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>差分</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>动态规划</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%8D%A2%E6%A0%B9dp/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>换根dp</p></a></div>
 
 
         
@@ -520,8 +532,9 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://leverimmy.top/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/&title=【洛谷】P6216 回文匹配 - Clever_Jimmy's Blog&summary=题意简述：给定 $S, T$，求 $T$ 在 $S$ 的所有奇数长度的回文子串中出现的次数之和。
-$1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://leverimmy.top/2020/07/05/%E3%80%90CodeForces%E3%80%91CF708C-Centroids/&title=【CodeForces】CF708C Centroids - Clever_Jimmy's Blog&summary=题意简述：给定一棵 $n$ 个点的树，你可以删除一条边并增加一条边，形成一棵新树。
+问每个点在进行这样的操作后，是否可能成为新树的重心。
+$1 \le n \le 4\cdot 10^5$。
 题目链接"
           
           >
@@ -534,8 +547,9 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://leverimmy.top/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/&title=【洛谷】P6216 回文匹配 - Clever_Jimmy's Blog&summary=题意简述：给定 $S, T$，求 $T$ 在 $S$ 的所有奇数长度的回文子串中出现的次数之和。
-$1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://leverimmy.top/2020/07/05/%E3%80%90CodeForces%E3%80%91CF708C-Centroids/&title=【CodeForces】CF708C Centroids - Clever_Jimmy's Blog&summary=题意简述：给定一棵 $n$ 个点的树，你可以删除一条边并增加一条边，形成一棵新树。
+问每个点在进行这样的操作后，是否可能成为新树的重心。
+$1 \le n \le 4\cdot 10^5$。
 题目链接"
           
           >
@@ -548,8 +562,9 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://leverimmy.top/2020/04/06/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P6216-%E5%9B%9E%E6%96%87%E5%8C%B9%E9%85%8D/&title=【洛谷】P6216 回文匹配 - Clever_Jimmy's Blog&summary=题意简述：给定 $S, T$，求 $T$ 在 $S$ 的所有奇数长度的回文子串中出现的次数之和。
-$1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
+          href="http://service.weibo.com/share/share.php?url=https://leverimmy.top/2020/07/05/%E3%80%90CodeForces%E3%80%91CF708C-Centroids/&title=【CodeForces】CF708C Centroids - Clever_Jimmy's Blog&summary=题意简述：给定一棵 $n$ 个点的树，你可以删除一条边并增加一条边，形成一棵新树。
+问每个点在进行这样的操作后，是否可能成为新树的重心。
+$1 \le n \le 4\cdot 10^5$。
 题目链接"
           
           >
@@ -574,25 +589,11 @@ $1\le\left|S\right|, \left|T\right| \le 3\cdot10^6$。
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/04/07/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P4015-%E8%BF%90%E8%BE%93%E9%97%AE%E9%A2%98/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>【洛谷】P4015 运输问题</p>
-                <p class='content'>题意简述：给定两个长度分别为 $m$ 和 $n$ 的序列 $A$ 和 $B$，
-每次操作，使 $A_i \gets A_i - 1$，且 $B_j \gets B_j + 1$ 有代价 $C_{...</p>
-              </a>
             
-            
-              <a class='next' href='/2020/03/30/%E3%80%90%E7%BD%AE%E9%A1%B6%E3%80%91%E8%BF%91%E6%9C%9F%E7%9A%84%E5%B0%8F%E8%AE%A1%E5%88%92/'>
-                <p class='title'>【置顶】近期的小计划<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>众所周知，$\text{Clever_Jimmy}$ 是只鸽子。
-
-
-OI 相关字符串
- KMP 2020.07.04 完成
- AC 自动机
- 后缀树
- 后缀数组
- 最小表示法
- 回文树 202...</p>
+              <a class='next' href='/2020/07/05/%E3%80%90CodeForces%E3%80%91CF1200E-Compress-Words/'>
+                <p class='title'>【CodeForces】CF1200E Compress Words<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>题意简述：给定 $n$ 个字符串 $S_1, S_2, \cdots S_n$，从左至依次合并两个字符串 $S_i, S_{i + 1}\quad(i &lt; n)$。
+每次合并时，找到最大的...</p>
               </a>
             
           </div>
@@ -673,7 +674,7 @@ OI 相关字符串
 
   <script>
     window.subData = {
-      title: '【洛谷】P6216 回文匹配',
+      title: '【CodeForces】CF708C Centroids',
       tools: true
     }
   </script>

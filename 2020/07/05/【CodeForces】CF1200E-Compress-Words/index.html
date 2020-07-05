@@ -419,9 +419,9 @@
 <a id="more"></a>
 
 <h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>设当前答案为 $S$，我们要把 $T$ 与 $S$ 合并，令 $\sum\left|S_i\right| = m$。</p>
-<p>则我们要求 $T\$S$ 的最长公共前后缀的长度 $q$，然后把 $T[q+1..\left|T\right|]$ 补充到 $S$ 之后即可。</p>
-<p>但有一个小细节，若每次我们都构造出 $T\$S$，那么时间复杂度是 $O(m^2)$ 的，因为 $S$ 最坏可达到 $m^2$ 级别。</p>
-<p>注意到一个性质，令 $p = \min\{\left|S\right|, \left|T\right|\}$，则 $q \le p$，我们每次只用构造出 $T\$S[1..p]$ 即可。</p>
+<p>则我们要求 $\overline{T\$S}$ 的最长公共前后缀的长度 $q$，然后把 $T[q+1..\left|T\right|]$ 补充到 $S$ 之后即可。</p>
+<p>但有一个小细节，若每次我们都构造出 $\overline{T\$S}$，那么时间复杂度是 $O(m^2)$ 的，因为 $S$ 最坏可达到 $m^2$ 级别。</p>
+<p>注意到一个性质，令 $p = \min\{\left|S\right|, \left|T\right|\}$，则 $q \le p$，我们每次只用构造出 $\overline{T\$S[1..p]}$ 即可。</p>
 <p>不难发现这样时间复杂度为 $O(m)$。</p>
 <h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><details ><summary> <p>Code</p> </summary>
               <div class='content'>
@@ -488,7 +488,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-05T19:31:04+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-05T19:38:37+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2020年7月5日</p>
@@ -577,6 +577,14 @@ $1 \le n \le 10^5$，$1 \le \sum\left|S_i\right| \le 10^6$。
         
         
           <div class="prev-next">
+            
+              <a class='prev' href='/2020/07/05/%E3%80%90CodeForces%E3%80%91CF708C-Centroids/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>【CodeForces】CF708C Centroids</p>
+                <p class='content'>题意简述：给定一棵 $n$ 个点的树，你可以删除一条边并增加一条边，形成一棵新树。
+问每个点在进行这样的操作后，是否可能成为新树的重心。
+$1 \le n \le 4\cdot 10^5$。
+题...</p>
+              </a>
             
             
               <a class='next' href='/2020/07/04/%E3%80%90POJ%E3%80%911961-Period/'>
