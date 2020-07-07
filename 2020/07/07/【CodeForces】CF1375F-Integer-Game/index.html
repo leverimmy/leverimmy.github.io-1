@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,8 +16,15 @@
 
   <!-- 页面元数据 -->
   
-    <title>标签：线段树 - Clever_Jimmy&#39;s Blog</title>
+    <title>【CodeForces】CF1375F Integer Game - Clever_Jimmy&#39;s Blog</title>
   
+    <meta name="keywords" content="构造">
+  
+  
+    <meta name="description" content="题意简述：这是一道交互题。
+给定三堆数量分别为 $a, b, c$ 的石子，先手每轮将给后手 $y_i$ 个石子，后手将这些石子合并到某一堆里。
+后手不能在相邻的两轮中将先手给的石子合并到同一堆里，如果有两堆石子个数相同，则先手胜；若经过 $1000$ 轮后先手仍未获得胜利，则后手胜。
+如果是你，你怎么保证你必胜...">
   
 
   <!-- feed -->
@@ -329,25 +334,12 @@
     <div class='body-wrapper'>
       
 
-
 <div class='l_main'>
   
-    
-      
-  <section class="post-list ">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+
   
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -357,11 +349,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2020/07/05/%E3%80%90CodeForces%E3%80%91CF1326E-Bombs/">
-      【CodeForces】CF1326E Bombs
+  <h1 class="title">
+    <a href="/2020/07/07/%E3%80%90CodeForces%E3%80%91CF1375F-Integer-Game/">
+      【CodeForces】CF1375F Integer Game
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -397,14 +389,9 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年7月5日</p>
+    <p>发布于：2020年7月7日</p>
   </a>
 </div>
-
-            
-          
-            
-              
 
             
           
@@ -422,39 +409,228 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定两个长度为 $n$ 的排列 $p, q$。</p>
-<p>第 $i$ 次询问，求在 $\forall j \in [1, i], b_j$ 这些位置安置炸弹，$p$ 的结果。</p>
-<p>一个排列 $p$ 对于一个埋炸弹序列的「结果」指：将 $p$ 从左至右每个位置上的数加入集合 $A$，若当前位置上有炸弹，则删除 $A$ 中的最大值；经历上述操作后 $A$ 中的最大值。</p>
-<p>$1 \le n \le 3\cdot 10^5$。</p>
-<p><a href="http://codeforces.com/problemset/problem/1326/E" target="_blank" rel="noopener">题目链接</a></p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/07/05/%E3%80%90CodeForces%E3%80%91CF1326E-Bombs/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          
+          <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p><strong>这是一道交互题。</strong></p>
+<p>给定三堆数量分别为 $a, b, c$ 的石子，先手每轮将给后手 $y_i$ 个石子，后手将这些石子合并到某一堆里。</p>
+<p>后手不能在相邻的两轮中将先手给的石子合并到同一堆里，如果有两堆石子个数相同，则先手胜；若经过 $1000$ 轮后先手仍未获得胜利，则后手胜。</p>
+<p>如果是你，你怎么保证你必胜？</p>
+<p>$1 \le a, b, c \le 10^9$，$1 \le y \le 10^{11}$，保证 $a, b, c$ 两两不同。</p>
+<p><a href="https://codeforces.ml/contest/1375/problem/F" target="_blank" rel="noopener">题目链接</a></p>
+<a id="more"></a>
 
-          </div>
-        
-      
-    
-  </section>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>不妨设 $a &lt; b &lt; c$，三堆名称分别为 $A, B, C$，可以证明，先手能在 $3$ 轮之内获胜。</p>
+<p>取 $y_1 = 2c - a - b$：</p>
+<ul>
+<li><p>若后手合并到 $A$ 中，则此时三堆石子分别为：$2c - b, b, c$。</p>
+<p>取 $y_2 = c - b$，则无论是合并到 $B$ 中，还是 $C$ 中，都会导致有两堆石子个数相同。</p>
+</li>
+<li><p>若后手合并到 $B$ 中，则此时三堆石子分别为：$a, 2c - a, c$。</p>
+<p>取 $y_2 = c - a$，则无论是合并到 $A$ 中，还是 $C$ 中，都会导致有两堆石子个数相同。</p>
+</li>
+<li><p>若后手合并到 $C$ 中，则此时三堆石子分别为 $a, b, 3c - a - b$。</p>
+<p>显然此时有 $a &lt; b &lt; 3c - a - b$，令 $a’ = a, b’ = b, c’ = 3c - a - b$，则取 $y_2 = 6c - 3a - 3b$：</p>
+<ul>
+<li><p>若后手合并到 $a$ 中，则此时三堆石子分别为：$6c - 2a - 3b, b, 3c - a - b$。</p>
+<p>取 $y_3 = 3c - a - 2b$，则无论是合并到 $B$ 中，还是 $C$ 中，都会导致有两堆石子个数相同。</p>
+</li>
+<li><p>若后手合并到 $b$ 中，则此时三堆石子分别为：$a, 6c - 3a - 2b, 3c - a - b$。</p>
+<p>取 $y_3 = 3c - 2a - b$，则无论是合并到 $A$ 中，还是 $C$ 中，都会导致有两堆石子个数相同。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>至此，先手必胜。</p>
+<h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><details ><summary> <p>Code</p> </summary>
+              <div class='content'>
+              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line">LL a[<span class="number">4</span>], x;</span><br><span class="line"><span class="keyword">int</span> rk[<span class="number">4</span>] = &#123; <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(LL tx, LL ty)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a[tx] &lt; a[ty];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld %lld %lld"</span>, &amp;a[<span class="number">1</span>], &amp;a[<span class="number">2</span>], &amp;a[<span class="number">3</span>]);</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"First"</span>), fflush(<span class="built_in">stdout</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">std</span>::sort(rk + <span class="number">1</span>, rk + <span class="number">4</span>, cmp);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, <span class="number">2</span> * a[rk[<span class="number">3</span>]] - a[rk[<span class="number">1</span>]] - a[rk[<span class="number">2</span>]]), fflush(<span class="built_in">stdout</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;x) &amp;&amp; x) &#123;</span><br><span class="line">        <span class="keyword">if</span>(x == rk[<span class="number">1</span>])</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, a[rk[<span class="number">3</span>]] - a[rk[<span class="number">2</span>]]), fflush(<span class="built_in">stdout</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(x == rk[<span class="number">2</span>])</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, a[rk[<span class="number">3</span>]] - a[rk[<span class="number">1</span>]]), fflush(<span class="built_in">stdout</span>);</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            a[rk[<span class="number">3</span>]] += <span class="number">2</span> * a[rk[<span class="number">3</span>]] - a[rk[<span class="number">1</span>]] - a[rk[<span class="number">2</span>]];</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, <span class="number">2</span> * a[rk[<span class="number">3</span>]] - a[rk[<span class="number">1</span>]] - a[rk[<span class="number">2</span>]]), fflush(<span class="built_in">stdout</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+              </div>
+            </details>
+
+          
+            <div class='article_footer'>
+              
+                
   
     
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
+    
+
+
+
+  
+
+  
     
     
-      <script>
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>许可证：署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://leverimmy.top/2020/07/07/%E3%80%90CodeForces%E3%80%91CF1375F-Integer-Game/>https://leverimmy.top/2020/07/07/%E3%80%90CodeForces%E3%80%91CF1375F-Integer-Game/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-07T13:43:38+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2020年7月7日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%9E%84%E9%80%A0/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>构造</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://leverimmy.top/2020/07/07/%E3%80%90CodeForces%E3%80%91CF1375F-Integer-Game/&title=【CodeForces】CF1375F Integer Game - Clever_Jimmy's Blog&summary=题意简述：这是一道交互题。
+给定三堆数量分别为 $a, b, c$ 的石子，先手每轮将给后手 $y_i$ 个石子，后手将这些石子合并到某一堆里。
+后手不能在相邻的两轮中将先手给的石子合并到同一堆里，如果有两堆石子个数相同，则先手胜；若经过 $1000$ 轮后先手仍未获得胜利，则后手胜。
+如果是你，你怎么保证你必胜？
+$1 \le a, b, c \le 10^9$，$1 \le y \le 10^{11}$，保证 $a, b, c$ 两两不同。
+题目链接"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://leverimmy.top/2020/07/07/%E3%80%90CodeForces%E3%80%91CF1375F-Integer-Game/&title=【CodeForces】CF1375F Integer Game - Clever_Jimmy's Blog&summary=题意简述：这是一道交互题。
+给定三堆数量分别为 $a, b, c$ 的石子，先手每轮将给后手 $y_i$ 个石子，后手将这些石子合并到某一堆里。
+后手不能在相邻的两轮中将先手给的石子合并到同一堆里，如果有两堆石子个数相同，则先手胜；若经过 $1000$ 轮后先手仍未获得胜利，则后手胜。
+如果是你，你怎么保证你必胜？
+$1 \le a, b, c \le 10^9$，$1 \le y \le 10^{11}$，保证 $a, b, c$ 两两不同。
+题目链接"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://leverimmy.top/2020/07/07/%E3%80%90CodeForces%E3%80%91CF1375F-Integer-Game/&title=【CodeForces】CF1375F Integer Game - Clever_Jimmy's Blog&summary=题意简述：这是一道交互题。
+给定三堆数量分别为 $a, b, c$ 的石子，先手每轮将给后手 $y_i$ 个石子，后手将这些石子合并到某一堆里。
+后手不能在相邻的两轮中将先手给的石子合并到同一堆里，如果有两堆石子个数相同，则先手胜；若经过 $1000$ 轮后先手仍未获得胜利，则后手胜。
+如果是你，你怎么保证你必胜？
+$1 \le a, b, c \le 10^9$，$1 \le y \le 10^{11}$，保证 $a, b, c$ 两两不同。
+题目链接"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/07/07/%E3%80%90CodeForces%E3%80%91CF1375E-Inversion-SwapSort/'>
+                <p class='title'>【CodeForces】CF1375E Inversion SwapSort<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>题意简述：给定一个长度为 $n$ 的序列 $a$，求 $a$ 中的所有逆序对 $(i_1, j_1), (i_2, j_2), \cdots, (i_m, j_m)$ 的一个排列 $p$，
+使得...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+  <script>
   // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
   if (typeof MathJax === 'undefined') {
     window.MathJax = {
@@ -506,186 +682,42 @@
   }
 </script>
 
-    
-
-  
 
 
-    
-  
+
+  <script>
+    window.subData = {
+      title: '【CodeForces】CF1375F Integer Game',
+      tools: true
+    }
+  </script>
+
+
 </div>
 <aside class='l_side'>
   
   
-    
-    
-
-<section class="widget blogger shadow desktop mobile">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box' href='/about/'>
-          <img no-lazy src='https://leverimmy.top/gallery/avatar.jpg'/>
-        </a>
-      
-    
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="mailto:506503360@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-          
-            <a href="https://github.com/LeverImmy"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
-
-  
 
   
     
     
-  
 
-  <section class="widget category shadow desktop">
+
+
+  <section class="widget toc-wrapper shadow desktop mobile" id="toc-div" >
     
   <header>
     
-      <a href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%A4%87%E5%BF%98%E5%BD%95/" href="/categories/%E5%A4%87%E5%BF%98%E5%BD%95/"
-            id="categoriesE5A487E5BF98E5BD95"
-            ><div class='name'>备忘录</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E5%A4%87%E5%BF%98%E5%BD%95/%E8%AE%A1%E5%88%92/" href="/categories/%E5%A4%87%E5%BF%98%E5%BD%95/%E8%AE%A1%E5%88%92/"
-            id="categoriesE5A487E5BF98E5BD95E8AEA1E58892"
-            ><div class='name'>计划</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"
-            id="categoriesE5ADA6E4B9A0E7AC94E8AEB0"
-            ><div class='name'>学习笔记</div><div class='badge'>(6)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"
-            id="categoriesE5ADA6E4B9A0E7AC94E8AEB0E58AA8E68081E8A784E58892"
-            ><div class='name'>动态规划</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AD%97%E7%AC%A6%E4%B8%B2/" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AD%97%E7%AC%A6%E4%B8%B2/"
-            id="categoriesE5ADA6E4B9A0E7AC94E8AEB0E5AD97E7ACA6E4B8B2"
-            ><div class='name'>字符串</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E8%AE%BA/" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E8%AE%BA/"
-            id="categoriesE5ADA6E4B9A0E7AC94E8AEB0E695B0E8AEBA"
-            ><div class='name'>数论</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9/" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9/"
-            id="categoriesE5ADA6E4B9A0E7AC94E8AEB0E69D82E9A1B9"
-            ><div class='name'>杂项</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%96%87%E5%8C%96%E8%AF%BE/" href="/categories/%E6%96%87%E5%8C%96%E8%AF%BE/"
-            id="categoriesE69687E58C96E8AFBE"
-            ><div class='name'>文化课</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E6%96%87%E5%8C%96%E8%AF%BE/%E6%95%B0%E5%AD%A6/" href="/categories/%E6%96%87%E5%8C%96%E8%AF%BE/%E6%95%B0%E5%AD%A6/"
-            id="categoriesE69687E58C96E8AFBEE695B0E5ADA6"
-            ><div class='name'>数学</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E6%9D%82%E7%AC%94/" href="/categories/%E6%9D%82%E7%AC%94/"
-            id="categoriesE69D82E7AC94"
-            ><div class='name'>杂笔</div><div class='badge'>(4)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E6%9D%82%E7%AC%94/%E5%A4%87%E5%BF%98%E5%BD%95/" href="/categories/%E6%9D%82%E7%AC%94/%E5%A4%87%E5%BF%98%E5%BD%95/"
-            id="categoriesE69D82E7AC94E5A487E5BF98E5BD95"
-            ><div class='name'>备忘录</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E6%9D%82%E7%AC%94/%E6%B8%B8%E8%AE%B0/" href="/categories/%E6%9D%82%E7%AC%94/%E6%B8%B8%E8%AE%B0/"
-            id="categoriesE69D82E7AC94E6B8B8E8AEB0"
-            ><div class='name'>游记</div><div class='badge'>(3)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/%E9%A2%98%E8%A7%A3/" href="/categories/%E9%A2%98%E8%A7%A3/"
-            id="categoriesE9A298E8A7A3"
-            ><div class='name'>题解</div><div class='badge'>(29)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E9%A2%98%E8%A7%A3/AtCoder/" href="/categories/%E9%A2%98%E8%A7%A3/AtCoder/"
-            id="categoriesE9A298E8A7A3AtCoder"
-            ><div class='name'>AtCoder</div><div class='badge'>(2)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E9%A2%98%E8%A7%A3/CodeForces/" href="/categories/%E9%A2%98%E8%A7%A3/CodeForces/"
-            id="categoriesE9A298E8A7A3CodeForces"
-            ><div class='name'>CodeForces</div><div class='badge'>(7)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E9%A2%98%E8%A7%A3/POJ/" href="/categories/%E9%A2%98%E8%A7%A3/POJ/"
-            id="categoriesE9A298E8A7A3POJ"
-            ><div class='name'>POJ</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/" href="/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/"
-            id="categoriesE9A298E8A7A3E6B49BE8B0B7"
-            ><div class='name'>洛谷</div><div class='badge'>(19)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题意简述："><span class="toc-number">1.</span> <span class="toc-text">题意简述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题思路："><span class="toc-number">2.</span> <span class="toc-text">解题思路：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考代码："><span class="toc-number">3.</span> <span class="toc-text">参考代码：</span></a></li></ol>
     </div>
   </section>
 
-
-  
-
-  
-    
-    
-  
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      <a href="/tags/CSP2019S/" style="font-size: 14px; color: #999">CSP2019S</a> <a href="/tags/DLX/" style="font-size: 14px; color: #999">DLX</a> <a href="/tags/Dinic/" style="font-size: 20.67px; color: #6c6c6c">Dinic</a> <a href="/tags/HBOI2020/" style="font-size: 14px; color: #999">HBOI2020</a> <a href="/tags/KMP/" style="font-size: 17.33px; color: #828282">KMP</a> <a href="/tags/LaTeX/" style="font-size: 14px; color: #999">LaTeX</a> <a href="/tags/NOI2014/" style="font-size: 14px; color: #999">NOI2014</a> <a href="/tags/NOIP2018/" style="font-size: 14px; color: #999">NOIP2018</a> <a href="/tags/%E5%80%8D%E5%A2%9E/" style="font-size: 14px; color: #999">倍增</a> <a href="/tags/%E5%88%86%E6%B2%BB/" style="font-size: 14px; color: #999">分治</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%87%BD%E6%95%B0/" style="font-size: 19px; color: #777">前缀函数</a> <a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 14px; color: #999">前缀和</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 19px; color: #777">动态规划</a> <a href="/tags/%E5%9B%9E%E6%96%87%E6%A0%91/" style="font-size: 19px; color: #777">回文树</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 17.33px; color: #828282">字符串</a> <a href="/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/" style="font-size: 15.67px; color: #8e8e8e">容斥原理</a> <a href="/tags/%E5%B7%AE%E5%88%86/" style="font-size: 14px; color: #999">差分</a> <a href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" style="font-size: 15.67px; color: #8e8e8e">快速幂</a> <a href="/tags/%E6%8A%80%E5%B7%A7/" style="font-size: 14px; color: #999">技巧</a> <a href="/tags/%E6%8D%A2%E6%A0%B9dp/" style="font-size: 14px; color: #999">换根dp</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 14px; color: #999">排序</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 14px; color: #999">搜索</a> <a href="/tags/%E6%95%B0%E5%88%97/" style="font-size: 14px; color: #999">数列</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 15.67px; color: #8e8e8e">数学</a> <a href="/tags/%E6%9A%B4%E5%8A%9B/" style="font-size: 14px; color: #999">暴力</a> <a href="/tags/%E6%9C%80%E5%A4%A7%E6%B5%81/" style="font-size: 17.33px; color: #828282">最大流</a> <a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" style="font-size: 14px; color: #999">最小生成树</a> <a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" style="font-size: 17.33px; color: #828282">最短路</a> <a href="/tags/%E6%9E%84%E9%80%A0/" style="font-size: 14px; color: #999">构造</a> <a href="/tags/%E7%8A%B6%E5%8E%8B/" style="font-size: 14px; color: #999">状压</a> <a href="/tags/%E7%94%9F%E6%B4%BB/" style="font-size: 14px; color: #999">生活</a> <a href="/tags/%E7%AD%89%E6%AF%94%E6%95%B0%E5%88%97/" style="font-size: 14px; color: #999">等比数列</a> <a href="/tags/%E7%B1%BB%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%B7%E7%AE%97%E6%B3%95/" style="font-size: 14px; color: #999">类欧几里德算法</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 14px; color: #999">线段树</a> <a href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" style="font-size: 15.67px; color: #8e8e8e">组合数学</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" style="font-size: 20.67px; color: #6c6c6c">网络流</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81-24-%E9%A2%98/" style="font-size: 24px; color: #555">网络流 24 题</a> <a href="/tags/%E8%AE%A1%E6%95%B0/" style="font-size: 14px; color: #999">计数</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 14px; color: #999">贪心</a> <a href="/tags/%E8%B4%B9%E7%94%A8%E6%B5%81/" style="font-size: 22.33px; color: #606060">费用流</a> <a href="/tags/%E9%80%86%E5%BA%8F%E5%AF%B9/" style="font-size: 14px; color: #999">逆序对</a> <a href="/tags/%E9%80%92%E5%BD%92/" style="font-size: 14px; color: #999">递归</a> <a href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/" style="font-size: 14px; color: #999">高精度</a>
-    </div>
-  </section>
-
-
-  
 
   
 
