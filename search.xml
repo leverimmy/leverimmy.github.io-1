@@ -836,9 +836,9 @@
       
         <tags>
             
-            <tag> KMP </tag>
-            
             <tag> 回文树 </tag>
+            
+            <tag> KMP </tag>
             
             <tag> 前缀和 </tag>
             
