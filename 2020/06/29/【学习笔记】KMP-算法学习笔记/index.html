@@ -534,8 +534,8 @@
 <h3 id="KMP-算法"><a href="#KMP-算法" class="headerlink" title="KMP 算法"></a>KMP 算法</h3><h4 id="算法流程-1"><a href="#算法流程-1" class="headerlink" title="算法流程"></a>算法流程</h4><p>我们举一个例子：用 $S = \mathtt{CCFCCFMONEY}$ 被 $T = \mathtt{CCFCCFSB}$ 匹配。</p>
 <p>我们定义两个指针 $i,k$，表示 $S[i - k..i - 1] = T[1..k]$。</p>
 <p>我们要拓展的，就是 $S[i]$ 与 $T[k + 1]$ 之间的关系。</p>
-<p>首先我们考虑朴素算法的弊端：当你匹配到了 $i = 8, k = 7$ 时：<br>$$<br>\begin{aligned}<br>S &amp; = \mathtt{\color{green}CCFXCCF\color{red}M\color{black}ONEY}<br>\<br>T &amp; = \mathtt{\color{green}CCFXCCF\color{red}S\color{black}B}<br>\<br>\text{index} &amp; =\mathtt{123456789}<br>\end{aligned}<br>$$<br>你发现 $S[i] = S[8] = \mathtt{M}$，可 $T[k + 1] = T[8] = \mathtt{S}$，我们前功尽弃，只能将 $T$ 往右平移一格。</p>
-<p>而且要重新开始：$i = 1, k = 1$。<br>$$<br>\begin{aligned}<br>S &amp; = \mathtt{CCFXCCFMONEY}<br>\<br>T &amp; = \mathtt{\text{ }CCFXCCFSB}<br>\<br>\text{index} &amp; =\mathtt{123456789}<br>\end{aligned}<br>$$<br>显然朴素算法的时间复杂度为 $O(nm)$。</p>
+<p>首先我们考虑朴素算法的弊端：当你匹配到了 $i = 8, k = 7$ 时：<br>$$<br>\begin{aligned}<br>S &amp; = \mathtt{\color{green}CCFXCCF\color{red}M\color{black}ONEY}<br>\\<br>T &amp; = \mathtt{\color{green}CCFXCCF\color{red}S\color{black}B}<br>\\<br>\text{index} &amp; =\mathtt{123456789}<br>\end{aligned}<br>$$<br>你发现 $S[i] = S[8] = \mathtt{M}$，可 $T[k + 1] = T[8] = \mathtt{S}$，我们前功尽弃，只能将 $T$ 往右平移一格。</p>
+<p>而且要重新开始：$i = 1, k = 1$。<br>$$<br>\begin{aligned}<br>S &amp; = \mathtt{CCFXCCFMONEY}<br>\\<br>T &amp; = \mathtt{\text{ }CCFXCCFSB}<br>\\<br>\text{index} &amp; =\mathtt{123456789}<br>\end{aligned}<br>$$<br>显然朴素算法的时间复杂度为 $O(nm)$。</p>
 <hr>
 <p>再考虑使用前缀函数 $\pi$ 来优化匹配的过程。</p>
 <p>不难求出 $T$ 的前缀数组 $\pi[1..n] = \{0, 1, 0, 0, 1, 2, 3, 0, 0\}$。</p>
@@ -560,8 +560,12 @@
 <h4 id="时间复杂度-1"><a href="#时间复杂度-1" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>依葫芦画瓢地使用求前缀函数数组时的摊还分析方法，不难得出 KMP 算法的时间复杂度为 $O(n + m)$。</p>
 <h4 id="空间复杂度-1"><a href="#空间复杂度-1" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>不难发现 KMP 算法的空间复杂度为 $O(n + m)$。</p>
 <h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><ol>
-<li><a href="https://leverimmy.top/2020/07/04/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2375-NOI2014-%E5%8A%A8%E7%89%A9%E5%9B%AD/">「NOI2014」动物园</a></li>
-<li><a href="https://leverimmy.top/2020/07/04/%E3%80%90POJ%E3%80%911961-Period/">POJ 1961-Period</a></li>
+<li><p><a href="https://leverimmy.top/2020/07/04/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2375-NOI2014-%E5%8A%A8%E7%89%A9%E5%9B%AD/">「NOI2014」动物园</a></p>
+</li>
+<li><p><a href="https://leverimmy.top/2020/07/04/%E3%80%90POJ%E3%80%911961-Period/">POJ 1961-Period</a></p>
+</li>
+<li><p><a href="https://leverimmy.top/2020/07/05/【CodeForces】CF1200E-Compress-Words/">CF1200E Compress Words</a></p>
+</li>
 </ol>
 <h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>《算法导论》是本好书，上面的算法均有使用循环不变式的正确性证明，很值得一看。</p>
 
@@ -625,10 +629,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-04T19:49:55+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-07T15:38:19+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年7月4日</p>
+    <p>更新于：2020年7月7日</p>
   </a>
 </div>
 
