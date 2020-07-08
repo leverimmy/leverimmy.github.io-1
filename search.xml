@@ -22,11 +22,11 @@
       
         <tags>
             
+            <tag> 容斥原理 </tag>
+            
             <tag> 组合数学 </tag>
             
             <tag> 快速幂 </tag>
-            
-            <tag> 容斥原理 </tag>
             
         </tags>
       
@@ -53,9 +53,38 @@
       
         <tags>
             
+            <tag> 暴力 </tag>
+            
             <tag> 动态规划 </tag>
             
-            <tag> 暴力 </tag>
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【AtCoder】ABC172E NEQ</title>
+      <link href="/2020/07/08/%E3%80%90AtCoder%E3%80%91ABC172E-NEQ/"/>
+      <url>/2020/07/08/%E3%80%90AtCoder%E3%80%91ABC172E-NEQ/</url>
+      
+        <content type="html"><![CDATA[<h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>求长度为 $n$，满足以下条件的序列对 $(A, B)$ 的个数：</p><ul><li>$\forall i \in [1, n], A_i \in [1, m], B_i \in [1, m]$</li><li>$\forall i \in [1, n], A_i \neq B_i$</li><li>$\forall 1 \le i &lt; j \le n, A_i \neq A_j, B_i \neq B_j$</li></ul><p>答案对 $10^9 + 7$ 取模。</p><p>$1 \le n \le m \le 5\cdot10^5$。</p><p><a href="https://atcoder.jp/contests/abc172/tasks/abc172_e" target="_blank" rel="noopener">题目链接</a></p><a id="more"></a><h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>首先我们可以发现，满足 $\forall i \in S, A_i = B_i$ 的序列对 $(A, B)$ 有 $A_{m}^{\left|S\right|}\cdot\left(A_{m - \left|S\right|}^{n - \left|S\right|}\right)^2$ 个。</p><p>然后根据容斥原理，我们发现答案为 $\sum\limits_{S \subseteq [1, n]}(-1)^{\left|S\right|}\cdot A_{m}^{\left|S\right|}\cdot\left(A_{m - \left|S\right|}^{n - \left|S\right|}\right)^2$。</p><p>（加上 $\left|S\right| = 0$ ，减去 $\left|S\right| = 1$，加上 $\left|S\right| = 2$……）</p><p>枚举子集是不必要的，我们可以从组合意义的角度来处理上式，</p><p>将所有 $\left|S\right| = k$ 的所有子集 $S$ 合并处理，这样的 $S$ 有 $\dbinom{n}{k}$ 个。</p><p>答案即<br>$$<br>\sum_{k = 0}^{n}\binom{n}{k}(-1)^k\cdot A_{m}^{k}\cdot\left(A_{m - k}^{n - k}\right)^2<br>$$</p><h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><details ><summary> <p>Code</p> </summary>              <div class='content'>              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">5e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, fac[N] = &#123; <span class="number">1</span> &#125;, inv[N] = &#123; <span class="number">1</span> &#125;;</span><br><span class="line">LL ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mul</span><span class="params">(<span class="keyword">int</span> ta, <span class="keyword">int</span> tb)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret;</span><br><span class="line">    __asm__ __volatile__ (<span class="string">"\tmull %%ebx\n\tdivl %%ecx\n"</span>:<span class="string">"=d"</span>(ret):<span class="string">"a"</span>(ta), <span class="string">"b"</span>(tb), <span class="string">"c"</span>(mod));</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">qpow</span><span class="params">(<span class="keyword">int</span> bas, <span class="keyword">int</span> po)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(po) &#123;</span><br><span class="line">        <span class="keyword">if</span>(po &amp; <span class="number">1</span>)</span><br><span class="line">            res = mul(res, bas);</span><br><span class="line">        bas = mul(bas, bas);</span><br><span class="line">        po &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> tn, <span class="keyword">int</span> tm)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mul(fac[tn], mul(inv[tm], inv[tn - tm]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">A</span><span class="params">(<span class="keyword">int</span> tn, <span class="keyword">int</span> tm)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mul(fac[tn], inv[tn - tm]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        fac[i] = mul(fac[i - <span class="number">1</span>], i);</span><br><span class="line">    inv[m] = qpow(fac[m], mod - <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = m; i &gt;= <span class="number">2</span>; --i)</span><br><span class="line">        inv[i - <span class="number">1</span>] = mul(inv[i], i);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> flg = (i &amp; <span class="number">1</span>) ? <span class="number">-1</span> : <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> tmp = mul(C(n, i), mul(A(m, i), qpow(A(m - i, n - i), <span class="number">2</span>)));</span><br><span class="line">        ans += flg * tmp;</span><br><span class="line">        ans %= mod, (ans += mod) %= mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>              </div>            </details>]]></content>
+      
+      
+      <categories>
+          
+          <category> 题解 </category>
+          
+          <category> AtCoder </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 容斥原理 </tag>
+            
+            <tag> 组合数学 </tag>
             
         </tags>
       
@@ -166,35 +195,6 @@
             <tag> 暴力 </tag>
             
             <tag> 逆序对 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>【AtCoder】ABC172E NEQ</title>
-      <link href="/2020/07/06/%E3%80%90AtCoder%E3%80%91ABC172E-NEQ/"/>
-      <url>/2020/07/06/%E3%80%90AtCoder%E3%80%91ABC172E-NEQ/</url>
-      
-        <content type="html"><![CDATA[<h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>求长度为 $n$，满足以下条件的序列对 $(A, B)$ 的个数：</p><ul><li>$\forall i \in [1, n], A_i \in [1, m], B_i \in [1, m]$</li><li>$\forall i \in [1, n], A_i \neq B_i$</li><li>$\forall 1 \le i &lt; j \le n, A_i \neq A_j, B_i \neq B_j$</li></ul><p>答案对 $10^9 + 7$ 取模。</p><p>$1 \le n \le m \le 5\cdot10^5$。</p><p><a href="https://atcoder.jp/contests/abc172/tasks/abc172_e" target="_blank" rel="noopener">题目链接</a></p><a id="more"></a><h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>首先我们可以发现，满足 $\forall i \in S, A_i = B_i$ 的序列对 $(A, B)$ 有 $A_{m}^{\left|S\right|}\cdot\left(A_{m - \left|S\right|}^{n - \left|S\right|}\right)^2$ 个。</p><p>然后根据容斥原理，我们发现答案为 $\sum\limits_{S \subseteq [1, n]}(-1)^{\left|S\right|}\cdot A_{m}^{\left|S\right|}\cdot\left(A_{m - \left|S\right|}^{n - \left|S\right|}\right)^2$。</p><p>（加上 $\left|S\right| = 0$ ，减去 $\left|S\right| = 1$，加上 $\left|S\right| = 2$……）</p><p>枚举子集是不必要的，我们可以从组合意义的角度来处理上式，</p><p>将所有 $\left|S\right| = k$ 的所有子集 $S$ 合并处理，这样的 $S$ 有 $\dbinom{n}{k}$ 个。</p><p>答案即<br>$$<br>\sum_{k = 0}^{n}\binom{n}{k}(-1)^k\cdot A_{m}^{k}\cdot\left(A_{m - k}^{n - k}\right)^2<br>$$</p><h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><details ><summary> <p>Code</p> </summary>              <div class='content'>              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">5e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, fac[N] = &#123; <span class="number">1</span> &#125;, inv[N] = &#123; <span class="number">1</span> &#125;;</span><br><span class="line">LL ans;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mul</span><span class="params">(<span class="keyword">int</span> ta, <span class="keyword">int</span> tb)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret;</span><br><span class="line">    __asm__ __volatile__ (<span class="string">"\tmull %%ebx\n\tdivl %%ecx\n"</span>:<span class="string">"=d"</span>(ret):<span class="string">"a"</span>(ta), <span class="string">"b"</span>(tb), <span class="string">"c"</span>(mod));</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">qpow</span><span class="params">(<span class="keyword">int</span> bas, <span class="keyword">int</span> po)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(po) &#123;</span><br><span class="line">        <span class="keyword">if</span>(po &amp; <span class="number">1</span>)</span><br><span class="line">            res = mul(res, bas);</span><br><span class="line">        bas = mul(bas, bas);</span><br><span class="line">        po &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> tn, <span class="keyword">int</span> tm)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mul(fac[tn], mul(inv[tm], inv[tn - tm]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">A</span><span class="params">(<span class="keyword">int</span> tn, <span class="keyword">int</span> tm)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mul(fac[tn], inv[tn - tm]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        fac[i] = mul(fac[i - <span class="number">1</span>], i);</span><br><span class="line">    inv[m] = qpow(fac[m], mod - <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = m; i &gt;= <span class="number">2</span>; --i)</span><br><span class="line">        inv[i - <span class="number">1</span>] = mul(inv[i], i);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> flg = (i &amp; <span class="number">1</span>) ? <span class="number">-1</span> : <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> tmp = mul(C(n, i), mul(A(m, i), qpow(A(m - i, n - i), <span class="number">2</span>)));</span><br><span class="line">        ans += flg * tmp;</span><br><span class="line">        ans %= mod, (ans += mod) %= mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>              </div>            </details>]]></content>
-      
-      
-      <categories>
-          
-          <category> 题解 </category>
-          
-          <category> AtCoder </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 组合数学 </tag>
-            
-            <tag> 容斥原理 </tag>
             
         </tags>
       
@@ -919,9 +919,9 @@
       
         <tags>
             
-            <tag> KMP </tag>
-            
             <tag> 回文树 </tag>
+            
+            <tag> KMP </tag>
             
             <tag> 前缀和 </tag>
             
