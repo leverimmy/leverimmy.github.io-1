@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【CodeForces】CF600F Edge coloring of bipartite graph</title>
+      <link href="/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600F-Edge-coloring-of-bipartite-graph/"/>
+      <url>/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600F-Edge-coloring-of-bipartite-graph/</url>
+      
+        <content type="html"><![CDATA[<h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个点集大小分别为 $a, b$，有 $m$ 条边的二分图，</p><p>问将其染成 <strong>任意两相邻边颜色均不同</strong> 最少需要多少种颜色，并输出任意一种方案。</p><p>$1 \le a, b \le 10^3$，$1 \le m \le 10^5$。</p><p><a href="https://codeforces.com/contest/600/problem/F" target="_blank" rel="noopener">题目链接</a></p><a id="more"></a><h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>边染色一个二分图，最少需要的颜色种数为图中顶点的最大度数。</p><p>具体证明可以看 <a href="https://codeforces.com/blog/entry/75431" target="_blank" rel="noopener">Story about edge coloring of graph</a>。</p><p>然后我们可以钦定一个点出边的颜色，如果有不符合的就顺着链摸下去修改颜色即可。</p><p>时间复杂度为 $O(m(a + b))$。</p><h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><details ><summary> <p>Code</p> </summary>              <div class='content'>              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a, b, m, ans;</span><br><span class="line"><span class="keyword">int</span> u[M], v[M], deg[N], col[N][N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;a, &amp;b, &amp;m);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;u[i], &amp;v[i]);</span><br><span class="line">        v[i] += a;</span><br><span class="line">        ++deg[u[i]], ++deg[v[i]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= a + b; ++i)</span><br><span class="line">        ans = <span class="built_in">std</span>::max(ans, deg[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> c1, c2;</span><br><span class="line">        <span class="keyword">for</span>(c1 = <span class="number">1</span>; c1 &lt;= ans; ++c1) <span class="keyword">if</span>(!col[u[i]][c1]) <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">for</span>(c2 = <span class="number">1</span>; c2 &lt;= ans; ++c2) <span class="keyword">if</span>(!col[v[i]][c2]) <span class="keyword">break</span>;</span><br><span class="line">        col[u[i]][c1] = v[i];</span><br><span class="line">        col[v[i]][c2] = u[i];</span><br><span class="line">        <span class="keyword">if</span>(c1 == c2) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> c0 = c2, x = v[i]; x; x = col[x][c0], c0 ^= c1 ^ c2)</span><br><span class="line">            <span class="built_in">std</span>::swap(col[x][c1], col[x][c2]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= ans; ++j)</span><br><span class="line">            <span class="keyword">if</span>(col[u[i]][j] == v[i]) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d "</span>, j);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>              </div>            </details>]]></content>
+      
+      
+      <categories>
+          
+          <category> 题解 </category>
+          
+          <category> CodeForces </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 二分图 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【CodeForces】CF600E Lomsat gelral</title>
       <link href="/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600E-Lomsat-gelral/"/>
       <url>/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600E-Lomsat-gelral/</url>
@@ -138,11 +165,11 @@
       
         <tags>
             
+            <tag> 容斥原理 </tag>
+            
             <tag> 组合数学 </tag>
             
             <tag> 快速幂 </tag>
-            
-            <tag> 容斥原理 </tag>
             
         </tags>
       
@@ -198,9 +225,9 @@
       
         <tags>
             
-            <tag> 组合数学 </tag>
-            
             <tag> 容斥原理 </tag>
+            
+            <tag> 组合数学 </tag>
             
         </tags>
       
