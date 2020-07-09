@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>【CodeForces】CF600D Area of Two Circles Intersection</title>
+      <link href="/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600D-Area-of-Two-Circles-Intersection/"/>
+      <url>/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600D-Area-of-Two-Circles-Intersection/</url>
+      
+        <content type="html"><![CDATA[<h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>求两个圆的交的面积。</p><p>$-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。</p><p><a href="http://codeforces.com/problemset/problem/600/D" target="_blank" rel="noopener">题目链接</a></p><a id="more"></a><h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>用余弦定理解三角形即可，然后用 $S = \dfrac{1}{2}ab\sin C$ 来求三角形面积，$S = \dfrac{1}{2}\alpha r^2$ 来求扇形面积，相减即可得到答案。</p><p>卡精度。</p><h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><details ><summary> <p>Code</p> </summary>              <div class='content'>              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LD long double</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> LD PI = <span class="built_in">std</span>::<span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">LD ra, rb;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">POINT</span> &#123;</span></span><br><span class="line">    LD x, y;</span><br><span class="line">&#125; A, B;</span><br><span class="line"></span><br><span class="line"><span class="function">LD <span class="title">dist</span><span class="params">(POINT a, POINT b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">std</span>::<span class="built_in">sqrt</span>((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">LD <span class="title">solve</span><span class="params">(LD a, LD b, LD c)</span> </span>&#123;</span><br><span class="line">    LD cosC = (a * a + b * b - c * c)/(<span class="number">2</span> * a * b);</span><br><span class="line">    LD angC = <span class="built_in">std</span>::<span class="built_in">acos</span>(cosC) * <span class="number">2</span>;</span><br><span class="line">    LD sin2C = <span class="built_in">std</span>::<span class="built_in">sin</span>(ang2C);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> a * a * ang2C / <span class="number">2</span> - a * a * sin2C / <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; A.x &gt;&gt; A.y &gt;&gt; ra;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; B.x &gt;&gt; B.y &gt;&gt; rb;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(ra &gt; rb)</span><br><span class="line">        <span class="built_in">std</span>::swap(A, B), <span class="built_in">std</span>::swap(ra, rb);</span><br><span class="line">    </span><br><span class="line">    LD dis = dist(A, B);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(dis &gt;= ra + rb)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"0"</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(dis + ra &lt;= rb)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%.20f"</span>, (<span class="keyword">double</span>)(PI * ra * ra));</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%.20f"</span>, (<span class="keyword">double</span>)(solve(ra, dis, rb) + solve(rb, dis, ra)));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>              </div>            </details>]]></content>
+      
+      
+      <categories>
+          
+          <category> 题解 </category>
+          
+          <category> CodeForces </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算几何 </tag>
+            
+            <tag> 余弦定理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【洛谷】「TJOI2010」阅读理解</title>
       <link href="/2020/07/09/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91%E3%80%8CTJOI2010%E3%80%8D%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/"/>
       <url>/2020/07/09/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91%E3%80%8CTJOI2010%E3%80%8D%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/</url>
@@ -82,11 +111,11 @@
       
         <tags>
             
+            <tag> 容斥原理 </tag>
+            
             <tag> 组合数学 </tag>
             
             <tag> 快速幂 </tag>
-            
-            <tag> 容斥原理 </tag>
             
         </tags>
       
@@ -142,9 +171,9 @@
       
         <tags>
             
-            <tag> 组合数学 </tag>
-            
             <tag> 容斥原理 </tag>
+            
+            <tag> 组合数学 </tag>
             
         </tags>
       
