@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>【洛谷】「TJOI2010」阅读理解</title>
+      <link href="/2020/07/09/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91%E3%80%8CTJOI2010%E3%80%8D%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/"/>
+      <url>/2020/07/09/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91%E3%80%8CTJOI2010%E3%80%8D%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定 $n$ 篇文章和 $m$ 个单词，问每个单词在哪些文章中出现过。</p><p>$1 \le n \le 10^3$，$1 \le m \le 10^4$，每篇文章长度不超过 $5\cdot 10^3$ 个字符，每个单词长度不超过 $20$ 个字符。</p><p><a href="https://www.luogu.com.cn/problem/P3879" target="_blank" rel="noopener">题目链接</a></p><a id="more"></a><h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>不难想到用 <code>std::map</code> 来维护这些文章，然后对每个询问而言，遍历所有的 <code>std::map</code>，直接查找是否存在即可。</p><p>但是可恶的毒瘤们卡了空间，于是就可以用 <code>std::set</code> 来维护。</p><p>同样的道理，我们用一些元素类型为 <code>std::string</code> 的 <code>std::set</code> 来维护每篇文章。</p><p>询问直接查 <code>s[i].find(str)</code> 是否等于 <code>s[i].end()</code> 即可。</p><p>挺短的，才 30 行，还比 trie 树好写。</p><h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><p>用了较多 <code>std::cin</code> 和 <code>std::cout</code>，开个 O2 就过了。</p><details ><summary> <p>Code</p> </summary>              <div class='content'>              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e3</span> + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">set</span> &lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; mp[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> num;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; num;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= num; ++j) &#123;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">string</span> str;</span><br><span class="line">            <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; str;</span><br><span class="line">            mp[i].insert(str);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; m;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">string</span> str;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; str;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">            <span class="keyword">if</span>(mp[j].find(str) != mp[j].end())</span><br><span class="line">                <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; j &lt;&lt; <span class="string">' '</span>;</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>              </div>            </details>]]></content>
+      
+      
+      <categories>
+          
+          <category> 题解 </category>
+          
+          <category> 洛谷 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 暴力 </tag>
+            
+            <tag> set </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【CodeForces】CF600A Extract Numbers</title>
       <link href="/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600A-Extract-Numbers/"/>
       <url>/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600A-Extract-Numbers/</url>
@@ -84,9 +113,9 @@
       
         <tags>
             
-            <tag> 暴力 </tag>
-            
             <tag> 动态规划 </tag>
+            
+            <tag> 暴力 </tag>
             
         </tags>
       
@@ -623,9 +652,9 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 费用流 </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -681,9 +710,9 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 费用流 </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -710,9 +739,9 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 费用流 </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -739,9 +768,9 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 费用流 </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -801,9 +830,9 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 费用流 </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -861,11 +890,11 @@
       
         <tags>
             
+            <tag> 网络流 24 题 </tag>
+            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
-            
-            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -921,9 +950,9 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 费用流 </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -1039,11 +1068,11 @@
       
         <tags>
             
+            <tag> 网络流 24 题 </tag>
+            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
-            
-            <tag> 网络流 24 题 </tag>
             
             <tag> 最大流 </tag>
             
@@ -1103,9 +1132,9 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 费用流 </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -1244,11 +1273,11 @@
       
         <tags>
             
+            <tag> 网络流 24 题 </tag>
+            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
-            
-            <tag> 网络流 24 题 </tag>
             
             <tag> 最大流 </tag>
             
@@ -1277,11 +1306,11 @@
       
         <tags>
             
+            <tag> 网络流 24 题 </tag>
+            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
-            
-            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -1308,11 +1337,11 @@
       
         <tags>
             
+            <tag> 网络流 24 题 </tag>
+            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
-            
-            <tag> 网络流 24 题 </tag>
             
             <tag> 最大流 </tag>
             
