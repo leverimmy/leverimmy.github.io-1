@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>【CodeForces】CF600A Extract Numbers</title>
+      <link href="/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600A-Extract-Numbers/"/>
+      <url>/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600A-Extract-Numbers/</url>
+      
+        <content type="html"><![CDATA[<h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个字符串，你要将其中的「非负整数」串与其他串分离出来，并输出这两堆字符串。</p><p>$1 \le n \le 10^5$。</p><p><a href="https://codeforces.com/contest/600/problem/A" target="_blank" rel="noopener">题目链接</a></p><a id="more"></a><h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>如果一个串是空串，我们就补上一个字符 $\$$，然后输出的时候跳过这个字符即可。</p><p>然后在遍历整个 $S$ 的时候，将答案放到两个另外的字符串 $A$ 和 $B$ 中去，最后输出 $A, B$。</p><p>代码实现 <strong>极其细节</strong>，建议自己动手实现一下。</p><h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><details ><summary> <p>Code</p> </summary>              <div class='content'>              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, lens, lena, lenb, firsta = <span class="number">1</span>, firstb = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">char</span> tmp[N], str[N], S[N], A[N], B[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">valid</span><span class="params">(<span class="keyword">char</span> ch)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ch != <span class="string">','</span> &amp;&amp; ch != <span class="string">';'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Output</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!lena)</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">"-"</span>);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\""</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lena; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(A[i] == <span class="string">'$'</span>)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="built_in">putchar</span>(A[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">"\""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!lenb)</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">'-'</span>);</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\""</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lenb; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(B[i] == <span class="string">'$'</span>)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            <span class="built_in">putchar</span>(B[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"\""</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> flg = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lens; ++i)</span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">isdigit</span>(S[i]))</span><br><span class="line">            flg = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(!lens || lens &gt;= <span class="number">2</span> &amp;&amp; S[<span class="number">1</span>] == <span class="string">'0'</span>)</span><br><span class="line">        flg = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(flg) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!firsta)</span><br><span class="line">            A[++lena] = <span class="string">','</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lens; ++i)</span><br><span class="line">            A[++lena] = S[i];</span><br><span class="line">        firsta = <span class="number">0</span>;</span><br><span class="line">        lens = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(!firstb)</span><br><span class="line">            B[++lenb] = <span class="string">','</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lens; ++i)</span><br><span class="line">            B[++lenb] = S[i];</span><br><span class="line">        firstb = <span class="number">0</span>;</span><br><span class="line">        lens = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, tmp + <span class="number">1</span>);</span><br><span class="line">    m = <span class="built_in">strlen</span>(tmp + <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(!valid(tmp[<span class="number">1</span>]))</span><br><span class="line">        str[++n] = <span class="string">'$'</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(!valid(tmp[i]) &amp;&amp; !valid(tmp[i - <span class="number">1</span>]))</span><br><span class="line">            str[++n] = <span class="string">'$'</span>;</span><br><span class="line">        str[++n] = tmp[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!valid(str[n]))</span><br><span class="line">        str[++n] = <span class="string">'$'</span>;</span><br><span class="line">    <span class="comment">// 添加 '$' 字符来处理空串</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*for(int i = 1; i &lt;= n; ++i)</span></span><br><span class="line"><span class="comment">        putchar(str[i]);</span></span><br><span class="line"><span class="comment">    puts("");*/</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(valid(str[i]))</span><br><span class="line">            S[++lens] = str[i];</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">int</span> flg = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lens; ++i)</span><br><span class="line">                <span class="keyword">if</span>(!<span class="built_in">isdigit</span>(S[i]))</span><br><span class="line">                    flg = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(!lens || lens &gt;= <span class="number">2</span> &amp;&amp; S[<span class="number">1</span>] == <span class="string">'0'</span>)</span><br><span class="line">                flg = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">if</span>(flg) &#123;</span><br><span class="line">                <span class="keyword">if</span>(!firsta)</span><br><span class="line">                    A[++lena] = <span class="string">','</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lens; ++i)</span><br><span class="line">                    A[++lena] = S[i];</span><br><span class="line">                firsta = <span class="number">0</span>;</span><br><span class="line">                lens = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">if</span>(!firstb)</span><br><span class="line">                    B[++lenb] = <span class="string">','</span>;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= lens; ++i)</span><br><span class="line">                    B[++lenb] = S[i];</span><br><span class="line">                firstb = <span class="number">0</span>;</span><br><span class="line">                lens = <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    solve();</span><br><span class="line">    Output();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>              </div>            </details>]]></content>
+      
+      
+      <categories>
+          
+          <category> 题解 </category>
+          
+          <category> CodeForces </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 字符串 </tag>
+            
+            <tag> 暴力 </tag>
+            
+            <tag> 模拟 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【AtCoder】ABC171F Strivore</title>
       <link href="/2020/07/08/%E3%80%90AtCoder%E3%80%91ABC171F-Strivore/"/>
       <url>/2020/07/08/%E3%80%90AtCoder%E3%80%91ABC171F-Strivore/</url>
@@ -22,11 +53,11 @@
       
         <tags>
             
-            <tag> 容斥原理 </tag>
-            
             <tag> 组合数学 </tag>
             
             <tag> 快速幂 </tag>
+            
+            <tag> 容斥原理 </tag>
             
         </tags>
       
@@ -82,9 +113,9 @@
       
         <tags>
             
-            <tag> 容斥原理 </tag>
-            
             <tag> 组合数学 </tag>
+            
+            <tag> 容斥原理 </tag>
             
         </tags>
       
@@ -124,7 +155,7 @@
       <link href="/2020/07/07/%E3%80%90CodeForces%E3%80%91Educational-CodeForces-Rounds-%E6%B1%87%E6%80%BB/"/>
       <url>/2020/07/07/%E3%80%90CodeForces%E3%80%91Educational-CodeForces-Rounds-%E6%B1%87%E6%80%BB/</url>
       
-        <content type="html"><![CDATA[<p>刷不动 AGC，就来刷 EDU 吧。</p><a id="more"></a><table><thead><tr><th align="center">ID</th><th align="center">何时完成</th><th align="center">题解链接</th><th align="center">备注</th></tr></thead><tbody><tr><td align="center"><a href="https://codeforces.com/contest/598" target="_blank" rel="noopener">Educational Codeforces Round 1</a></td><td align="center">2020.07.08</td><td align="center"><a href="[https://leverimmy.top/2020/07/07/%E3%80%90CodeForces%E3%80%91CF598C-Nearest-vectors/](https://leverimmy.top/2020/07/07/[CodeForces]CF598C-Nearest-vectors/)">C</a> <a href="[https://leverimmy.top/2020/07/08/%E3%80%90CodeForces%E3%80%91CF598E-Chocolate-Bar/](https://leverimmy.top/2020/07/08/[CodeForces]CF598E-Chocolate-Bar/)">E</a></td><td align="center">代码：<a href="https://codeforces.com/contest/598/submission/86212341" target="_blank" rel="noopener">A</a> <a href="https://codeforces.com/contest/598/submission/86212298" target="_blank" rel="noopener">B</a> <a href="https://codeforces.com/contest/598/submission/86214469" target="_blank" rel="noopener">D</a>；F 是个憨批计算几何，不写。</td></tr><tr><td align="center"><a href="https://codeforces.com/contest/600" target="_blank" rel="noopener">Educational Codeforces Round 2</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/609" target="_blank" rel="noopener">Educational Codeforces Round 3</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/612" target="_blank" rel="noopener">Educational Codeforces Round 4</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/616" target="_blank" rel="noopener">Educational Codeforces Round 5</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/620" target="_blank" rel="noopener">Educational Codeforces Round 6</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/622" target="_blank" rel="noopener">Educational Codeforces Round 7</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/628" target="_blank" rel="noopener">Educational Codeforces Round 8</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/632" target="_blank" rel="noopener">Educational Codeforces Round 9</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/652" target="_blank" rel="noopener">Educational Codeforces Round 10</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/660" target="_blank" rel="noopener">Educational Codeforces Round 11</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/665" target="_blank" rel="noopener">Educational Codeforces Round 12</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/678" target="_blank" rel="noopener">Educational Codeforces Round 13</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/691" target="_blank" rel="noopener">Educational Codeforces Round 14</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/702" target="_blank" rel="noopener">Educational Codeforces Round 15</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/710" target="_blank" rel="noopener">Educational Codeforces Round 16</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/762" target="_blank" rel="noopener">Educational Codeforces Round 17</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/792" target="_blank" rel="noopener">Educational Codeforces Round 18</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/797" target="_blank" rel="noopener">Educational Codeforces Round 19</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/803" target="_blank" rel="noopener">Educational Codeforces Round 20</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/808" target="_blank" rel="noopener">Educational Codeforces Round 21</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/813" target="_blank" rel="noopener">Educational Codeforces Round 22</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr></tbody></table>]]></content>
+        <content type="html"><![CDATA[<p>刷不动 AGC，就来刷 EDU 吧。</p><a id="more"></a><table><thead><tr><th align="center">ID</th><th align="center">何时完成</th><th align="center">题解链接</th><th align="center">备注</th></tr></thead><tbody><tr><td align="center"><a href="https://codeforces.com/contest/598" target="_blank" rel="noopener">Educational Codeforces Round 1</a></td><td align="center">2020.07.08</td><td align="center"><a href="[https://leverimmy.top/2020/07/07/%E3%80%90CodeForces%E3%80%91CF598C-Nearest-vectors/](https://leverimmy.top/2020/07/07/[CodeForces]CF598C-Nearest-vectors/)">C</a> <a href="[https://leverimmy.top/2020/07/08/%E3%80%90CodeForces%E3%80%91CF598E-Chocolate-Bar/](https://leverimmy.top/2020/07/08/[CodeForces]CF598E-Chocolate-Bar/)">E</a></td><td align="center">代码：<a href="https://codeforces.com/contest/598/submission/86212341" target="_blank" rel="noopener">A</a> <a href="https://codeforces.com/contest/598/submission/86212298" target="_blank" rel="noopener">B</a> <a href="https://codeforces.com/contest/598/submission/86214469" target="_blank" rel="noopener">D</a>；F 是个憨批计算几何，不写。</td></tr><tr><td align="center"><a href="https://codeforces.com/contest/600" target="_blank" rel="noopener">Educational Codeforces Round 2</a></td><td align="center"></td><td align="center"></td><td align="center">C 是个憨批模拟，不写。</td></tr><tr><td align="center"><a href="https://codeforces.com/contest/609" target="_blank" rel="noopener">Educational Codeforces Round 3</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/612" target="_blank" rel="noopener">Educational Codeforces Round 4</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/616" target="_blank" rel="noopener">Educational Codeforces Round 5</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/620" target="_blank" rel="noopener">Educational Codeforces Round 6</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/622" target="_blank" rel="noopener">Educational Codeforces Round 7</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/628" target="_blank" rel="noopener">Educational Codeforces Round 8</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/632" target="_blank" rel="noopener">Educational Codeforces Round 9</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/652" target="_blank" rel="noopener">Educational Codeforces Round 10</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/660" target="_blank" rel="noopener">Educational Codeforces Round 11</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/665" target="_blank" rel="noopener">Educational Codeforces Round 12</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/678" target="_blank" rel="noopener">Educational Codeforces Round 13</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/691" target="_blank" rel="noopener">Educational Codeforces Round 14</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/702" target="_blank" rel="noopener">Educational Codeforces Round 15</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/710" target="_blank" rel="noopener">Educational Codeforces Round 16</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/762" target="_blank" rel="noopener">Educational Codeforces Round 17</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/792" target="_blank" rel="noopener">Educational Codeforces Round 18</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/797" target="_blank" rel="noopener">Educational Codeforces Round 19</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/803" target="_blank" rel="noopener">Educational Codeforces Round 20</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/808" target="_blank" rel="noopener">Educational Codeforces Round 21</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"><a href="https://codeforces.com/contest/813" target="_blank" rel="noopener">Educational Codeforces Round 22</a></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr><tr><td align="center"></td><td align="center"></td><td align="center"></td><td align="center"></td></tr></tbody></table>]]></content>
       
       
       <categories>
@@ -592,9 +623,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -650,9 +681,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -679,9 +710,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -708,9 +739,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -770,9 +801,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -830,11 +861,11 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -890,9 +921,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -1008,11 +1039,11 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
             <tag> 最大流 </tag>
             
@@ -1072,9 +1103,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -1213,11 +1244,11 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
             <tag> 最大流 </tag>
             
@@ -1246,11 +1277,11 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -1277,11 +1308,11 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
             <tag> 最大流 </tag>
             
