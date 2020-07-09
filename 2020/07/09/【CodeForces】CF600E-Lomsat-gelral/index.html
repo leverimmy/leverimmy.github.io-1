@@ -16,13 +16,13 @@
 
   <!-- 页面元数据 -->
   
-    <title>【CodeForces】CF600D Area of Two Circles&#39; Intersection - Clever_Jimmy&#39;s Blog</title>
+    <title>【CodeForces】CF600E Lomsat gelral - Clever_Jimmy&#39;s Blog</title>
   
-    <meta name="keywords" content="计算几何,余弦定理">
+    <meta name="keywords" content="dsu on tree">
   
   
-    <meta name="description" content="题意简述：求两个圆的交的面积。
-$-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
+    <meta name="description" content="题意简述：给定一棵大小为 $n$ 的一棵树，每个结点都有一个颜色 $c_i$，每种颜色有一个编号，求树中每个子树的最多的颜色 编号 的和。
+$1 \le n, c_i \le 10^5$。
 题目链接">
   
 
@@ -349,8 +349,8 @@ $-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
         
           
   <h1 class="title">
-    <a href="/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600D-Area-of-Two-Circles-Intersection/">
-      【CodeForces】CF600D Area of Two Circles' Intersection
+    <a href="/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600E-Lomsat-gelral/">
+      【CodeForces】CF600E Lomsat gelral
     </a>
   </h1>
 
@@ -412,16 +412,21 @@ $-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
         <div class="article-entry" itemprop="articleBody">
           
           
-          <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>求两个圆的交的面积。</p>
-<p>$-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。</p>
-<p><a href="http://codeforces.com/problemset/problem/600/D" target="_blank" rel="noopener">题目链接</a></p>
+          <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一棵大小为 $n$ 的一棵树，每个结点都有一个颜色 $c_i$，每种颜色有一个编号，求树中每个子树的最多的颜色 <strong>编号</strong> 的和。</p>
+<p>$1 \le n, c_i \le 10^5$。</p>
+<p><a href="http://codeforces.com/problemset/problem/600/E" target="_blank" rel="noopener">题目链接</a></p>
 <a id="more"></a>
 
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>用余弦定理解三角形即可，然后用 $S = \dfrac{1}{2}ab\sin C$ 来求三角形面积，$S = \dfrac{1}{2}\alpha r^2$ 来求扇形面积，相减即可得到答案。</p>
-<p>卡精度。</p>
+<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>设 $\textrm{occ}(i)$ 表示 $i$ 这种颜色出现的次数。</p>
+<p>在处理每个并列的子树时，我们发现每次要清空一次 $\text{occ}$，这很浪费时间；</p>
+<p>但最后一个子树的 $\textrm{occ}$ 不需要清空，可以直接贡献到父亲节点上去。</p>
+<p>考虑 dsu on tree，我们不清空的重儿子所在的子树，直接合并到父亲节点上。</p>
+<hr>
+<p>分析时间复杂度，一个节点被暴力清空，只可能因为它的某个祖先是轻儿子。</p>
+<p>而每条轻链上的节点个数是 $O(\log n)$ 的，于是总复杂度为 $O(n\log n)$。</p>
 <h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><details ><summary> <p>Code</p> </summary>
               <div class='content'>
-              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LD long double</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> LD PI = <span class="built_in">std</span>::<span class="built_in">acos</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">LD ra, rb;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">POINT</span> &#123;</span></span><br><span class="line">    LD x, y;</span><br><span class="line">&#125; A, B;</span><br><span class="line"></span><br><span class="line"><span class="function">LD <span class="title">dist</span><span class="params">(POINT a, POINT b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">std</span>::<span class="built_in">sqrt</span>((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">LD <span class="title">solve</span><span class="params">(LD a, LD b, LD c)</span> </span>&#123;</span><br><span class="line">    LD cosC = (a * a + b * b - c * c)/(<span class="number">2</span> * a * b);</span><br><span class="line">    LD angC = <span class="built_in">std</span>::<span class="built_in">acos</span>(cosC) * <span class="number">2</span>;</span><br><span class="line">    LD sin2C = <span class="built_in">std</span>::<span class="built_in">sin</span>(ang2C);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> a * a * ang2C / <span class="number">2</span> - a * a * sin2C / <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; A.x &gt;&gt; A.y &gt;&gt; ra;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cin</span> &gt;&gt; B.x &gt;&gt; B.y &gt;&gt; rb;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(ra &gt; rb)</span><br><span class="line">        <span class="built_in">std</span>::swap(A, B), <span class="built_in">std</span>::swap(ra, rb);</span><br><span class="line">    </span><br><span class="line">    LD dis = dist(A, B);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(dis &gt;= ra + rb)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"0"</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(dis + ra &lt;= rb)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%.20f"</span>, (<span class="keyword">double</span>)(PI * ra * ra));</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%.20f"</span>, (<span class="keyword">double</span>)(solve(ra, dis, rb) + solve(rb, dis, ra)));</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">2e5</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, c[N], cnt, first[N];</span><br><span class="line"><span class="keyword">int</span> son[N], occ[N], siz[N], maxocc;</span><br><span class="line">LL sum, ans[N];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">EDGE</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> to, _next;</span><br><span class="line">&#125; e[M];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    e[cnt].to = v, e[cnt]._next = first[u];</span><br><span class="line">    first[u] = cnt++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    siz[x] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = first[x]; ~i; i = e[i]._next) &#123;</span><br><span class="line">        <span class="keyword">int</span> y = e[i].to;</span><br><span class="line">        <span class="keyword">if</span>(y == p)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        dfs1(y, x);</span><br><span class="line">        siz[x] += siz[y];</span><br><span class="line">        <span class="keyword">if</span>(siz[y] &gt; siz[son[x]])</span><br><span class="line">            son[x] = y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    --occ[c[x]];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = first[x]; ~i; i = e[i]._next) &#123;</span><br><span class="line">        <span class="keyword">int</span> y = e[i].to;</span><br><span class="line">        <span class="keyword">if</span>(y == p)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        clear(y, x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> p, <span class="keyword">int</span> g)</span> </span>&#123;</span><br><span class="line">    ++occ[c[x]];</span><br><span class="line">    <span class="keyword">if</span>(occ[c[x]] &gt; maxocc) &#123;</span><br><span class="line">        maxocc = occ[c[x]];</span><br><span class="line">        sum = c[x];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(occ[c[x]] == maxocc)</span><br><span class="line">        sum += c[x];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = first[x]; ~i; i = e[i]._next) &#123;</span><br><span class="line">        <span class="keyword">int</span> y = e[i].to;</span><br><span class="line">        <span class="keyword">if</span>(y == p || y == g)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        calc(y, x, g);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> p)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = first[x]; ~i; i = e[i]._next) &#123;</span><br><span class="line">        <span class="keyword">int</span> y = e[i].to;</span><br><span class="line">        <span class="keyword">if</span>(y == p || y == son[x])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        dfs2(y, x);</span><br><span class="line">        clear(y, x);</span><br><span class="line">        sum = maxocc = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(son[x])</span><br><span class="line">        dfs2(son[x], x);</span><br><span class="line">    calc(x, p, son[x]);</span><br><span class="line">    ans[x] = sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">memset</span>(first, <span class="number">-1</span>, <span class="keyword">sizeof</span>(first));</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;c[i]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;u, &amp;v);</span><br><span class="line">        add(u, v);</span><br><span class="line">        add(v, u);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs1(<span class="number">1</span>, <span class="number">0</span>), dfs2(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld "</span>, ans[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
               </div>
             </details>
 
@@ -460,7 +465,7 @@ $-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
           
         
           
-            <p>本文永久链接是：<a href=https://leverimmy.top/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600D-Area-of-Two-Circles-Intersection/>https://leverimmy.top/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600D-Area-of-Two-Circles-Intersection/</a></p>
+            <p>本文永久链接是：<a href=https://leverimmy.top/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600E-Lomsat-gelral/>https://leverimmy.top/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600E-Lomsat-gelral/</a></p>
           
         
       </blockquote>
@@ -485,7 +490,7 @@ $-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-09T10:07:11+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-09T15:12:53+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2020年7月9日</p>
@@ -497,7 +502,7 @@ $-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>计算几何</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E4%BD%99%E5%BC%A6%E5%AE%9A%E7%90%86/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>余弦定理</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/dsu-on-tree/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>dsu on tree</p></a></div>
 
 
         
@@ -515,8 +520,8 @@ $-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://leverimmy.top/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600D-Area-of-Two-Circles-Intersection/&title=【CodeForces】CF600D Area of Two Circles' Intersection - Clever_Jimmy's Blog&summary=题意简述：求两个圆的交的面积。
-$-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://leverimmy.top/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600E-Lomsat-gelral/&title=【CodeForces】CF600E Lomsat gelral - Clever_Jimmy's Blog&summary=题意简述：给定一棵大小为 $n$ 的一棵树，每个结点都有一个颜色 $c_i$，每种颜色有一个编号，求树中每个子树的最多的颜色 编号 的和。
+$1 \le n, c_i \le 10^5$。
 题目链接"
           
           >
@@ -529,8 +534,8 @@ $-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://leverimmy.top/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600D-Area-of-Two-Circles-Intersection/&title=【CodeForces】CF600D Area of Two Circles' Intersection - Clever_Jimmy's Blog&summary=题意简述：求两个圆的交的面积。
-$-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://leverimmy.top/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600E-Lomsat-gelral/&title=【CodeForces】CF600E Lomsat gelral - Clever_Jimmy's Blog&summary=题意简述：给定一棵大小为 $n$ 的一棵树，每个结点都有一个颜色 $c_i$，每种颜色有一个编号，求树中每个子树的最多的颜色 编号 的和。
+$1 \le n, c_i \le 10^5$。
 题目链接"
           
           >
@@ -543,8 +548,8 @@ $-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://leverimmy.top/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600D-Area-of-Two-Circles-Intersection/&title=【CodeForces】CF600D Area of Two Circles' Intersection - Clever_Jimmy's Blog&summary=题意简述：求两个圆的交的面积。
-$-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
+          href="http://service.weibo.com/share/share.php?url=https://leverimmy.top/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600E-Lomsat-gelral/&title=【CodeForces】CF600E Lomsat gelral - Clever_Jimmy's Blog&summary=题意简述：给定一棵大小为 $n$ 的一棵树，每个结点都有一个颜色 $c_i$，每种颜色有一个编号，求树中每个子树的最多的颜色 编号 的和。
+$1 \le n, c_i \le 10^5$。
 题目链接"
           
           >
@@ -569,18 +574,15 @@ $-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600E-Lomsat-gelral/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>【CodeForces】CF600E Lomsat gelral</p>
-                <p class='content'>题意简述：给定一棵大小为 $n$ 的一棵树，每个结点都有一个颜色 $c_i$，每种颜色有一个编号，求树中每个子树的最多的颜色 编号 的和。
-$1 \le n, c_i \le 10^5$。
-题目...</p>
-              </a>
             
-            
-              <a class='next' href='/2020/07/09/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91%E3%80%8CTJOI2010%E3%80%8D%E9%98%85%E8%AF%BB%E7%90%86%E8%A7%A3/'>
-                <p class='title'>【洛谷】「TJOI2010」阅读理解<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>题意简述：给定 $n$ 篇文章和 $m$ 个单词，问每个单词在哪些文章中出现过。
-$1 \le n \le 10^3$，$1 \le m \le 10^4$，每篇文章长度不超过 $5\cdot ...</p>
+              <a class='next' href='/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600D-Area-of-Two-Circles-Intersection/'>
+                <p class='title'>【CodeForces】CF600D Area of Two Circles' Intersection<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>题意简述：求两个圆的交的面积。
+$-10^9 \le x_1, y_1, x_2, y_2 \le 10^9$，$1 \le r_1, r_2 \le 10^9$。
+题目链接
+
+
+解题思路：用余...</p>
               </a>
             
           </div>
@@ -661,7 +663,7 @@ $1 \le n \le 10^3$，$1 \le m \le 10^4$，每篇文章长度不超过 $5\cdot ..
 
   <script>
     window.subData = {
-      title: '【CodeForces】CF600D Area of Two Circles' Intersection',
+      title: '【CodeForces】CF600E Lomsat gelral',
       tools: true
     }
   </script>
