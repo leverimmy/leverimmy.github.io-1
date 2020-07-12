@@ -18,7 +18,7 @@
 
   <!-- 页面元数据 -->
   
-    <title>标签：最大流 - Clever_Jimmy&#39;s Blog</title>
+    <title>标签：记忆化 - Clever_Jimmy&#39;s Blog</title>
   
   
 
@@ -340,10 +340,6 @@
         
           
         
-          
-        
-          
-        
       
     
     
@@ -362,8 +358,8 @@
         
           
   <h2 class="title">
-    <a href="/2020/03/26/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3355-%E9%AA%91%E5%A3%AB%E5%85%B1%E5%AD%98%E9%97%AE%E9%A2%98/">
-      【洛谷】P3355 骑士共存问题
+    <a href="/2020/07/12/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3435-POI2006-OKR-Periods-of-Words/">
+      【洛谷】P3435 [POI2006]OKR-Periods of Words
     </a>
   </h2>
 
@@ -401,7 +397,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年3月26日</p>
+    <p>发布于：2020年7月12日</p>
   </a>
 </div>
 
@@ -429,217 +425,14 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个大小为 $n \times n$ 的棋盘，其中 $m$ 个格子上有障碍，问最多能放多少个骑士（即「马」）。</p>
-<p>$1 \le n \le 200$，$0 \le m \le n^2$。</p>
-<p><a href="https://www.luogu.com.cn/problem/P3355" target="_blank" rel="noopener">题目链接</a></p>
+        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个字符串 $S$，求：<br>$$<br>\sum_{i = 1}^{n}\mathop{\max}\limits_{S_i\sqsubset S_j^2}{j}<br>$$<br>$1 \le \left|S\right| \le 10^6$。</p>
+<p><a href="https://www.luogu.com.cn/problem/P3435" target="_blank" rel="noopener">题目链接</a></p>
       
     </div>
     
       
         <div class="button readmore">
-          <a href="/2020/03/26/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3355-%E9%AA%91%E5%A3%AB%E5%85%B1%E5%AD%98%E9%97%AE%E9%A2%98/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/02/28/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2774-%E6%96%B9%E6%A0%BC%E5%8F%96%E6%95%B0%E9%97%AE%E9%A2%98/">
-      【洛谷】P2774 方格取数问题
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://leverimmy.top" rel="nofollow">
-    <img src="https://leverimmy.top/gallery/avatar.jpg">
-    <p>Clever_Jimmy</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/洛谷</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年2月28日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个 $m$ 行 $n$ 列的矩阵 $M$，在这个矩阵中取出一些数，每取出一个数后，在之后的操作中禁止取与它 <strong>相邻</strong> 的方格中的数。求取出的数的和的最大值。</p>
-<p>$1 \le m, n \le 100$，$1 \le M_{i, j} \le 10^5$。</p>
-<p><a href="https://www.luogu.com.cn/problem/P2774" target="_blank" rel="noopener">题目链接</a></p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/02/28/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2774-%E6%96%B9%E6%A0%BC%E5%8F%96%E6%95%B0%E9%97%AE%E9%A2%98/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
-
-          </div>
-        
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/02/09/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2756-%E9%A3%9E%E8%A1%8C%E5%91%98%E9%85%8D%E5%AF%B9%E6%96%B9%E6%A1%88%E9%97%AE%E9%A2%98/">
-      【洛谷】P2756 飞行员配对方案问题
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://leverimmy.top" rel="nofollow">
-    <img src="https://leverimmy.top/gallery/avatar.jpg">
-    <p>Clever_Jimmy</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  
-  <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/%E6%B4%9B%E8%B0%B7/' rel="nofollow">
-      <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/洛谷</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年2月9日</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个二分图 $(V_1, V_2, E)$，求其最大匹配。</p>
-<p>$1\le \left|V_1\right|, \left|V_2\right| \le 100$，$1 \le \left|E\right| \le \left|V_1\right|\cdot\left|V_2\right|$。</p>
-<p><a href="https://www.luogu.com.cn/problem/P2756" target="_blank" rel="noopener">题目链接</a></p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/02/09/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2756-%E9%A3%9E%E8%A1%8C%E5%91%98%E9%85%8D%E5%AF%B9%E6%96%B9%E6%A1%88%E9%97%AE%E9%A2%98/">
+          <a href="/2020/07/12/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3435-POI2006-OKR-Periods-of-Words/">
             阅读全文 <i class="fas fa-chevron-right"></i>
           </a>
         </div>

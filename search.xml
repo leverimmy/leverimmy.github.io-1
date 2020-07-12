@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>【洛谷】P3435 [POI2006]OKR-Periods of Words</title>
+      <link href="/2020/07/12/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3435-POI2006-OKR-Periods-of-Words/"/>
+      <url>/2020/07/12/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3435-POI2006-OKR-Periods-of-Words/</url>
+      
+        <content type="html"><![CDATA[<h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个字符串 $S$，求：<br>$$<br>\sum_{i = 1}^{n}\mathop{\max}\limits_{S_i\sqsubset S_j^2}{j}<br>$$<br>$1 \le \left|S\right| \le 10^6$。</p><p><a href="https://www.luogu.com.cn/problem/P3435" target="_blank" rel="noopener">题目链接</a></p><a id="more"></a><h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><p>我们单独考虑某个字符串 $S_i \sqsubset S$，则 $\forall k \in \pi^{\star}[i]$，都有 $S_{i - k} \sqsubset S_i^2$。</p><p>考虑让 $i - k$ 最大（题目要求），即让 $k$ 最小，也就是我们 $\forall i \in [1, n]$，求 $\pi^{\star}[i]$ 中的非零最小值。</p><p>对每个 $i \in [1, n]$ 都求一次最小值，会被卡成 $O(\left|S\right|^2)$，考虑记忆化。</p><p>我们每次求出来了 $\pi^{\star}[i]$ 中的非零最小值 $k$ 时，直接令 $\pi[i] \gets k$。</p><p>答案即为（之后的）<br>$$<br>\sum_{i = 1}^{n}(i - \pi[i])<br>$$</p><h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><details ><summary> <p>Code</p> </summary>              <div class='content'>              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, pi[N];</span><br><span class="line">LL ans;</span><br><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">calcPi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>, k = <span class="number">0</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">while</span>(k &gt; <span class="number">0</span> &amp;&amp; str[k + <span class="number">1</span>] != str[i])</span><br><span class="line">            k = pi[k];</span><br><span class="line">        <span class="keyword">if</span>(str[k + <span class="number">1</span>] == str[i])</span><br><span class="line">            ++k;</span><br><span class="line">        pi[i] = k;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, str + <span class="number">1</span>);</span><br><span class="line">    calcPi();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> k = i;</span><br><span class="line">        <span class="keyword">while</span>(pi[k])</span><br><span class="line">            k = pi[k];</span><br><span class="line">        <span class="keyword">if</span>(pi[i])</span><br><span class="line">            pi[i] = k;</span><br><span class="line">        ans += i - k;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>              </div>            </details>]]></content>
+      
+      
+      <categories>
+          
+          <category> 题解 </category>
+          
+          <category> 洛谷 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 前缀函数 </tag>
+            
+            <tag> 记忆化 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【学习笔记】AC 自动机学习笔记</title>
       <link href="/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
       <url>/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
