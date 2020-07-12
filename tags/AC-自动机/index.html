@@ -18,7 +18,7 @@
 
   <!-- 页面元数据 -->
   
-    <title>归档：2018 - Clever_Jimmy&#39;s Blog</title>
+    <title>标签：AC 自动机 - Clever_Jimmy&#39;s Blog</title>
   
   
 
@@ -70,39 +70,7 @@
 
 <body>
   
-  <div class="cover-wrapper">
-    
-      <cover class='cover  half'>
-        <div class='cover-body'>
-  <div class='a'>
-    
-    
-      <p class="title">Clever_Jimmy 的博客</p>
-    
-    
-      <p class="subtitle">放下成见。</p>
-    
-  </div>
-  <div class='b'>
-    
-      <div class="m_search">
-        <form name="searchform" class="form u-search-form">
-          <input type="text" class="input u-search-input" placeholder="" />
-          <i class="icon fas fa-search fa-fw"></i>
-        </form>
-      </div>
-    
-    <div class='menu navigation'>
-      <ul class='cover-list-h'>
-        
-      </ul>
-    </div>
-  </div>
-</div>
-
-      </cover>
-    
-    <div id="loading-bar-wrapper">
+  <div id="loading-bar-wrapper">
   <div id="loading-bar"></div>
 </div>
 <header class="l_header shadow blur">
@@ -355,16 +323,17 @@
 
 <script>setLoadingBarProgress(40);</script>
 
-  </div>
 
 
-  <div class="l_body">
+  <div class="l_body nocover">
     <div class='body-wrapper'>
       
 
+
 <div class='l_main'>
-	
-		
+  
+    
+      
   <section class="post-list ">
     
       
@@ -389,8 +358,8 @@
         
           
   <h2 class="title">
-    <a href="/2018/11/25/%E3%80%90%E6%B8%B8%E8%AE%B0%E3%80%91%E8%AE%B0%E6%B8%B8-8102-PION/">
-      【游记】记游 8102 PION
+    <a href="/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20/">
+      【学习笔记】AC 自动机学习笔记
     </a>
   </h2>
 
@@ -415,9 +384,9 @@
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/%E6%9D%82%E7%AC%94/%E6%B8%B8%E8%AE%B0/' rel="nofollow">
+    <a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AD%97%E7%AC%A6%E4%B8%B2/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>杂笔/游记</p>
+      <p>学习笔记/字符串</p>
     </a>
   </div>
 
@@ -428,7 +397,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2018年11月25日</p>
+    <p>发布于：2020年7月12日</p>
   </a>
 </div>
 
@@ -456,14 +425,14 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       
-        <p>就在两周之前，差不多这个时间段，人生中的第一次$NOIP$结束了。</p>
-<p>这一次纵然有许多遗憾，也让我获取到了许多经验。</p>
+        <p>本文比较随意地讲解了一下 AC 自动机极其 fail 树的建构以及应用。</p>
+<p>可能不太严谨，但通俗易懂。</p>
       
     </div>
     
       
         <div class="button readmore">
-          <a href="/2018/11/25/%E3%80%90%E6%B8%B8%E8%AE%B0%E3%80%91%E8%AE%B0%E6%B8%B8-8102-PION/">
+          <a href="/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20/">
             阅读全文 <i class="fas fa-chevron-right"></i>
           </a>
         </div>
@@ -539,7 +508,8 @@
   
 
 
-	
+    
+  
 </div>
 <aside class='l_side'>
   
@@ -773,67 +743,6 @@
   </footer>
 
 <script>setLoadingBarProgress(80);</script>
-
-
-
-
-	<!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-	
-
-	
-	    <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-	
 
 
       <script>setLoadingBarProgress(60);</script>
