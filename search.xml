@@ -5,10 +5,10 @@
     
     <entry>
       <title>【学习笔记】AC 自动机学习笔记</title>
-      <link href="/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20/"/>
-      <url>/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%20/</url>
+      <link href="/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <url>/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
       
-        <content type="html"><![CDATA[<p>本文比较随意地讲解了一下 AC 自动机极其 fail 树的建构以及应用。</p><p>可能不太严谨，但通俗易懂。</p><a id="more"></a><h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>为了更方便地描述字符串相关内容，我们做出以下规定：</p><ol><li>字符串通常用 $S, T$ 等表示，$c$ 通常表示一个字符，$\Sigma$ 表示字符集；</li><li>字符串长度用 $\left|S\right|$ 表示；</li><li>字符集大小用 $\left|\Sigma\right|$ 表示；</li><li>$S[l..r]$ 表示 $S[l], S[l + 1], \ldots, S[r - 1], S[r]$；</li><li>空串用 $\epsilon$ 表示；</li><li>由 $S_1, S_2, \cdots, S_n$ 构成的 trie 树，用 $\textrm{trie}(S_1, S_2, \cdots, S_n)$ 表示；</li><li>字典树中从根沿着边走到 $i$ 节点所形成的的字符串，用 $\textrm{str}(i)$ 表示。</li></ol><p>特殊地，本文的字符串下标 <strong>从 $1$ 开始</strong>。</p><blockquote><p>一些例子：对于 $S = \mathtt{ABCBAD}$ 而言：</p><ol><li>$\left|S\right| = 6$；</li><li>$\left|\Sigma\right| = 4$；</li><li>$S[2..4] = \mathtt{BCBA}$；</li><li>$S_4 = \mathtt{ABCB}$。</li></ol></blockquote><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>笼统地讲，AC 自动机实际上是一个 <strong>trie 图</strong> 加上很多的 fail 指针形成的结构。</p><p>AC 自动机中的 fail 指针就如同 KMP 算法的 $\pi$ 数组；</p><p>但不同的是 fail 指针能在多个模式串上迭代，而 $\pi$ 数组只能在单一的模式串上迭代。</p><p>注意到我的描述为「是一个 trie 图」，因为 AC 自动机实际上把所有 <strong>不被接受的状态</strong> 都连向了沿着 fail 指针走后的 <strong>合法状态</strong>；</p><p>而这样就形成了一个图而不是单纯的一棵树。</p><p>也许你并不能理解上一句话，不过不要紧，我们先从「基于 trie 树结构的 AC 自动机」的结构开始说起。</p><p>对于一个模式串为 $S_1, S_2, \cdots, S_n$ 基于 trie 树结构的 AC 自动机而言，有：</p><ol><li><p>$\textrm{ch}[u, c]$ 数组。</p><p>指向的是 $u$ 节点，往后拓展一个字符 $c$ 之后到达的节点。</p></li><li><p>$\text{fail}[u]$ 数组。</p><p>$\textrm{fail}[u]$ 自 $u$ 开始，指向 $\textrm{trie}(S_1, S_2, \cdots, S_n)$ 中的最长的，前缀与 $\textrm{str}(u)$ 的真后缀相等的节点。</p><p>如下图所示，$5$ 号节点的 fail 指针指向的是 $2$ 号节点，因为 $\textrm{str}(5) = \mathtt{bab}, \textrm{str}(2) = \mathtt{ab}$；</p><p>$\mathtt{ab}$ 是这棵 trie 树中最长的满足前缀（$\mathtt{ab}$）与 $\textrm{str}(5)$ 的某一真后缀（$\textrm{str}(5)[2..3] = \mathtt{ab}$）相等的节点。</p><p><img src="/gallery/lectures/ac/trie_tree.png" alt="一个基于 trie 树结构的 AC 自动机，只标出了一个 fail 指针"></p></li></ol><h3 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h3><h4 id="trie-图的构建"><a href="#trie-图的构建" class="headerlink" title="trie 图的构建"></a>trie 图的构建</h4><h4 id="fail-指针的连接"><a href="#fail-指针的连接" class="headerlink" title="fail 指针的连接"></a>fail 指针的连接</h4><h4 id="对一个字符串进行匹配"><a href="#对一个字符串进行匹配" class="headerlink" title="对一个字符串进行匹配"></a>对一个字符串进行匹配</h4><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><h4 id="trie-图的构建-1"><a href="#trie-图的构建-1" class="headerlink" title="trie 图的构建"></a>trie 图的构建</h4><h4 id="fail-指针的连接-1"><a href="#fail-指针的连接-1" class="headerlink" title="fail 指针的连接"></a>fail 指针的连接</h4><h4 id="对一个字符串进行匹配-1"><a href="#对一个字符串进行匹配-1" class="headerlink" title="对一个字符串进行匹配"></a>对一个字符串进行匹配</h4><p>如同 ouuan 在 <a href="[https://ouuan.github.io/post/ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/](https://ouuan.github.io/post/ac自动机学习笔记/)">他的博客</a> 里说到的，普通的「暴力跳 fail 指针」的 AC 自动机其实是 <strong>错误</strong> 的；</p><p>正确的做法是建出 fail 树之后 dfs 求每棵子树的大小。</p><h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3>]]></content>
+        <content type="html"><![CDATA[<p>本文比较随意地讲解了一下 AC 自动机极其 fail 树的建构以及应用。</p><p>可能不太严谨，但通俗易懂。</p><a id="more"></a><h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>为了更方便地描述字符串相关内容，我们做出以下规定：</p><ol><li>字符串通常用 $S, T$ 等表示，$c$ 通常表示一个字符，$\Sigma$ 表示字符集；</li><li>字符串长度用 $\left|S\right|$ 表示；</li><li>字符集大小用 $\left|\Sigma\right|$ 表示；</li><li>$S[l..r]$ 表示 $S[l], S[l + 1], \ldots, S[r - 1], S[r]$；</li><li>空串用 $\epsilon$ 表示；</li><li>由 $S_1, S_2, \cdots, S_n$ 构成的 trie 树，用 $\textrm{trie}(S_1, S_2, \cdots, S_n)$ 表示；</li><li>字典树中从根沿着边走到 $i$ 节点所形成的的字符串，用 $\textrm{str}(i)$ 表示。</li></ol><p>特殊地，本文的字符串下标 <strong>从 $1$ 开始</strong>。</p><blockquote><p>一些例子：对于 $S = \mathtt{ABCBAD}$ 而言：</p><ol><li>$\left|S\right| = 6$；</li><li>$\left|\Sigma\right| = 4$；</li><li>$S[2..4] = \mathtt{BCBA}$；</li><li>$S_4 = \mathtt{ABCB}$。</li></ol></blockquote><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>笼统地讲，AC 自动机实际上是一个 <strong>trie 图</strong> 加上很多的 fail 指针形成的结构。</p><p>AC 自动机中的 fail 指针就如同 KMP 算法的 $\pi$ 数组；</p><p>但不同的是 fail 指针能在多个模式串上迭代，而 $\pi$ 数组只能在单一的模式串上迭代。</p><p>注意到我的描述为「是一个 trie 图」，因为 AC 自动机实际上把所有 <strong>不被接受的状态</strong> 都连向了沿着 fail 指针走后的 <strong>合法状态</strong>；</p><p>而这样就形成了一个图而不是单纯的一棵树。</p><p>也许你并不能理解上一句话，不过不要紧，我们先从「基于 trie 树结构的 AC 自动机」的结构开始说起。</p><p>对于一个模式串为 $S_1, S_2, \cdots, S_n$ 基于 trie 树结构的 AC 自动机而言，有：</p><ol><li><p>$\textrm{ch}[u, c]$ 数组。</p><p>指向的是 $u$ 节点，往后拓展一个字符 $c$ 之后到达的节点。</p></li><li><p>$\text{fail}[u]$ 数组。</p><p>$\textrm{fail}[u]$ 自 $u$ 开始，指向 $\textrm{trie}(S_1, S_2, \cdots, S_n)$ 中的最长的，前缀与 $\textrm{str}(u)$ 的真后缀相等的节点。</p><p>如下图所示，$5$ 号节点的 fail 指针指向的是 $2$ 号节点，因为 $\textrm{str}(5) = \mathtt{bab}, \textrm{str}(2) = \mathtt{ab}$；</p><p>$\mathtt{ab}$ 是这棵 trie 树中最长的满足前缀（$\mathtt{ab}$）与 $\textrm{str}(5)$ 的某一真后缀（$\textrm{str}(5)[2..3] = \mathtt{ab}$）相等的节点。</p><p><img src="/gallery/lectures/ac/trie_tree.png" alt="一个基于 trie 树结构的 AC 自动机，只标出了一个 fail 指针"></p></li></ol><h3 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h3><p>一个 AC 自动机的建立以及使用包括三个流程：「trie 图的构建」、「fail 指针的连接」和「对一个文本串进行匹配」。</p><h4 id="trie-图的构建"><a href="#trie-图的构建" class="headerlink" title="trie 图的构建"></a>trie 图的构建</h4><h4 id="fail-指针的连接"><a href="#fail-指针的连接" class="headerlink" title="fail 指针的连接"></a>fail 指针的连接</h4><h4 id="对一个文本串进行匹配"><a href="#对一个文本串进行匹配" class="headerlink" title="对一个文本串进行匹配"></a>对一个文本串进行匹配</h4><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><h4 id="trie-图的构建-1"><a href="#trie-图的构建-1" class="headerlink" title="trie 图的构建"></a>trie 图的构建</h4><h4 id="fail-指针的连接-1"><a href="#fail-指针的连接-1" class="headerlink" title="fail 指针的连接"></a>fail 指针的连接</h4><h4 id="对一个文本串进行匹配-1"><a href="#对一个文本串进行匹配-1" class="headerlink" title="对一个文本串进行匹配"></a>对一个文本串进行匹配</h4><p>如同 ouuan 在 <a href="[https://ouuan.github.io/post/ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/](https://ouuan.github.io/post/ac自动机学习笔记/)">他的博客</a> 里说到的，普通的「暴力跳 fail 指针」的 AC 自动机其实是 <strong>错误</strong> 的；</p><p>正确的做法是建出 fail 树之后 dfs 求每棵子树的大小。</p><h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3>]]></content>
       
       
       <categories>
@@ -194,11 +194,11 @@
       
         <tags>
             
-            <tag> 容斥原理 </tag>
-            
             <tag> 组合数学 </tag>
             
             <tag> 快速幂 </tag>
+            
+            <tag> 容斥原理 </tag>
             
         </tags>
       
@@ -254,9 +254,9 @@
       
         <tags>
             
-            <tag> 容斥原理 </tag>
-            
             <tag> 组合数学 </tag>
+            
+            <tag> 容斥原理 </tag>
             
         </tags>
       

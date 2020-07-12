@@ -16,14 +16,13 @@
 
   <!-- 页面元数据 -->
   
-    <title>【AtCoder】ABC171F Strivore - Clever_Jimmy&#39;s Blog</title>
+    <title>【学习笔记】AC 自动机学习笔记 - Clever_Jimmy&#39;s Blog</title>
   
-    <meta name="keywords" content="组合数学,快速幂,容斥原理">
+    <meta name="keywords" content="字符串,AC 自动机">
   
   
-    <meta name="description" content="题意简述：给定一个字符串 $S$ 和数字 $k$，求所有本质不同的字符串 $T$ 的个数，使得 $\left|T\right| = \left|S\right| + k$，且 $S$ 为 $T$ 的 子序列。
-$1 \le \left|S\right|, k \le 10^6$。
-题目链接">
+    <meta name="description" content="本文比较随意地讲解了一下 AC 自动机极其 fail 树的建构以及应用。
+可能不太严谨，但通俗易懂。">
   
 
   <!-- feed -->
@@ -345,14 +344,12 @@ $1 \le \left|S\right|, k \le 10^6$。
     
       
       
-        <a title='【AtCoder】ABC171F Strivore' href='/2020/07/08/%E3%80%90AtCoder%E3%80%91ABC171F-Strivore/'><img class='thumbnail' src='/gallery/tutorials/ABC171F/index.png'></a>
-      
       <div class="meta" id="header-meta">
         
           
   <h1 class="title">
-    <a href="/2020/07/08/%E3%80%90AtCoder%E3%80%91ABC171F-Strivore/">
-      【AtCoder】ABC171F Strivore
+    <a href="/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+      【学习笔记】AC 自动机学习笔记
     </a>
   </h1>
 
@@ -377,9 +374,9 @@ $1 \le \left|S\right|, k \le 10^6$。
               
   
   <div class='new-meta-item category'>
-    <a href='/categories/%E9%A2%98%E8%A7%A3/AtCoder/' rel="nofollow">
+    <a href='/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AD%97%E7%AC%A6%E4%B8%B2/' rel="nofollow">
       <i class="fas fa-folder-open fa-fw" aria-hidden="true"></i>
-      <p>题解/AtCoder</p>
+      <p>学习笔记/字符串</p>
     </a>
   </div>
 
@@ -390,7 +387,7 @@ $1 \le \left|S\right|, k \le 10^6$。
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：2020年7月8日</p>
+    <p>发布于：2020年7月12日</p>
   </a>
 </div>
 
@@ -414,28 +411,52 @@ $1 \le \left|S\right|, k \le 10^6$。
         <div class="article-entry" itemprop="articleBody">
           
           
-          <h3 id="题意简述："><a href="#题意简述：" class="headerlink" title="题意简述："></a>题意简述：</h3><p>给定一个字符串 $S$ 和数字 $k$，求所有本质不同的字符串 $T$ 的个数，使得 $\left|T\right| = \left|S\right| + k$，且 $S$ 为 $T$ 的 <strong>子序列</strong>。</p>
-<p>$1 \le \left|S\right|, k \le 10^6$。</p>
-<p><a href="https://atcoder.jp/contests/abc171/tasks/abc171_f" target="_blank" rel="noopener">题目链接</a></p>
+          <p>本文比较随意地讲解了一下 AC 自动机极其 fail 树的建构以及应用。</p>
+<p>可能不太严谨，但通俗易懂。</p>
 <a id="more"></a>
 
-<h3 id="解题思路："><a href="#解题思路：" class="headerlink" title="解题思路："></a>解题思路：</h3><blockquote>
-<p>令 $n = \left|S\right|, m = \left|S\right| + k$。</p>
+<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>为了更方便地描述字符串相关内容，我们做出以下规定：</p>
+<ol>
+<li>字符串通常用 $S, T$ 等表示，$c$ 通常表示一个字符，$\Sigma$ 表示字符集；</li>
+<li>字符串长度用 $\left|S\right|$ 表示；</li>
+<li>字符集大小用 $\left|\Sigma\right|$ 表示；</li>
+<li>$S[l..r]$ 表示 $S[l], S[l + 1], \ldots, S[r - 1], S[r]$；</li>
+<li>空串用 $\epsilon$ 表示；</li>
+<li>由 $S_1, S_2, \cdots, S_n$ 构成的 trie 树，用 $\textrm{trie}(S_1, S_2, \cdots, S_n)$ 表示；</li>
+<li>字典树中从根沿着边走到 $i$ 节点所形成的的字符串，用 $\textrm{str}(i)$ 表示。</li>
+</ol>
+<p>特殊地，本文的字符串下标 <strong>从 $1$ 开始</strong>。</p>
+<blockquote>
+<p>一些例子：对于 $S = \mathtt{ABCBAD}$ 而言：</p>
+<ol>
+<li>$\left|S\right| = 6$；</li>
+<li>$\left|\Sigma\right| = 4$；</li>
+<li>$S[2..4] = \mathtt{BCBA}$；</li>
+<li>$S_4 = \mathtt{ABCB}$。</li>
+</ol>
 </blockquote>
-<p>正着计算 $S$ 为 $T$ 的子序列时 $T$ 的个数不方便，因此我们可以考虑计算 $S$ 不为 $T’$ 的 <strong>子序列</strong> 时 $T’$ 的个数。</p>
-<p>再用 $26^m$ 减去 $T’$ 的个数，即为 $T$ 的个数。</p>
-<p>$T’$ 中可能包含 $S$ 的前缀 $S[1], S[1..2], S[1..3], \cdots, S[1.. n - 1]$；</p>
-<p>当然，也可能不包含 $S$ 的任意一个前缀，可以看做包含 $S[1\ldots0] = \epsilon$。</p>
-<p>当 $T’$ 中 <strong>仅</strong> 包含 $S[1.. i] \quad i \in [0, n)$ 时，从 $m$ 个位置里选取 $i$ 个位置来填这些字符有 $\dbinom{m}{i}$ 种方法，</p>
-<p>而要求剩下的 $m - i$ 个位置不能包含 $S[i + 1]$ 这个字母（因为包含了就会组成 $S[1..i + 1]$ 这个子序列了），</p>
-<p>因此有 $25^{m - i}$ 种方法。</p>
-<p>答案即为<br>$$<br>26^{m}-\sum_{i = 0}^{n - 1}\binom{m}{i}\cdot25^{m - i}<br>$$<br>值得一提的是，此题的答案与 $S$ 具体是什么无关，只与 $\left|S\right|$ 有关。</p>
-<h3 id="参考代码："><a href="#参考代码：" class="headerlink" title="参考代码："></a>参考代码：</h3><details ><summary> <p>Code</p> </summary>
-              <div class='content'>
-              <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> M = <span class="number">2e6</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, k;</span><br><span class="line"><span class="keyword">int</span> m, fac[M] = &#123; <span class="number">1</span> &#125;, inv[M];</span><br><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line"></span><br><span class="line">LL tot, mis;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">mul</span><span class="params">(<span class="keyword">int</span> ta, <span class="keyword">int</span> tb)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> ret;</span><br><span class="line">    __asm__ __volatile__ (<span class="string">"\tmull %%ebx\n\tdivl %%ecx\n"</span>:<span class="string">"=d"</span>(ret):<span class="string">"a"</span>(ta), <span class="string">"b"</span>(tb), <span class="string">"c"</span>(mod));</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">qpow</span><span class="params">(<span class="keyword">int</span> bas, <span class="keyword">int</span> po)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(po) &#123;</span><br><span class="line">        <span class="keyword">if</span>(po &amp; <span class="number">1</span>)</span><br><span class="line">            res = mul(res, bas);</span><br><span class="line">        bas = mul(bas, bas);</span><br><span class="line">        po &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> tn, <span class="keyword">int</span> tm)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> mul(fac[tn], mul(inv[tm], inv[tn - tm]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int32_t</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d %s"</span>, &amp;k, str + <span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    n = <span class="built_in">strlen</span>(str + <span class="number">1</span>);</span><br><span class="line">    m = n + k;</span><br><span class="line"></span><br><span class="line">    tot = qpow(<span class="number">26</span>, m);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        fac[i] = mul(fac[i - <span class="number">1</span>], i);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= m; ++i)</span><br><span class="line">        inv[i] = qpow(fac[i], mod - <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        mis = (mis + mul(C(m, i), qpow(<span class="number">25</span>, m - i))) % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    tot = ((tot - mis) % mod + mod) % mod;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, tot);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-              </div>
-            </details>
-
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>笼统地讲，AC 自动机实际上是一个 <strong>trie 图</strong> 加上很多的 fail 指针形成的结构。</p>
+<p>AC 自动机中的 fail 指针就如同 KMP 算法的 $\pi$ 数组；</p>
+<p>但不同的是 fail 指针能在多个模式串上迭代，而 $\pi$ 数组只能在单一的模式串上迭代。</p>
+<p>注意到我的描述为「是一个 trie 图」，因为 AC 自动机实际上把所有 <strong>不被接受的状态</strong> 都连向了沿着 fail 指针走后的 <strong>合法状态</strong>；</p>
+<p>而这样就形成了一个图而不是单纯的一棵树。</p>
+<p>也许你并不能理解上一句话，不过不要紧，我们先从「基于 trie 树结构的 AC 自动机」的结构开始说起。</p>
+<p>对于一个模式串为 $S_1, S_2, \cdots, S_n$ 基于 trie 树结构的 AC 自动机而言，有：</p>
+<ol>
+<li><p>$\textrm{ch}[u, c]$ 数组。</p>
+<p>指向的是 $u$ 节点，往后拓展一个字符 $c$ 之后到达的节点。</p>
+</li>
+<li><p>$\text{fail}[u]$ 数组。</p>
+<p>$\textrm{fail}[u]$ 自 $u$ 开始，指向 $\textrm{trie}(S_1, S_2, \cdots, S_n)$ 中的最长的，前缀与 $\textrm{str}(u)$ 的真后缀相等的节点。</p>
+<p>如下图所示，$5$ 号节点的 fail 指针指向的是 $2$ 号节点，因为 $\textrm{str}(5) = \mathtt{bab}, \textrm{str}(2) = \mathtt{ab}$；</p>
+<p>$\mathtt{ab}$ 是这棵 trie 树中最长的满足前缀（$\mathtt{ab}$）与 $\textrm{str}(5)$ 的某一真后缀（$\textrm{str}(5)[2..3] = \mathtt{ab}$）相等的节点。</p>
+<p><img src="/gallery/lectures/ac/trie_tree.png" alt="一个基于 trie 树结构的 AC 自动机，只标出了一个 fail 指针"></p>
+</li>
+</ol>
+<h3 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h3><p>一个 AC 自动机的建立以及使用包括三个流程：「trie 图的构建」、「fail 指针的连接」和「对一个文本串进行匹配」。</p>
+<h4 id="trie-图的构建"><a href="#trie-图的构建" class="headerlink" title="trie 图的构建"></a>trie 图的构建</h4><h4 id="fail-指针的连接"><a href="#fail-指针的连接" class="headerlink" title="fail 指针的连接"></a>fail 指针的连接</h4><h4 id="对一个文本串进行匹配"><a href="#对一个文本串进行匹配" class="headerlink" title="对一个文本串进行匹配"></a>对一个文本串进行匹配</h4><h3 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h3><h4 id="trie-图的构建-1"><a href="#trie-图的构建-1" class="headerlink" title="trie 图的构建"></a>trie 图的构建</h4><h4 id="fail-指针的连接-1"><a href="#fail-指针的连接-1" class="headerlink" title="fail 指针的连接"></a>fail 指针的连接</h4><h4 id="对一个文本串进行匹配-1"><a href="#对一个文本串进行匹配-1" class="headerlink" title="对一个文本串进行匹配"></a>对一个文本串进行匹配</h4><p>如同 ouuan 在 <a href="[https://ouuan.github.io/post/ac%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/](https://ouuan.github.io/post/ac自动机学习笔记/)">他的博客</a> 里说到的，普通的「暴力跳 fail 指针」的 AC 自动机其实是 <strong>错误</strong> 的；</p>
+<p>正确的做法是建出 fail 树之后 dfs 求每棵子树的大小。</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3>
           
             <div class='article_footer'>
               
@@ -471,7 +492,7 @@ $1 \le \left|S\right|, k \le 10^6$。
           
         
           
-            <p>本文永久链接是：<a href=https://leverimmy.top/2020/07/08/%E3%80%90AtCoder%E3%80%91ABC171F-Strivore/>https://leverimmy.top/2020/07/08/%E3%80%90AtCoder%E3%80%91ABC171F-Strivore/</a></p>
+            <p>本文永久链接是：<a href=https://leverimmy.top/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>https://leverimmy.top/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></p>
           
         
       </blockquote>
@@ -496,10 +517,10 @@ $1 \le \left|S\right|, k \le 10^6$。
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-08T22:26:37+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-12T11:20:43+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年7月8日</p>
+    <p>更新于：2020年7月12日</p>
   </a>
 </div>
 
@@ -508,7 +529,7 @@ $1 \le \left|S\right|, k \le 10^6$。
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>组合数学</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>快速幂</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>容斥原理</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>字符串</p></a></div> <div class="new-meta-item meta-tags"><a class="tag" href="/tags/AC-%E8%87%AA%E5%8A%A8%E6%9C%BA/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>AC 自动机</p></a></div>
 
 
         
@@ -526,9 +547,8 @@ $1 \le \left|S\right|, k \le 10^6$。
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://leverimmy.top/2020/07/08/%E3%80%90AtCoder%E3%80%91ABC171F-Strivore/&title=【AtCoder】ABC171F Strivore - Clever_Jimmy's Blog&pics=/gallery/tutorials/ABC171F/index.png&summary=题意简述：给定一个字符串 $S$ 和数字 $k$，求所有本质不同的字符串 $T$ 的个数，使得 $\left|T\right| = \left|S\right| + k$，且 $S$ 为 $T$ 的 子序列。
-$1 \le \left|S\right|, k \le 10^6$。
-题目链接"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://leverimmy.top/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=【学习笔记】AC 自动机学习笔记 - Clever_Jimmy's Blog&summary=本文比较随意地讲解了一下 AC 自动机极其 fail 树的建构以及应用。
+可能不太严谨，但通俗易懂。"
           
           >
           
@@ -540,9 +560,8 @@ $1 \le \left|S\right|, k \le 10^6$。
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://leverimmy.top/2020/07/08/%E3%80%90AtCoder%E3%80%91ABC171F-Strivore/&title=【AtCoder】ABC171F Strivore - Clever_Jimmy's Blog&pics=/gallery/tutorials/ABC171F/index.png&summary=题意简述：给定一个字符串 $S$ 和数字 $k$，求所有本质不同的字符串 $T$ 的个数，使得 $\left|T\right| = \left|S\right| + k$，且 $S$ 为 $T$ 的 子序列。
-$1 \le \left|S\right|, k \le 10^6$。
-题目链接"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://leverimmy.top/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=【学习笔记】AC 自动机学习笔记 - Clever_Jimmy's Blog&summary=本文比较随意地讲解了一下 AC 自动机极其 fail 树的建构以及应用。
+可能不太严谨，但通俗易懂。"
           
           >
           
@@ -554,9 +573,8 @@ $1 \le \left|S\right|, k \le 10^6$。
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://leverimmy.top/2020/07/08/%E3%80%90AtCoder%E3%80%91ABC171F-Strivore/&title=【AtCoder】ABC171F Strivore - Clever_Jimmy's Blog&pics=/gallery/tutorials/ABC171F/index.png&summary=题意简述：给定一个字符串 $S$ 和数字 $k$，求所有本质不同的字符串 $T$ 的个数，使得 $\left|T\right| = \left|S\right| + k$，且 $S$ 为 $T$ 的 子序列。
-$1 \le \left|S\right|, k \le 10^6$。
-题目链接"
+          href="http://service.weibo.com/share/share.php?url=https://leverimmy.top/2020/07/12/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91AC-%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=【学习笔记】AC 自动机学习笔记 - Clever_Jimmy's Blog&summary=本文比较随意地讲解了一下 AC 自动机极其 fail 树的建构以及应用。
+可能不太严谨，但通俗易懂。"
           
           >
           
@@ -580,20 +598,12 @@ $1 \le \left|S\right|, k \le 10^6$。
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600A-Extract-Numbers/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>【CodeForces】CF600A Extract Numbers</p>
-                <p class='content'>题意简述：给定一个字符串，你要将其中的「非负整数」串与其他串分离出来，并输出这两堆字符串。
-$1 \le n \le 10^5$。
-题目链接
-
-
-解题思路：如果一个串是空串，我们就补上一个字符 ...</p>
-              </a>
             
-            
-              <a class='next' href='/2020/07/08/%E3%80%90CodeForces%E3%80%91CF598E-Chocolate-Bar/'>
-                <p class='title'>【CodeForces】CF598E Chocolate Bar<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>题意简述：给定一个 $n\times m$ 的矩阵，将 $r\times c$ 的矩阵切成 $r \times c’$ 和 $r\times (c - c’)$ 的矩阵需要 $r^2$ 的花费。...</p>
+              <a class='next' href='/2020/07/09/%E3%80%90CodeForces%E3%80%91CF600F-Edge-coloring-of-bipartite-graph/'>
+                <p class='title'>【CodeForces】CF600F Edge coloring of bipartite graph<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>题意简述：给定一个点集大小分别为 $a, b$，有 $m$ 条边的二分图，
+问将其染成 任意两相邻边颜色均不同 最少需要多少种颜色，并输出任意一种方案。
+$1 \le a, b \le 10^3...</p>
               </a>
             
           </div>
@@ -674,7 +684,7 @@ $1 \le n \le 10^5$。
 
   <script>
     window.subData = {
-      title: '【AtCoder】ABC171F Strivore',
+      title: '【学习笔记】AC 自动机学习笔记',
       tools: true
     }
   </script>
@@ -701,7 +711,7 @@ $1 \le n \le 10^5$。
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#题意简述："><span class="toc-number">1.</span> <span class="toc-text">题意简述：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解题思路："><span class="toc-number">2.</span> <span class="toc-text">解题思路：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考代码："><span class="toc-number">3.</span> <span class="toc-text">参考代码：</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义"><span class="toc-number">2.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#算法流程"><span class="toc-number">3.</span> <span class="toc-text">算法流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#trie-图的构建"><span class="toc-number">3.1.</span> <span class="toc-text">trie 图的构建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fail-指针的连接"><span class="toc-number">3.2.</span> <span class="toc-text">fail 指针的连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对一个文本串进行匹配"><span class="toc-number">3.3.</span> <span class="toc-text">对一个文本串进行匹配</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码实现"><span class="toc-number">4.</span> <span class="toc-text">代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#trie-图的构建-1"><span class="toc-number">4.1.</span> <span class="toc-text">trie 图的构建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fail-指针的连接-1"><span class="toc-number">4.2.</span> <span class="toc-text">fail 指针的连接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对一个文本串进行匹配-1"><span class="toc-number">4.3.</span> <span class="toc-text">对一个文本串进行匹配</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例题"><span class="toc-number">5.</span> <span class="toc-text">例题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写在最后"><span class="toc-number">6.</span> <span class="toc-text">写在最后</span></a></li></ol>
     </div>
   </section>
 
