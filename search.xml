@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>【学习笔记】Lyndon 分解学习笔记</title>
+      <link href="/2020/07/15/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91Lyndon-%E5%88%86%E8%A7%A3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <url>/2020/07/15/%E3%80%90%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E3%80%91Lyndon-%E5%88%86%E8%A7%A3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+      
+        <content type="html"><![CDATA[<p>OI-Wiki 里的字符串板块有 <a href="https://oi-wiki.org/string/lyndon/" target="_blank" rel="noopener">这个</a>，就学一学叭？</p><a id="more"></a><h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>为了更方便地描述字符串相关内容，我们做出以下规定：</p><ol><li>字符串通常用 $S, T$ 等表示，$c$ 通常表示一个字符，$\Sigma$ 表示字符集；</li><li>字符串长度用 $\left|S\right|$ 表示；</li><li>字符集大小用 $\left|\Sigma\right|$ 表示；</li><li>$S[l..r]$ 表示 $S[l], S[l + 1], \ldots, S[r - 1], S[r]$；</li><li>空串用 $\epsilon$ 表示；</li><li>$S$ 是 $T$ 的前缀，用 $S \sqsubset T$ 表示；$S$ 是 $T$ 的后缀，用 $S \sqsupset T$ 表示；</li><li>$S$ 的字典序小于 $T$，用 $S &lt; T$ 表示，即 $\left|S\right| &lt; \left|T\right| \lor<br>(\left|S\right| = \left|T\right| \land \exists i \in [1, \left|S\right|), \textrm{s.t. }S[1..i] = T[1..i] \land S[i + 1] &lt; T[i + 1])$。</li><li>特殊地，<strong>仅在本文中</strong>，字符串 $S$ 的第 $i$ 个后缀，即 $S[i..\left|S\right|]$，用 $S^i$ 表示。</li></ol><div class="note warning">            <p>注意，这个表示是 <strong>极为不规范的</strong>，因为 $S^i$ 在其他的很多地方表示 $\begin{matrix}\overline{\underbrace{SS\cdots S}}\\S \textrm{ repeated } i \textrm{ times}\end{matrix}$。</p>          </div><p>特殊地，本文的字符串下标 <strong>从 $1$ 开始</strong>。</p><blockquote><p>一些例子：对于 $S = \mathtt{ABCBAD}$ 而言：</p><ol><li>$\left|S\right| = 6$；</li><li>$\left|\Sigma\right| = 4$；</li><li>$S[2..4] = \mathtt{BCBA}$；</li></ol></blockquote><h3 id="Lyndon-串"><a href="#Lyndon-串" class="headerlink" title="Lyndon 串"></a>Lyndon 串</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>若一个字符串 $S$ 满足 $\forall i \in [2, \left|S\right|], S&lt; S[i..\left|S\right|]$，则我们称这个字符串为一个「Lyndon 串」。</p><p>它的等价命题是 $S$ 的字典序小于其所有 <strong>非平凡的</strong> 循环同构串。</p><h4 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h4><div class="note success">            <p>性质 1：若有两 Lyndon 串 $S, T$，且 $S &lt; T$，则 $\overline{ST}$ 也为 Lyndon 串。</p>          </div><details ><summary> <p>证明</p> </summary>              <div class='content'>              <p>我们分两种情况来证明：</p><ol><li><p>$\left|S\right| \ge \left|T\right|$</p><p>显然 $\overline{ST} &lt; T$，又有 $T$ 的所有后缀都大于 $T$，因此 $\overline{ST}$ 的所有后缀都大于 $\overline{ST}$。</p><p>因此 $\overline{ST}$ 是 Lyndon 串。</p></li><li><p>$\left|S\right| &gt; \left|T\right|$</p><ul><li><p>若 $S \not\sqsubset T$</p><p>此时 $\overline{ST} &lt; T$，由 1 即可得证。</p></li><li><p>若 $S \sqsubset T$</p><p>若 $\overline{ST} \ge T$，则有 $T \ge T[\left|S\right| + 1..\left|T\right|]$，与「$T$ 是 Lyndon 串」矛盾。</p><p>那么此时一定有 $\overline{ST} &lt; T$，由 1 即可得证。</p></li></ul></li></ol><p>综上所述，若有两 Lyndon 串 $S, T$，且 $S &lt; T$，则 $\overline{ST}$ 也为 Lyndon 串。</p>              </div>            </details><div class="note success">            <p>性质 2：若字符串 $S$ 和字符 $c$ 满足存在某一个字符串 $T$ 使得 $\overline{Sc} \sqsubset T$，则 $\forall c’ &gt; c \in \Sigma$，$\overline{Sc’}$ 均为 Lyndon 串。</p>          </div><details ><summary> <p>证明</p> </summary>              <div class='content'>              <p>不妨设 $T = \overline{ScR}, n = \left|S\right|$，则<br>$$<br>\forall i \in [2, n], \overline{S^icR} &gt; \overline{ScR}<br>$$<br>$\therefore \overline{S^ic} \ge S$</p><p>$\therefore \overline{S^ic’} &gt; \overline{S^ic} \ge S$</p><p>又 $\because c \ge S[1]$</p><p>$\therefore c’ &gt; c \ge S[1]$</p><p>$\therefore T = \overline{Sc’}$ 也是一个 Lyndon 串。</p>              </div>            </details><h4 id="Lyndon-分解"><a href="#Lyndon-分解" class="headerlink" title="Lyndon 分解"></a>Lyndon 分解</h4><p>将一个字符串 $S$ 分解成 $\overline{T_1T_2\cdots T_m}$，满足 $\forall i \in [1, m), T_i \ge T_{i + 1}$，且 $\forall i \in [1, m]$，$T_i$ 均为 Lyndon 串。</p><p>这样的一个分解我们称之为「Lyndon 分解」。</p><div class="note success">            <p>定理：一个字符串 $S$ 的 Lyndon 分解有且仅有一个。</p>          </div><details ><summary> <p>证明</p> </summary>              <div class='content'>              <ol><li><p>先证明存在性：</p><p>假设我们有一个非 Lyndon 分解 $S = \overline{R_1R_2\cdots R_x}$，初始化 $x = n, \forall i \in [1, n], R_i = S[i]$。</p><p>若 $\exists i \in [1, n), \textrm{s.t. }R_i &lt; R_{i + 1}$，则将 $R_i$ 与 $R_{i + 1}$ 合成成一个字符串，这样一定能得到一个 Lyndon 分解。</p></li><li><p>再证明唯一性：</p><p>设 $S$ 有两个 Lyndon 分解 $S = \overline{P_1P_2\cdots P_iP_{i + 1}\cdots P_x}$ 和 $S = \overline{P_1P_2\cdots P_iQ_{i + 1}\cdots Q_x}$。</p><p>不妨令 $\left|P_{i + 1}\right| &gt; \left|Q_{i +1}\right|$，设 $P_{i + 1} = \overline{Q_{i + 1}Q_{i + 2}\cdots Q_{k}Q_{k + 1}[1..l]}$，则<br>$$<br>P_{i + 1} &lt; Q_{k + 1}[1..l] \le Q_{k + 1} \le Q_{i + 1} &lt; P_{i + 1}<br>$$<br>矛盾。</p></li></ol><p>综上所述，一个字符串 $S$ 的 Lyndon 分解有且仅有一个。</p>              </div>            </details><h3 id="Duval-算法"><a href="#Duval-算法" class="headerlink" title="Duval 算法"></a>Duval 算法</h3><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><h4 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h4><h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+          <category> 字符串 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Lyndon 分解 </tag>
+            
+            <tag> Duval 算法 </tag>
+            
+            <tag> 最小表示法 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【洛谷】P3435 [POI2006]OKR-Periods of Words</title>
       <link href="/2020/07/12/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3435-POI2006-OKR-Periods-of-Words/"/>
       <url>/2020/07/12/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3435-POI2006-OKR-Periods-of-Words/</url>
@@ -221,11 +252,11 @@
       
         <tags>
             
+            <tag> 容斥原理 </tag>
+            
             <tag> 组合数学 </tag>
             
             <tag> 快速幂 </tag>
-            
-            <tag> 容斥原理 </tag>
             
         </tags>
       
@@ -252,9 +283,9 @@
       
         <tags>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 暴力 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
       
@@ -281,9 +312,9 @@
       
         <tags>
             
-            <tag> 组合数学 </tag>
-            
             <tag> 容斥原理 </tag>
+            
+            <tag> 组合数学 </tag>
             
         </tags>
       
@@ -791,9 +822,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -849,9 +880,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -878,9 +909,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -907,9 +938,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -969,9 +1000,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -1029,11 +1060,11 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -1089,9 +1120,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -1207,11 +1238,11 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
             <tag> 最大流 </tag>
             
@@ -1271,9 +1302,9 @@
       
         <tags>
             
-            <tag> 费用流 </tag>
-            
             <tag> 网络流 24 题 </tag>
+            
+            <tag> 费用流 </tag>
             
         </tags>
       
@@ -1412,11 +1443,11 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
             <tag> 最大流 </tag>
             
@@ -1445,11 +1476,11 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
         </tags>
       
@@ -1476,11 +1507,11 @@
       
         <tags>
             
-            <tag> 网络流 24 题 </tag>
-            
             <tag> 网络流 </tag>
             
             <tag> Dinic </tag>
+            
+            <tag> 网络流 24 题 </tag>
             
             <tag> 最大流 </tag>
             
