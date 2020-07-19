@@ -421,13 +421,9 @@
 <li>$S[l..r]$ 表示 $S[l], S[l + 1], \ldots, S[r - 1], S[r]$；</li>
 <li>空串用 $\epsilon$ 表示；</li>
 <li>$S$ 是 $T$ 的前缀，用 $S \sqsubset T$ 表示；$S$ 是 $T$ 的后缀，用 $S \sqsupset T$ 表示；</li>
-<li>$S$ 的字典序小于 $T$，用 $S &lt; T$ 表示，即 $\left|S\right| &lt; \left|T\right| \lor<br>(\left|S\right| = \left|T\right| \land \exists i \in [1, \left|S\right|), \textrm{s.t. }S[1..i] = T[1..i] \land S[i + 1] &lt; T[i + 1])$。</li>
-<li>特殊地，<strong>仅在本文中</strong>，字符串 $S$ 的第 $i$ 个后缀，即 $S[i..\left|S\right|]$，用 $S^i$ 表示。</li>
+<li>$S$ 的字典序小于 $T$，用 $S &lt; T$ 表示，即 $\left|S\right| &lt; \left|T\right| \lor<br>(\left|S\right| = \left|T\right| \land \exists i \in [1, \left|S\right|), \textrm{s.t. }S[1..i] = T[1..i] \land S[i + 1] &lt; T[i + 1])$；</li>
+<li>一个字符串 $S$ 重复 $i$ 次形成的字符串，即 $\begin{matrix}\overline{\underbrace{SS\cdots S}}\\S \textrm{ repeated } i \textrm{ times}\end{matrix}$，用 $S^i$ 表示。</li>
 </ol>
-<div class="note warning">
-            <p>注意，这个表示是 <strong>极为不规范的</strong>，因为 $S^i$ 在其他的很多地方表示 $\begin{matrix}\overline{\underbrace{SS\cdots S}}\\S \textrm{ repeated } i \textrm{ times}\end{matrix}$。</p>
-          </div>
-
 <p>特殊地，本文的字符串下标 <strong>从 $1$ 开始</strong>。</p>
 <blockquote>
 <p>一些例子：对于 $S = \mathtt{ABCBAD}$ 而言：</p>
@@ -552,7 +548,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-19T12:54:42+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-19T13:39:26+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2020年7月19日</p>
