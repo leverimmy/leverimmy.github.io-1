@@ -455,7 +455,7 @@
 
 <details ><summary> <p>证明</p> </summary>
               <div class='content'>
-              <p>不妨设 $T = \overline{ScR}, n = \left|S\right|$，则<br>$$<br>\forall i \in [2, n], \overline{S^icR} &gt; \overline{ScR}<br>$$<br>$\therefore \overline{S^ic} \ge S$</p><p>$\therefore \overline{S^ic’} &gt; \overline{S^ic} \ge S$</p><p>又 $\because c \ge S[1]$</p><p>$\therefore c’ &gt; c \ge S[1]$</p><p>$\therefore T = \overline{Sc’}$ 也是一个 Lyndon 串。</p>
+              <p>不妨设 $T = \overline{ScR}, n = \left|S\right|$，则<br>$$<br>\forall i \in [2, n], \overline{S[i..\left|S\right|]cR} &gt; \overline{ScR}<br>$$<br>$\therefore \overline{S[i..\left|S\right|]c} \ge S$</p><p>$\therefore \overline{S[i..\left|S\right|]c’} &gt; \overline{S[i..\left|S\right|]c} \ge S$</p><p>又 $\because c \ge S[1]$</p><p>$\therefore c’ &gt; c \ge S[1]$</p><p>$\therefore T = \overline{Sc’}$ 也是一个 Lyndon 串。</p>
               </div>
             </details>
 
@@ -471,7 +471,27 @@
               </div>
             </details>
 
-<h3 id="Duval-算法"><a href="#Duval-算法" class="headerlink" title="Duval 算法"></a>Duval 算法</h3><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><h4 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h4><h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3>
+<h3 id="Duval-算法"><a href="#Duval-算法" class="headerlink" title="Duval 算法"></a>Duval 算法</h3><h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><p>维持一个循环不变式：</p>
+<ul>
+<li>$S[1..i - 1] = \overline{R_1R_2\cdots R_w}$ 是固定下来的 Lyndon 分解，也就是 $\forall l \in [1, w], R_l$ 是 $\textrm{Lyndon}$ 串且 $R_l &gt; R_{l + 1}$。</li>
+<li>$S[i..k-1] = T ^ \alpha + Z (\alpha &gt; 1)$ 是没有固定的分解，满足 $T$ 是 $\textrm{Lyndon}$ 串，且 $Z$ 是 $T$ 的 <strong>可为空的</strong> 不等于 $T$ 的前缀，且有 $R_g &gt; S[i..k-1]$。</li>
+</ul>
+<p>令 $j = k - \left|T\right|$，也就是上一个周期对应 $k$ 的字符。</p>
+<ol>
+<li>若 $S[k] = S[j]$，则 $k \gets k + 1, j \gets j + 1$ 即可。</li>
+<li>若 $S[k] &gt; S[j]$，由引理 2 知 $\overline{ZS[k]}$ 是一个 Lyndon 串，由于 Lyndon 分解要保证 $R_i \ge R_{i + 1}$，所以 $\overline{T^{\alpha}ZS[k]}$ 成为了一个新的 Lyndon 串。</li>
+<li>若 $S[k] &lt; S[j]$，则 $S[k]$ 不能被包含到 $T^{\alpha}$ 里，因为 $S[k]$ 的出现会导致更小的后缀的存在。所以 $T^{\alpha}$ 要被分离出去，算法从 $Z$ 的开头重新开始。</li>
+</ol>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LL long long</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">5e6</span> + <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, ans;</span><br><span class="line"><span class="keyword">char</span> str[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%s"</span>, str + <span class="number">1</span>);</span><br><span class="line">	n = <span class="built_in">strlen</span>(str + <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ) &#123;</span><br><span class="line">		<span class="keyword">int</span> j = i, k = i + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">while</span>(k &lt;= n &amp;&amp; str[j] &lt;= str[k]) &#123;</span><br><span class="line">			<span class="keyword">if</span>(str[j] &lt; str[k])</span><br><span class="line">				j = i, ++k;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				++j, ++k;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span>(i &lt;= j) &#123;</span><br><span class="line">			ans ^= i + (k - j) - <span class="number">1</span>;</span><br><span class="line">			i += k - j;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>不难发现，$i$ 是单调递增的，且每次 $k$ 移动的距离 <strong>不会超过 $i$ 移动的距离</strong>，因此时间复杂度是 $O(n)$ 的。</p>
+<blockquote>
+<p>事实上，循环的总次数不超过 $4n - 3$。</p>
+</blockquote>
+<h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>不难发现空间复杂度是 <strong>额外</strong> $O(1)$ 的。</p>
+<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><p>？</p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>太高深了。</p>
+
           
             <div class='article_footer'>
               
@@ -532,10 +552,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-18T21:16:18+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-19T12:54:42+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：2020年7月18日</p>
+    <p>更新于：2020年7月19日</p>
   </a>
 </div>
 
@@ -721,7 +741,7 @@
 
 
     <div class='content'>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lyndon-串"><span class="toc-number">2.</span> <span class="toc-text">Lyndon 串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#性质"><span class="toc-number">2.2.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lyndon-分解"><span class="toc-number">2.3.</span> <span class="toc-text">Lyndon 分解</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Duval-算法"><span class="toc-number">3.</span> <span class="toc-text">Duval 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-number">3.1.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#正确性"><span class="toc-number">3.2.</span> <span class="toc-text">正确性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间复杂度"><span class="toc-number">3.3.</span> <span class="toc-text">时间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空间复杂度"><span class="toc-number">3.4.</span> <span class="toc-text">空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例题"><span class="toc-number">4.</span> <span class="toc-text">例题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写在最后"><span class="toc-number">5.</span> <span class="toc-text">写在最后</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#写在前面"><span class="toc-number">1.</span> <span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Lyndon-串"><span class="toc-number">2.</span> <span class="toc-text">Lyndon 串</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#定义"><span class="toc-number">2.1.</span> <span class="toc-text">定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#性质"><span class="toc-number">2.2.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Lyndon-分解"><span class="toc-number">2.3.</span> <span class="toc-text">Lyndon 分解</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Duval-算法"><span class="toc-number">3.</span> <span class="toc-text">Duval 算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#算法流程"><span class="toc-number">3.1.</span> <span class="toc-text">算法流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代码实现"><span class="toc-number">3.2.</span> <span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#时间复杂度"><span class="toc-number">3.3.</span> <span class="toc-text">时间复杂度</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#空间复杂度"><span class="toc-number">3.4.</span> <span class="toc-text">空间复杂度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例题"><span class="toc-number">4.</span> <span class="toc-text">例题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#写在最后"><span class="toc-number">5.</span> <span class="toc-text">写在最后</span></a></li></ol>
     </div>
   </section>
 

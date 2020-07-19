@@ -430,7 +430,7 @@ EERTREE 是一个 回文串...">
 <li>$S[l..r]$ 表示 $S[l], S[l + 1], \ldots, S[r - 1], S[r]$；</li>
 <li>$\epsilon$ 表示空串；</li>
 <li>$S \subset T$ 表示 $S$ 为 $T$ 的子串，即  $\exists i \in [1, \left|T\right| - \left|S\right|], \text{s.t. } \forall j \in [1, \left|S\right|], S[j] = T[i + j - 1]$；</li>
-<li>$\overleftarrow{S}$ 表示 $S$ 的翻转，即 $\forall i \in [1, \left|S\right|], \overleftarrow{S[i]} = S[\left|S\right|- i + 1]$；</li>
+<li>$\overleftarrow{S}$ 表示 $S$ 的翻转，即 $\forall i \in [1, \left|S\right|], \overleftarrow{S}[i] = S[\left|S\right|- i + 1]$；</li>
 <li>$S$ 为回文串当且仅当 $S = \overleftarrow{S}$，即 $\forall i \in [1, \left|S\right|], S[i] = S[\left|S\right| - i + 1]$；</li>
 <li>若 $S$ 为回文串，则定义 $r(S)$ 为其最长回文半径，即 $r(S) = \max\{\left\lfloor\dfrac{\left|T\right| + 1}{2}\right\rfloor\}, T \subset S, T = \overleftarrow{T}$。</li>
 </ol>
@@ -493,7 +493,7 @@ EERTREE 是一个 回文串...">
 <p>节点 $u$ 连至 $v$ 的回文链接 $fail_u$ 意味着 $v$ 表示的回文串 $S$ 是 $u$ 表示的回文串 $T$ 的次长回文后缀子串（因为最长的是自己本身）。</p>
 <p>我们 <strong>定义</strong> $fail_c = 0, fail_0 = fail_{-1} = -1$。 </p>
 <div class="note success">
-            <p>引理 2：任一满足 $len_u &gt; 0$ 的节点 $u$ 的入度为 $1$（注意，这里的「入度」不将「后缀链接」计算在内）。</p>
+            <p>引理 2：任一满足 $len_u &gt; 0$ 的节点 $u$ 的入度为 $1$（注意，这里的「入度」不将「回文链接」计算在内）。</p>
           </div>
 
 <details ><summary> <p>证明</p> </summary>
@@ -508,7 +508,7 @@ EERTREE 是一个 回文串...">
 
 <details ><summary> <p>证明</p> </summary>
               <div class='content'>
-              <p>由引理 1 可知，在 $S$ 的逐步插入过程中，最多会新建 $n$ 个节点；而还有 $2$ 个初始化时新建的节点。</p><p>所以节点个数为最多为 $n + 2$ 个。</p><p>由引理 2 可知，边的个数最多为 $n$ 个；后缀链接最多有 $n$ 个。</p><p>综上所述，建立 $\text{eertree}(S)$ 的空间复杂度为 $O(n)$。</p><p align="right">$\blacksquare$ </p>
+              <p>由引理 1 可知，在 $S$ 的逐步插入过程中，最多会新建 $n$ 个节点；而还有 $2$ 个初始化时新建的节点。</p><p>所以节点个数为最多为 $n + 2$ 个。</p><p>由引理 2 可知，边的个数最多为 $n$ 个；回文链接最多有 $n$ 个。</p><p>综上所述，建立 $\text{eertree}(S)$ 的空间复杂度为 $O(n)$。</p><p align="right">$\blacksquare$ </p>
               </div>
             </details>
 
@@ -547,7 +547,7 @@ EERTREE 是一个 回文串...">
 
 <details ><summary> <p>证明</p> </summary>
               <div class='content'>
-              <p>在初始化的时候，我们得到了 $\text{eertree}(\epsilon)$，即一个「奇根」和一个「偶根」加上它们的后缀链接。</p><p>对 $S$ 建造回文树的时候，我们会依次向回文树中插入 $S[1], S[2], \ldots, S[n]$。</p><p>我们要使得在每次 $\text{add}$ 操作之后，回文树中的所有节点之间的边以及回文链接都被正确维护。</p><p>考虑进行完了第 $i$ 次操作后的状态，我们已经处理了 $T = S[1, i]$ 的回文树，现在要插入 $c = S[i + 1]$。</p><hr><p>我们现在的目标是寻找 $S[1..i + 1] = Tc$ 的最长回文后缀 $P$。</p><p>显然，要么 $P = c$，要么 $P = cQc$（显然 $Q$ 为 $S[1..i]$ 的某一回文后缀）。</p><p>也就是说，我们需要找到 $T$ 中，以 <strong>开头的前一位</strong> 为 $c$ 的最长回文后缀 $Q$。</p><p>我们从 $\text{maxSuf}(T)$ 开始，沿着回文链接遍历，设当前节点为 $v$，比较 $c$ 和 $T[i - len_v - 1]$。</p><p>怎么理解呢？$T[i - len_v..i - 1]$ 是某一回文串 $Q$，我们要找的，是满足 $Q$ 开头的前一位为 $c$ 的某一回文串。</p><p>也就是要保证 $c = T[i - len_v - 1]$。</p><p>不难发现，特殊地，当 $P = c$ 时，$Q$ 对应的节点为「奇根」。</p><hr><ol><li><p>若 $P = c$：</p><p>检查 $ch_{-1, c}$ 是否存在：</p><ol><li>若不存在，则新建一个节点 $v$，使 $ch_{-1, c} = v, len_v = 1, fail_v = 0$。</li><li>若存在，根据定义，$fail_v = 0$ 不需要更新。</li></ol></li><li><p>若 $P = cQc$：</p><p>设 $Q$ 对应的节点的序号为 $u$。</p><p>检查 $ch_{u, c}$ 是否存在：</p><ol><li><p>若不存在，则新建一个节点 $v$，使 $len_v = len_u + 2$，连接 $u \to v$，还要更新 $fail_v$。</p></li><li><p>若存在，我们只需要考虑更新 $fail_v$。</p></li></ol><p>考虑 $fail_v$ 到底会指向哪里？会指向 $S[1, i + 1] = Tc$ 的次长回文后缀。</p><p>即 $cQc$ 中 <strong>开头的前一位</strong> 为 $c$ 的次长回文后缀 $R$。</p><p>若我们从 $u$ 开始遍历后缀链接，那么找到的会是 $cQc$ 这个最长回文后缀；</p><p>因此我们应从 $fail_u$ 开始遍历，仍然是比较 $c$ 和 $T[i - len_v - 1]$。</p></li></ol><hr><p>接下来我们来分析 $\text{add}$ 操作的时间复杂度。</p><ol><li><p>我们每次检查 $ch_{u, c}$（或是检查 $ch_{-1, c}$）是否存在，需要 $O(\log\left|\Sigma\right|)$ 的时间复杂度（<code>std::map</code> 之类的数据结构实现）</p><p>实际情况下，我们使用子节点数组来实现，单次 $\text{add}$ 的时间复杂度是 $O(\left|\Sigma\right|)$ 的。</p><p>则一共 $n$ 次，共 $O(n \log\left|\Sigma\right|)$。</p></li><li><p>令已经处理了的字符串 $S[1..i] = T$，考虑 $\text{maxSuf}(T)$ 的末尾在 $S$ 中的下标 $j$ 的变化：</p><ul><li><p>一个 $fail$ 的转移会使 $j$ 向左至少移动 $1$ 格；</p></li><li><p>一个 $ch$ 转移会使 $j$ 向右至少移动一格。</p></li></ul><p>在处理整个 $S$ 的过程中，向左最多移动 $n$ 格，也就是最多 $n$ 次；向右最多移动 $n$ 格，也就是最多 $n$ 次。</p><p>因此转移部分的时间复杂度为总共 $O(n)$。</p></li></ol><p>总时间复杂度为 $O(n) + O(n\log\left|\Sigma\right|) = O(n\log\left|\Sigma\right|)$。</p><p>综上所述，建立一个长度为 $n$ 的字符串 $S$ 的回文树 $\text{eertree}(S)$ 的时间复杂度可达到在线 $O(n\log\left|\Sigma\right|)$。</p><p align="right">$\blacksquare$ </p>
+              <p>在初始化的时候，我们得到了 $\text{eertree}(\epsilon)$，即一个「奇根」和一个「偶根」加上它们的回文链接。</p><p>对 $S$ 建造回文树的时候，我们会依次向回文树中插入 $S[1], S[2], \ldots, S[n]$。</p><p>我们要使得在每次 $\text{add}$ 操作之后，回文树中的所有节点之间的边以及回文链接都被正确维护。</p><p>考虑进行完了第 $i$ 次操作后的状态，我们已经处理了 $T = S[1..i]$ 的回文树，现在要插入 $c = S[i + 1]$。</p><hr><p>我们现在的目标是寻找 $S[1..i + 1] = Tc$ 的最长回文后缀 $P$。</p><p>显然，要么 $P = c$，要么 $P = cQc$（显然 $Q$ 为 $S[1..i]$ 的某一回文后缀）。</p><p>也就是说，我们需要找到 $T$ 中，以 <strong>开头的前一位</strong> 为 $c$ 的最长回文后缀 $Q$。</p><p>我们从 $\text{maxSuf}(T)$ 开始，沿着回文链接遍历，设当前节点为 $v$，比较 $c$ 和 $T[i - len_v - 1]$。</p><p>怎么理解呢？$T[i - len_v..i - 1]$ 是某一回文串 $Q$，我们要找的，是满足 $Q$ 开头的前一位为 $c$ 的某一回文串。</p><p>也就是要保证 $c = T[i - len_v - 1]$。</p><p>不难发现，特殊地，当 $P = c$ 时，$Q$ 对应的节点为「奇根」。</p><hr><ol><li><p>若 $P = c$：</p><p>检查 $ch_{-1, c}$ 是否存在：</p><ol><li>若不存在，则新建一个节点 $v$，使 $ch_{-1, c} = v, len_v = 1, fail_v = 0$。</li><li>若存在，根据定义，$fail_v = 0$ 不需要更新。</li></ol></li><li><p>若 $P = cQc$：</p><p>设 $Q$ 对应的节点的序号为 $u$。</p><p>检查 $ch_{u, c}$ 是否存在：</p><ol><li><p>若不存在，则新建一个节点 $v$，使 $len_v = len_u + 2$，连接 $u \to v$，还要更新 $fail_v$。</p></li><li><p>若存在，我们只需要考虑更新 $fail_v$。</p></li></ol><p>考虑 $fail_v$ 到底会指向哪里？会指向 $S[1, i] = Tc$ 的次长回文后缀。</p><p>即 $cQc$ 中 <strong>开头的前一位</strong> 为 $c$ 的次长回文后缀 $R$。</p><p>若我们从 $u$ 开始遍历回文链接，那么找到的会是 $cQc$ 这个最长回文后缀；</p><p>因此我们应从 $x = fail_u$ 开始遍历，仍然是比较 $c$ 和 $T[i - len_x - 1]$。</p></li></ol><hr><p>接下来我们来分析 $\text{add}$ 操作的时间复杂度。</p><ol><li><p>我们每次检查 $ch_{u, c}$（或是检查 $ch_{-1, c}$）是否存在，需要 $O(\log\left|\Sigma\right|)$ 的时间复杂度（<code>std::map</code> 之类的数据结构实现）</p><p>实际情况下，我们使用子节点数组来实现，单次 $\text{add}$ 的时间复杂度是 $O(\left|\Sigma\right|)$ 的。</p><p>则一共 $n$ 次，共 $O(n \log\left|\Sigma\right|)$。</p></li><li><p>令已经处理了的字符串 $S[1..i] = T$，考虑 $\text{maxSuf}(T)$ 的末尾在 $S$ 中的下标 $j$ 的变化：</p><ul><li><p>一个 $fail$ 的转移会使 $j$ 向左至少移动一格；</p></li><li><p>一个 $ch$ 转移会使 $j$ 向右至少移动一格。</p></li></ul><p>在处理整个 $S$ 的过程中，向左最多移动 $n$ 格，也就是最多 $n$ 次；向右最多移动 $n$ 格，也就是最多 $n$ 次。</p><p>因此转移部分的时间复杂度为总共 $O(n)$。</p></li></ol><p>总时间复杂度为 $O(n) + O(n\log\left|\Sigma\right|) = O(n\log\left|\Sigma\right|)$。</p><p>综上所述，建立一个长度为 $n$ 的字符串 $S$ 的回文树 $\text{eertree}(S)$ 的时间复杂度可达到在线 $O(n\log\left|\Sigma\right|)$。</p><p align="right">$\blacksquare$ </p>
               </div>
             </details>
 
@@ -559,7 +559,7 @@ EERTREE 是一个 回文串...">
 
 <details ><summary> <p>证明</p> </summary>
               <div class='content'>
-              <ol><li><p>如果边 $e = u \to v$ 存在，则 $len_v = len_u + 2$，显然 $u, v$ 奇偶性相同，则「奇点」与「偶点」之间互不相通。</p><p>结合引理 2，此性质得证。</p></li><li><p>这是回文树上边的定义和 trie 的定义。</p></li><li><p>注意到，除了 $fail_{-1}$，其他的回文链接均会使 $len$ 减小，且回文树中的每个点均有唯一的后缀链接。</p><p>则每个点都仅有唯一简单路径到达 $-1$，这显然是一棵（带有一个环）的树。</p></li></ol><p align="right">$\blacksquare$ </p>
+              <ol><li><p>如果边 $e = u \to v$ 存在，则 $len_v = len_u + 2$，显然 $u, v$ 奇偶性相同，则「奇点」与「偶点」之间互不相通。</p><p>结合引理 2，此性质得证。</p></li><li><p>这是回文树上边的定义和 trie 的定义。</p></li><li><p>注意到，除了 $fail_{-1}$，其他的回文链接均会使 $len$ 减小，且回文树中的每个点均有唯一的回文链接。</p><p>则每个点都仅有唯一简单路径到达 $-1$，这显然是一棵（带有一个环）的树。</p></li></ol><p align="right">$\blacksquare$ </p>
               </div>
             </details>
 
@@ -677,7 +677,7 @@ EERTREE 是一个 回文串...">
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-18T22:16:47+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-18T23:13:53+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2020年7月18日</p>
