@@ -10,7 +10,7 @@
       
       
       
-      <link rel="shortcut icon" href="../../../img/favicon.ico">
+      <link rel="shortcut icon" href="../../../assets/img/favicon.ico">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.3">
     
     
@@ -33,6 +33,8 @@
     
     
     
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css">
+    
     
       
     
@@ -47,6 +49,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -207,7 +214,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../../about/myself/" class="md-tabs__link">
+        <a href="../../about/myself/" class="md-tabs__link">
           关于
         </a>
       
@@ -495,9 +502,157 @@
     <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        前缀函数与 KMP 算法
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
     <a href="./" title="前缀函数与 KMP 算法" class="md-nav__link md-nav__link--active">
       前缀函数与 KMP 算法
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    写在前面
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    前缀函数数组
+  </a>
+  
+    <nav class="md-nav" aria-label="前缀函数数组">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    算法流程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    代码实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    正确性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    时间复杂度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    空间复杂度
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kmp" class="md-nav__link">
+    KMP 算法
+  </a>
+  
+    <nav class="md-nav" aria-label="KMP 算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    算法流程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    代码实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    正确性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    时间复杂度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    空间复杂度
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    例题
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    写在最后
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -670,7 +825,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../about/myself/" title="关于我" class="md-nav__link">
+    <a href="../../about/myself/" title="关于我" class="md-nav__link">
       关于我
     </a>
   </li>
@@ -682,7 +837,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../about/friends/" title="友情链接" class="md-nav__link">
+    <a href="../../about/friends/" title="友情链接" class="md-nav__link">
       友情链接
     </a>
   </li>
@@ -700,6 +855,153 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    写在前面
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    前缀函数数组
+  </a>
+  
+    <nav class="md-nav" aria-label="前缀函数数组">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    算法流程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    代码实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    正确性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    时间复杂度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    空间复杂度
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kmp" class="md-nav__link">
+    KMP 算法
+  </a>
+  
+    <nav class="md-nav" aria-label="KMP 算法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    算法流程
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    代码实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    正确性
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    时间复杂度
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    空间复杂度
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    例题
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    写在最后
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -711,7 +1013,393 @@
                 
                   <h1>前缀函数与 KMP 算法</h1>
                 
-                
+                <p>发现自己不会 KMP 的模板了，借此机会复习一下 KMP，顺便更深入地研究前缀函数 <span class="arithmatex">\(\pi\)</span> 的应用。</p>
+<!--more-->
+
+<h2 id="_1">写在前面</h2>
+<p>为了更方便地描述字符串相关内容，我们做出以下规定：</p>
+<ol>
+<li>字符串通常用 <span class="arithmatex">\(S, T\)</span> 等表示，<span class="arithmatex">\(c\)</span> 通常表示一个字符，<span class="arithmatex">\(\Sigma\)</span> 表示字符集；</li>
+<li>字符串长度用 <span class="arithmatex">\(\left|S\right|\)</span> 表示；</li>
+<li>字符集大小用 <span class="arithmatex">\(\left|\Sigma\right|\)</span> 表示；</li>
+<li><span class="arithmatex">\(S[l..r]\)</span> 表示 <span class="arithmatex">\(S[l], S[l + 1], \ldots, S[r - 1], S[r]\)</span>；</li>
+<li>空串用 <span class="arithmatex">\(\epsilon\)</span> 表示；</li>
+<li><span class="arithmatex">\(S\)</span> 是 <span class="arithmatex">\(T\)</span> 的前缀，用 <span class="arithmatex">\(S \sqsubset T\)</span> 表示；<span class="arithmatex">\(S\)</span> 是 <span class="arithmatex">\(T\)</span> 的后缀，用 <span class="arithmatex">\(S \sqsupset T\)</span> 表示；</li>
+<li><span class="arithmatex">\(S\)</span> 的第 <span class="arithmatex">\(i\)</span> 个前缀，即 <span class="arithmatex">\(S[1..i]\)</span>，用 <span class="arithmatex">\(S_i\)</span> 表示。</li>
+</ol>
+<p>特殊地，本文的字符串下标、<span class="arithmatex">\(\pi\)</span> 数组下标 <strong>均从 <span class="arithmatex">\(1\)</span> 开始</strong>。</p>
+<div class="admonition note">
+<p class="admonition-title">一些例子</p>
+<p>对于 <span class="arithmatex">\(S = \mathtt{ABCBAD}\)</span> 而言：</p>
+<ol>
+<li>
+<p><span class="arithmatex">\(\left|S\right| = 6\)</span>；</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\left|\Sigma\right| = 4\)</span>；</p>
+</li>
+<li>
+<p><span class="arithmatex">\(S[2..4] = \mathtt{BCBA}\)</span>；</p>
+</li>
+<li>
+<p><span class="arithmatex">\(S_4 = \mathtt{ABCB}\)</span>。</p>
+</li>
+</ol>
+</div>
+<h2 id="_2">前缀函数数组</h2>
+<h3 id="_3">定义</h3>
+<p>对于一个字符串 <span class="arithmatex">\(S\)</span>，我们定义其前缀函数 <span class="arithmatex">\(\pi(S)\)</span> 的值为 <span class="arithmatex">\(S\)</span> 的最长相等的真前缀和真后缀的长度，即：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\pi(S) &amp; = \mathop{\operatorname{argmax}}\limits_{k &lt; \left|S\right|}\{S[1..k] = S[\left|S\right| - k + 1..\left|S\right|]\}
+\\
+&amp; = \mathop{\operatorname{argmax}}\limits_{k &lt; \left|S\right|}\{S_k \sqsupset S\}
+\end{aligned}
+\]</div>
+<p>对于一个字符串 <span class="arithmatex">\(S\)</span>，我们定义其前缀函数数组 <span class="arithmatex">\(\pi\)</span> 为 <span class="arithmatex">\(\pi[i] = \pi(S_i)\)</span>。</p>
+<div class="admonition warning">
+<p class="admonition-title"><span class="arithmatex">\(\pi[1] = ?\)</span></p>
+<p>特殊地，当 <span class="arithmatex">\(\left|S\right| = 1\)</span> 时 <span class="arithmatex">\(\pi(S) = \mathop{\operatorname{argmax}}\limits_{k &lt; 1}\{S[1..k] = S[2 - k..1]\}\)</span></p>
+<p>此时有 <span class="arithmatex">\(k = 0\)</span> 满足 <span class="arithmatex">\(S[1..0] = S[2..1] = \epsilon\)</span>，故 <span class="arithmatex">\(\left|S\right| = 1 \Longrightarrow \pi(S) = 0\)</span>。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">性质 1</p>
+<p><span class="arithmatex">\(\pi(S_i) = \pi[i] &lt; i\)</span>。</p>
+<details class="success" open="open"><summary>证明</summary><p>由定义知 <span class="arithmatex">\(\pi[i] &lt; i\)</span>，即得证。</p>
+</details>
+</div>
+<h3 id="_4">算法流程</h3>
+<ol>
+<li>
+<p>根据定义，<span class="arithmatex">\(\pi[1] = 0\)</span>；</p>
+</li>
+<li>
+<p>假设我们循环到了要求 <span class="arithmatex">\(\pi[i]\quad(i \ge 2)\)</span>，令 <span class="arithmatex">\(k \gets \pi[i - 1]\)</span>。</p>
+<p>由 <span class="arithmatex">\(\pi\)</span> 数组的定义得，此时 <span class="arithmatex">\(S[1..k] = S[i - k, i - 1]\)</span>。</p>
+<p>我们现在要做的，就是从 <span class="arithmatex">\(\pi[1..i - 1]\)</span> 递推到 <span class="arithmatex">\(\pi[i]\)</span>：</p>
+<p>考虑到 <span class="arithmatex">\(\pi\)</span> 数组的定义，我们不断地枚举共同的前后缀（即使用 <span class="arithmatex">\(k = \pi[k]\)</span> 来迭代）。</p>
+<p>结束这个迭代，有且仅有两种情况：<span class="arithmatex">\(k = 0\)</span> 或 <span class="arithmatex">\(S[k + 1] = S[i]\)</span>。</p>
+<hr />
+<p>对于前者，说明对于字符串 <span class="arithmatex">\(S[1..i]\)</span>，不存在任何两个真前缀与真后缀相同，<span class="arithmatex">\(\pi[i] = 0\)</span>。</p>
+<p>对于后者，说明我们找到了一个 <span class="arithmatex">\(k\)</span>，使得 <span class="arithmatex">\(S[1..k + 1] = S[i - k..i]\)</span>，根据定义，有 <span class="arithmatex">\(\pi[i] = k + 1\)</span>。</p>
+</li>
+<li>
+<p>至此，我们求出了字符串 <span class="arithmatex">\(S\)</span> 的前缀函数数组 <span class="arithmatex">\(\pi\)</span>。</p>
+</li>
+</ol>
+<h3 id="_5">代码实现</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">calcPi</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">S</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">pi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">S</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">len</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">S</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">pi</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="o">++</span><span class="n">k</span><span class="p">;</span>
+        <span class="n">pi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+<h3 id="_6">正确性</h3>
+<div class="admonition tip">
+<p class="admonition-title">引理 1（后缀重叠引理）</p>
+<p>对于 <span class="arithmatex">\(x, y\)</span> 满足 <span class="arithmatex">\(x \sqsupset z, y \sqsupset z\)</span> 而言，有：</p>
+<ul>
+<li>
+<p>若 <span class="arithmatex">\(\left|x\right| \le \left|y\right|\)</span>，则 <span class="arithmatex">\(x \sqsupset y\)</span>；</p>
+</li>
+<li>
+<p>若 <span class="arithmatex">\(\left|x\right| \ge \left|y\right|\)</span>，则 <span class="arithmatex">\(y \sqsupset x\)</span>；</p>
+</li>
+<li>
+<p>若 <span class="arithmatex">\(\left|x\right| = \left|y\right|\)</span>，则 <span class="arithmatex">\(x = y\)</span>。</p>
+</li>
+</ul>
+<details class="success" open="open"><summary>证明</summary><p>过于显然，证明略。</p>
+</details>
+</div>
+<p>设</p>
+<div class="arithmatex">\[
+\pi^{\star}[q] = \\{\pi[q], \pi^{(2)}[q], \cdots, \pi^{(t)}[q]\\}
+\]</div>
+<p>其中</p>
+<div class="arithmatex">\[
+\pi^{(i)}[q] = \begin{cases}q &amp; i = 0 \\\\ \pi[\pi^{(i - 1)}[q]] &amp; i \ge 1\end{cases}
+\]</div>
+<p>当 <span class="arithmatex">\(\pi^{(t)}[q] = 0\)</span> 时 <span class="arithmatex">\(\pi^{\star}[q]\)</span> 中的序列终止。</p>
+<div class="admonition tip">
+<p class="admonition-title">引理 2（前缀函数迭代引理）</p>
+<p>对任意长度为 <span class="arithmatex">\(n\)</span> 的字符串 <span class="arithmatex">\(S\)</span>，有</p>
+<div class="arithmatex">\[
+\forall q \in [1, n], \pi^{\star}[q] = \{k: k &lt; q \land S_k \sqsupset S_q\}
+\]</div>
+<details class="success"><summary>证明</summary><ul>
+<li>
+<p>先证明 <span class="arithmatex">\(\pi^{\star}[q] \subseteq \{k:k &lt; q \land S_k \sqsupset S_q\}\)</span>，</p>
+<p>即证明 <span class="arithmatex">\(\forall x \in \pi^{\star}[q], x &lt; q \land S_x \sqsupset S_q\)</span>。</p>
+<p>任取 <span class="arithmatex">\(x \in \pi^{\star}[q]\)</span>，不妨设 <span class="arithmatex">\(x = \pi^{u}[q] \quad (u &gt; 0)\)</span>，下面通过对 <span class="arithmatex">\(u\)</span> 的数学归纳法证明命题成立。</p>
+<p>（基础）当 <span class="arithmatex">\(u = 1\)</span> 时，<span class="arithmatex">\(x = \pi[q]\)</span>，由 <span class="arithmatex">\(\pi\)</span> 数组的定义可知 <span class="arithmatex">\(\pi[q] &lt; q \land S_{\pi[q]} \sqsupset S_q\)</span>。</p>
+<p>（假设）假设当 <span class="arithmatex">\(u = v\)</span> 时 <span class="arithmatex">\(\pi^{v}[q] &lt; q \land S_{\pi^{v}[q]} \sqsupset S_q\)</span>。</p>
+<p>（推导）则当 <span class="arithmatex">\(u = v + 1\)</span> 时，<span class="arithmatex">\(\pi^{v + 1}[q] = \pi[\pi^{v}[q]] &lt; \pi^{v}[q] &lt; q\)</span>（性质 1）；<span class="arithmatex">\(S_{\pi^{v + 1}[q]} \sqsupset S_{\pi^{v}[q]} \sqsupset S_q\)</span>（由性质 1 得到下标的大小关系，由引理 1 得到前缀之间的关系）</p>
+<p>因此 <span class="arithmatex">\(\forall x \in \pi^{\star}[q], x &lt; q \land S_x \sqsupset S_q\)</span>。</p>
+</li>
+<li>
+<p>再证明 <span class="arithmatex">\(\{k:k &lt; q \land S_k \sqsupset S_q\} \subseteq \pi^{\star}[q]\)</span>，</p>
+<p>即证明 <span class="arithmatex">\(\forall x \in \\{k:k &lt; q \land S_x \sqsupset S_q\\}, x \in\pi^{\star}[q]\)</span></p>
+<p>考虑使用反证法来证明命题成立。</p>
+<p>假设集合 <span class="arithmatex">\(M = \{k:k &lt; q \land S_k \sqsupset S_q\} - \pi^{\star}[q]\)</span> 非空，<span class="arithmatex">\(j\)</span> 是 <span class="arithmatex">\(M\)</span> 中的最大值。</p>
+<p><span class="arithmatex">\(\because\)</span> <span class="arithmatex">\(\pi[q]\)</span> 是 <span class="arithmatex">\(\{k:k &lt; q \land S_x \sqsupset S_q\}\)</span> 中的最大值，且 <span class="arithmatex">\(j \in \{k:k &lt; q \land S_x \sqsupset S_q\}\)</span></p>
+<p><span class="arithmatex">\(\therefore j &lt; \pi[q], S_j \sqsupset S_q\)</span></p>
+<p>又 <span class="arithmatex">\(\because \pi[q] \in \pi^{\star}[q]\)</span></p>
+<p><span class="arithmatex">\(\therefore \exists j' \in \pi^{\star}[q], \text{s.t. }j' &gt; j\)</span></p>
+<p>设 <span class="arithmatex">\(j'\)</span> 表示 <span class="arithmatex">\(\pi^{\star}[q]\)</span> 中比 <span class="arithmatex">\(j\)</span> 大的最小整数。</p>
+<p><span class="arithmatex">\(\because \{k:k &lt; q \land S_k \sqsupset S_q\} \subseteq \pi^{\star}[q]\)</span> 且 <span class="arithmatex">\(j' \in \pi^{\star}[q]\)</span></p>
+<p><span class="arithmatex">\(\therefore S_{j'} \sqsupset S_q\)</span></p>
+<p><span class="arithmatex">\(\because j' &gt; j\)</span> 且 <span class="arithmatex">\(j\)</span> 是小于 <span class="arithmatex">\(j'\)</span> 的最大值</p>
+<p><span class="arithmatex">\(\therefore S_j \sqsupset S_{j'}\)</span>（引理 1）</p>
+<p>由 <span class="arithmatex">\(\pi\)</span> 数组的定义知 <span class="arithmatex">\(\pi[j'] = j\)</span></p>
+<p><span class="arithmatex">\(\because j' \in \pi^{\star}[q]\)</span></p>
+<p><span class="arithmatex">\(\therefore j = \pi[j'] \in \pi^{\star}[q]\)</span>，与假设矛盾</p>
+<p>因此 <span class="arithmatex">\(\{k:k &lt; q \land S_k \sqsupset S_q\} \subseteq \pi^{\star}[q]\)</span>。</p>
+</li>
+</ul>
+<p>综上所述，对任意长度为 <span class="arithmatex">\(n\)</span> 的字符串 <span class="arithmatex">\(S\)</span>，有 <span class="arithmatex">\(\forall q \in [1, n], \pi^{\star}[q] = \{k: k &lt; q \land S_k \sqsupset S_q\}\)</span>。</p>
+</details>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">引理 3</p>
+<p>对任意长度为 <span class="arithmatex">\(n\)</span> 的字符串 <span class="arithmatex">\(S\)</span>，有 <span class="arithmatex">\(\forall q \in [1, n]\)</span>，若 <span class="arithmatex">\(\pi[q] &gt; 0\)</span>，则 <span class="arithmatex">\(\pi[q] - 1 \in \pi^{\star}[q - 1]\)</span>。</p>
+<details class="success"><summary>证明</summary><p>令 <span class="arithmatex">\(x = \pi[q] &gt; 0\)</span>，则 <span class="arithmatex">\(x &lt; q, S_x \sqsupset S_q\)</span></p>
+<p><span class="arithmatex">\(\because x &gt; 0\)</span>，则 <span class="arithmatex">\(x - 1\)</span> 有意义</p>
+<p><span class="arithmatex">\(\therefore x - 1 &lt; q - 1, S_{x - 1} \sqsupset S_{q - 1}\)</span>（把 <span class="arithmatex">\(S_x\)</span> 和 <span class="arithmatex">\(S_q\)</span> 的最后一个字符去掉） </p>
+<p>由引理 2 知 <span class="arithmatex">\(x - 1 \in \pi^{\star}[q - 1]\)</span></p>
+<p><span class="arithmatex">\(\therefore \forall q \in [1, n] \land \pi[q] &gt; 0,\pi[q] - 1 \in \pi^{\star}[q - 1]\)</span></p>
+</details>
+</div>
+<p>对 <span class="arithmatex">\(q \in [2, n]\)</span> 定义子集 <span class="arithmatex">\(E_{q - i} \subseteq \pi^{\star}[q - 1]\)</span> 为：</p>
+<div class="arithmatex">\[
+E_{q - 1} = \{k\in\pi^{\star}[q - 1]:S_{k + 1} = S_k\}
+\]</div>
+<p>则有：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+ E_{q - 1} &amp; = \{k\in\pi^{\star}[q - 1]:S_{k + 1} = S_k\}
+ \\
+ &amp; = \{k: k &lt; q - 1, S_k \sqsupset S_{q - 1}, S[k + 1] = S[q]\}
+ \\
+ &amp; = \{k: k &lt; q - 1, S_{k + 1} \sqsupset S_q\}
+\end{aligned}
+\]</div>
+<p>因此，<span class="arithmatex">\(E_{q - 1}\)</span> 是由 <span class="arithmatex">\(\pi^{\star}[q - 1]\)</span> 中的值组成的、能满足 <span class="arithmatex">\(S_{k + 1}\)</span> 与 <span class="arithmatex">\(S_q\)</span> 的某个后缀相等的 <span class="arithmatex">\(k\)</span> 组成的集合。</p>
+<div class="admonition tip">
+<p class="admonition-title">推论 1</p>
+<p>对任意长度为 <span class="arithmatex">\(n\)</span> 的字符串 <span class="arithmatex">\(S\)</span>，有</p>
+<div class="arithmatex">\[
+\forall q \in [2, n],\pi[q] = \begin{cases}0 &amp; E_{q - 1} = \varnothing \\ 1 + \max\{k \in E_{q - 1}\} &amp; E_{q - 1} \neq \varnothing\end{cases}
+\]</div>
+<details class="success"><summary>证明</summary><ul>
+<li>
+<p>当 <span class="arithmatex">\(E_{q - 1} = \varnothing\)</span> 时，不存在任何一个 <span class="arithmatex">\(k \in \pi^{\star}[q - 1]\)</span>，使得 <span class="arithmatex">\(S_{k + 1} \sqsupset S_q\)</span>。</p>
+<p>显然此时 <span class="arithmatex">\(\pi[q]\)</span> 只能为 <span class="arithmatex">\(0\)</span>。</p>
+</li>
+<li>
+<p>当 <span class="arithmatex">\(E_{q - 1} \neq \varnothing\)</span> 时，</p>
+<ul>
+<li><span class="arithmatex">\(\forall k \in E_{q - 1}, k &lt; q - 1 \land S_{k + 1} \sqsupset S_q \Longrightarrow k + 1 &lt; q\)</span></li>
+</ul>
+<p>则由 <span class="arithmatex">\(\pi[q]\)</span> 的定义，<span class="arithmatex">\(k\)</span> 是拓展到 <span class="arithmatex">\(S_q\)</span> 的某一后缀的备选项，<span class="arithmatex">\(\pi[q] \ge 1 + \max\{k \in E_{q - 1}\}\)</span>。</p>
+<ul>
+<li>注意到此时 <span class="arithmatex">\(\pi[q] &gt; 0\)</span>，设 <span class="arithmatex">\(r = \pi[q] - 1\)</span>。</li>
+</ul>
+<p>则 <span class="arithmatex">\(r + 1 = \pi[q] &lt; q, S_{r + 1} = S_{\pi[q]} \sqsupset S_q\)</span>。</p>
+<p><span class="arithmatex">\(\because r + 1 &gt; 0\)</span></p>
+<p><span class="arithmatex">\(\therefore S_{r + 1} = S_q\)</span></p>
+<p>由引理 3 可得 <span class="arithmatex">\(r = \pi[q] - 1 \in \pi^{\star}[q - 1]\)</span></p>
+<p><span class="arithmatex">\(\therefore r \in E_{q - 1}\)</span></p>
+<p><span class="arithmatex">\(\therefore \pi[q] - 1 = r \le \max\{k \in E_{q - 1}\}\)</span></p>
+<p>即 <span class="arithmatex">\(\pi[q] \le 1 + \max\{k \in E_{q - 1}\}\)</span></p>
+</li>
+</ul>
+<p>综上所述，当 <span class="arithmatex">\(E_{q - 1} \neq \varnothing\)</span>，<span class="arithmatex">\(\pi[q] = 1 + \max\{k \in E_{q - 1}\}\)</span>。</p>
+</details>
+</div>
+<hr />
+<p>再来看看代码：</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kt">void</span> <span class="nf">calcPi</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">S</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">pi</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">strlen</span><span class="p">(</span><span class="n">S</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">len</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">S</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">pi</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="o">++</span><span class="n">k</span><span class="p">;</span>
+        <span class="n">pi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+<p>接下来我们将使用循环不变式来证明上述代码的正确性。</p>
+<details class="success" open="open"><summary>证明</summary><ul>
+<li>
+<p>初始化</p>
+<p>在第 4 行的迭代开始前，有 <span class="arithmatex">\(i = 1, k = \pi[i] = 0\)</span>，不变式成立。</p>
+</li>
+<li>
+<p>保持</p>
+<p>在每次迭代开始前，有 <span class="arithmatex">\(k = \pi[i - 1]\)</span>：</p>
+<ul>
+<li>
+<p>若是第一次迭代，此等式由第 4 行保证；</p>
+</li>
+<li>
+<p>其余迭代均由第 9 行保证。</p>
+</li>
+</ul>
+<p>接下来要证明每次迭代结束后均有 <span class="arithmatex">\(k = \pi[i]\)</span> 成立。</p>
+<p>若 <span class="arithmatex">\(k \neq \pi[i]\)</span>，则会在第 5-8 行将 <span class="arithmatex">\(k\)</span> 调整至 <span class="arithmatex">\(\pi[i]\)</span>。</p>
+<ul>
+<li>
+<p>第 5 行的 <code>while</code> 循环遍历每一个 <span class="arithmatex">\(k \in \pi^{\star}[i - 1]\)</span>，直至找到一个 <span class="arithmatex">\(k\)</span>，使得 <span class="arithmatex">\(S[k + 1] = S[i]\)</span>。（引理 2）</p>
+<ul>
+<li>若找不到这样的值，则在第 7 行 <span class="arithmatex">\(k = 0\)</span>。</li>
+<li>若找到了这样的值，此时 <span class="arithmatex">\(k\)</span> 为满足条件的集合中的最大值，应将 <span class="arithmatex">\(\pi[i] \gets k + 1\)</span>。（推论 1）</li>
+</ul>
+</li>
+</ul>
+<p>第 9 行的赋值语句使得 <span class="arithmatex">\(k = \pi[i]\)</span> 恒成立。</p>
+</li>
+<li>
+<p>终止</p>
+<p>当 <span class="arithmatex">\(i = n + 1\)</span> 时，迭代终止，此时我们求出了 <span class="arithmatex">\(\pi[1..n]\)</span>。</p>
+<p>至此，算法结束。</p>
+</li>
+</ul>
+<p>因此，上述代码实现能正确地求出字符串 <span class="arithmatex">\(S\)</span> 的前缀函数数组。</p>
+</details>
+<h3 id="_7">时间复杂度</h3>
+<p>不难发现，第 7-9 行代码的时间复杂度均为 <span class="arithmatex">\(O(n)\)</span>，唯一棘手的是第 6-7 行代码。</p>
+<p>考虑 <span class="arithmatex">\(k\)</span> 的变化，<span class="arithmatex">\(k\)</span> 在第 7-8 行增加的次数不超过 <span class="arithmatex">\(n\)</span> 次，即 <span class="arithmatex">\(k \le n\)</span>；</p>
+<p><span class="arithmatex">\(k\)</span> 在第 6 行的操作中，因为有 <span class="arithmatex">\(\pi(S_i) &lt; i\)</span> 的性质，导致每次迭代至少使 <span class="arithmatex">\(k\)</span> 减小 <span class="arithmatex">\(1\)</span>，即最多迭代 <span class="arithmatex">\(n\)</span> 次。</p>
+<p>综上所述，用上述方法求一个字符串的前缀函数数组的时间复杂度为 <span class="arithmatex">\(O(n)\)</span>。</p>
+<h3 id="_8">空间复杂度</h3>
+<p>易知用此种方法求前缀函数数组的空间复杂度为 <span class="arithmatex">\(O(n)\)</span>。</p>
+<h2 id="kmp">KMP 算法</h2>
+<h3 id="_9">算法流程</h3>
+<p>我们举一个例子：用 <span class="arithmatex">\(S = \mathtt{CCFCCFMONEY}\)</span> 被 <span class="arithmatex">\(T = \mathtt{CCFCCFSB}\)</span> 匹配。</p>
+<p>我们定义两个指针 <span class="arithmatex">\(i,k\)</span>，表示 <span class="arithmatex">\(S[i - k..i - 1] = T[1..k]\)</span>。</p>
+<p>我们要拓展的，就是 <span class="arithmatex">\(S[i]\)</span> 与 <span class="arithmatex">\(T[k + 1]\)</span> 之间的关系。</p>
+<p>首先我们考虑朴素算法的弊端：当你匹配到了 <span class="arithmatex">\(i = 8, k = 7\)</span> 时：
+$$
+\begin{aligned}
+S &amp; = \mathtt{\color{green}CCFXCCF\color{red}M\color{black}ONEY}
+\\
+T &amp; = \mathtt{\color{green}CCFXCCF\color{red}S\color{black}B}
+\\
+\text{index} &amp; =\mathtt{123456789}
+\end{aligned}
+$$
+你发现 <span class="arithmatex">\(S[i] = S[8] = \mathtt{M}\)</span>，可 <span class="arithmatex">\(T[k + 1] = T[8] = \mathtt{S}\)</span>，我们前功尽弃，只能将 <span class="arithmatex">\(T\)</span> 往右平移一格。</p>
+<p>而且要重新开始：<span class="arithmatex">\(i = 1, k = 1\)</span>。
+$$
+\begin{aligned}
+S &amp; = \mathtt{CCFXCCFMONEY}
+\\
+T &amp; = \mathtt{\text{ }CCFXCCFSB}
+\\
+\text{index} &amp; =\mathtt{123456789}
+\end{aligned}
+$$
+显然朴素算法的时间复杂度为 <span class="arithmatex">\(O(nm)\)</span>。</p>
+<hr />
+<p>再考虑使用前缀函数 <span class="arithmatex">\(\pi\)</span> 来优化匹配的过程。</p>
+<p>不难求出 <span class="arithmatex">\(T\)</span> 的前缀数组 <span class="arithmatex">\(\pi[1..n] = \\{0, 1, 0, 0, 1, 2, 3, 0, 0\\}\)</span>。</p>
+<p>考虑前缀数组的意义：<span class="arithmatex">\(T_i\)</span> 的最长的相等的前后缀长度。</p>
+<p>你知道了当 <span class="arithmatex">\(i = 8, k = 7\)</span> 时，有 <span class="arithmatex">\(S[1..7] = T[1..7]\)</span>，而且 <span class="arithmatex">\(T[1..3] = T[5..7]\)</span>。</p>
+<p>在上述的例子中，也就是我们可以把 <span class="arithmatex">\(T[1..3]\)</span> 这个地方匹配到的 <span class="arithmatex">\(\mathtt{\color{green}CCF}\)</span> 移动到 <span class="arithmatex">\(S[5..8]\)</span> 去。</p>
+<p>这样就直接节省了三次移动。</p>
+<hr />
+<p>总结一下使用前缀函数 <span class="arithmatex">\(\pi\)</span> 时我们的匹配过程：</p>
+<ol>
+<li>
+<p>使用 <span class="arithmatex">\(i, k\)</span> 来表示当前 <span class="arithmatex">\(S[i - k..i - 1] = T[1..k]\)</span>；</p>
+</li>
+<li>
+<p>如果 <span class="arithmatex">\(S[i] \neq T[k + 1]\)</span>，我们就用 <span class="arithmatex">\(\pi\)</span> 函数来实现大幅度的跳跃；</p>
+<p>否则 <span class="arithmatex">\(k' \gets k + 1\)</span>，表示 <span class="arithmatex">\(S[i - k..i] = T[1..k + 1]\)</span>；</p>
+</li>
+<li>
+<p>当 <span class="arithmatex">\(k = m\)</span> 时，说明找到了一个匹配 <span class="arithmatex">\(S[i - m + 1..i] = T[1..m]\)</span>。</p>
+</li>
+</ol>
+<h3 id="_10">代码实现</h3>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">T</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">pi</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="o">++</span><span class="n">k</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// S[i - m + 1..i] = T[1..m]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">pi</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+
+<h3 id="_11">正确性</h3>
+<p>可以证明，上述代码实现是正确的。</p>
+<h3 id="_12">时间复杂度</h3>
+<p>依葫芦画瓢地使用求前缀函数数组时的摊还分析方法，不难得出 KMP 算法的时间复杂度为 <span class="arithmatex">\(O(n + m)\)</span>。</p>
+<h3 id="_13">空间复杂度</h3>
+<p>不难发现 KMP 算法的空间复杂度为 <span class="arithmatex">\(O(n + m)\)</span>。</p>
+<h2 id="_14">例题</h2>
+<ol>
+<li>
+<p><a href="https://leverimmy.top/2020/07/04/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P2375-NOI2014-%E5%8A%A8%E7%89%A9%E5%9B%AD/">「NOI2014」动物园</a></p>
+</li>
+<li>
+<p><a href="https://leverimmy.top/2020/07/04/%E3%80%90POJ%E3%80%911961-Period/">「POJ 1961」Period</a></p>
+</li>
+<li>
+<p><a href="https://leverimmy.top/2020/07/05/【CodeForces】CF1200E-Compress-Words/">「CF1200E」Compress Words</a></p>
+</li>
+<li>
+<p><a href="https://leverimmy.top/2020/07/12/%E3%80%90%E6%B4%9B%E8%B0%B7%E3%80%91P3435-POI2006-OKR-Periods-of-Words/">「POI2006」OKR-Periods of Words</a></p>
+</li>
+</ol>
+<h2 id="_15">写在最后</h2>
+<p><img alt="KMP（老图）" src="/gallery/lectures/kmp/end.jpg" /></p>
                 
               
               
@@ -790,6 +1478,14 @@
           }, typeof search !== "undefined" && search)
         })
       </script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="../../../javascripts/config.js"></script>
       
     
   </body>
