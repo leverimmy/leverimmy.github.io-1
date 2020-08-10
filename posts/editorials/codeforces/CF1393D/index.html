@@ -594,8 +594,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../articles/2020-08/" title="2020-08" class="md-nav__link">
-      2020-08
+    <a href="../../../articles/build-this-site/" title="如何使用 MkDocs 建立属于自己的博客" class="md-nav__link">
+      如何使用 MkDocs 建立属于自己的博客
     </a>
   </li>
 
@@ -841,11 +841,30 @@
                 
                   <h1>CF1393D</h1>
                 
-                <h2 id="_1">题意简述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>给定一个 <span class="arithmatex">\(n \times m\)</span> 的矩形，求其中最大的每个元素均相等的斜 <span class="arithmatex">\(45^{\circ}\)</span> 的正方形的边长<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>。</p>
+                <div class="admonition abstract">
+<p class="admonition-title">知识点</p>
+<ul>
+<li>动态规划</li>
+<li>悬线法</li>
+</ul>
+</div>
+<h2 id="_1">题意简述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>给定一个 <span class="arithmatex">\(n \times m\)</span> 的矩阵 <span class="arithmatex">\(A\)</span>，求所有的（可重叠）每个元素均相等的斜 <span class="arithmatex">\(45^{\circ}\)</span> 的正方形的边长的个数<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>。</p>
 <p>数据范围：<span class="arithmatex">\(1 \le n, m \le 2\cdot 10^3\)</span>。</p>
+<div class="admonition example">
+<p class="admonition-title">一些「合法的斜正方形」和「不合法的斜正方形」的例子</p>
+<p>合法的斜正方形：</p>
+<p><img alt="合法的斜正方形" src="valid.png" /></p>
+<p>不合法的斜正方形：</p>
+<p><img alt="不合法的斜正方形" src="invalid.png" /></p>
+</div>
 <h2 id="_2">解题思路<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>设 <span class="arithmatex">\(f(i, j)\)</span> 表示以 <span class="arithmatex">\((i, j)\)</span> 为最下方的边界，最大的合法的正方形，此边界到正方形中心的距离。</p>
+<p>不难发现答案为 <span class="arithmatex">\(\textrm{ans} = \sum_{i = 1}^{n}\sum_{j = 1}^{m}f(i, j)\)</span>。</p>
+<p>如果 <span class="arithmatex">\((i, j)\)</span> 能被左上方区域拓展出来，那么一定要满足 <span class="arithmatex">\(A_{i, j} = A_{i - 1, j - 1} = A_{i - 1, j} = A——{i - 1, j + 1} = A_{i - 2, j}\)</span>。</p>
+<p>递推式即为 <span class="arithmatex">\(f(i, j) = \min\\{f(i - 1, j - 1), f(i - 1, j), f(i - 2, j)\\} + 1\)</span>。</p>
 <h2 id="_3">代码实现<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>核心部分已用高亮标出。</p>
 <details class="note"><summary>Code</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
  3
