@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
       
-        <link rel="canonical" href="https://leverimmy.top/posts/whk/maths/">
+        <link rel="canonical" href="https://leverimmy.top/posts/articles/how-to-build-this-fucking-blog/">
       
       
       <link rel="shortcut icon" href="../../../assets/img/favicon.ico">
@@ -17,7 +17,7 @@
     
     
       
-        <title>数学 - Clever_Jimmy's Blog</title>
+        <title>如何使用 MkDocs 建立一个博客 - Clever_Jimmy's Blog</title>
       
     
     
@@ -53,7 +53,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-mkdocs" class="md-skip">
+        <a href="#_1" class="md-skip">
           跳转至
         </a>
       
@@ -81,7 +81,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              数学
+              如何使用 MkDocs 建立一个博客
             
           </span>
         </div>
@@ -177,7 +177,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../../articles/" class="md-tabs__link">
+        <a href="../" class="md-tabs__link md-tabs__link--active">
           杂笔
         </a>
       
@@ -203,7 +203,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../" class="md-tabs__link md-tabs__link--active">
+        <a href="../../whk/" class="md-tabs__link">
           文化课
         </a>
       
@@ -436,6 +436,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../lectures/ac-automaton/" title="AC 自动机" class="md-nav__link">
+      AC 自动机
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../lectures/dlx/" title="Dancing Links" class="md-nav__link">
       Dancing Links
     </a>
@@ -460,8 +472,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../lectures/ac-automaton/" title="AC 自动机" class="md-nav__link">
-      AC 自动机
+    <a href="../../lectures/pairing-heap/" title="配对堆" class="md-nav__link">
+      配对堆
     </a>
   </li>
 
@@ -478,18 +490,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../lectures/pairing-heap/" title="配对堆" class="md-nav__link">
-      配对堆
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -499,10 +499,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       杂笔
@@ -526,7 +528,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../articles/" title="概览" class="md-nav__link">
+    <a href="../" title="概览" class="md-nav__link">
       概览
     </a>
   </li>
@@ -536,11 +538,144 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../../articles/build-this-site/" title="如何使用 MkDocs 建立属于自己的博客" class="md-nav__link">
-      如何使用 MkDocs 建立属于自己的博客
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        如何使用 MkDocs 建立一个博客
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="如何使用 MkDocs 建立一个博客" class="md-nav__link md-nav__link--active">
+      如何使用 MkDocs 建立一个博客
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    下载必要组件
+  </a>
+  
+    <nav class="md-nav" aria-label="下载必要组件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-python385" class="md-nav__link">
+    在 Python 官网 下载 python3.8.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pip" class="md-nav__link">
+    安装 pip
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mkdocs" class="md-nav__link">
+    安装 MkDocs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-git" class="md-nav__link">
+    在 Git 官网 安装 git
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-repo" class="md-nav__link">
+    创建 GitHub repo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    建立本地服务器
+  </a>
+  
+    <nav class="md-nav" aria-label="建立本地服务器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    找到一个心爱的文件夹
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    搭建站点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-pages" class="md-nav__link">
+    链接到 GitHub Pages
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    自定义配置
+  </a>
+  
+    <nav class="md-nav" aria-label="自定义配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    主题设置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -619,12 +754,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
       文化课
@@ -648,70 +781,9 @@
 
 
   <li class="md-nav__item">
-    <a href="../" title="概览" class="md-nav__link">
+    <a href="../../whk/" title="概览" class="md-nav__link">
       概览
     </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        数学
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
-      </label>
-    
-    <a href="./" title="数学" class="md-nav__link md-nav__link--active">
-      数学
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    Commands
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    Project layout
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -788,8 +860,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="目录">
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon">
@@ -800,16 +870,104 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#commands" class="md-nav__link">
-    Commands
+  <a href="#_1" class="md-nav__link">
+    下载必要组件
   </a>
+  
+    <nav class="md-nav" aria-label="下载必要组件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-python385" class="md-nav__link">
+    在 Python 官网 下载 python3.8.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pip" class="md-nav__link">
+    安装 pip
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mkdocs" class="md-nav__link">
+    安装 MkDocs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#git-git" class="md-nav__link">
+    在 Git 官网 安装 git
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-repo" class="md-nav__link">
+    创建 GitHub repo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#project-layout" class="md-nav__link">
-    Project layout
+  <a href="#_2" class="md-nav__link">
+    建立本地服务器
   </a>
+  
+    <nav class="md-nav" aria-label="建立本地服务器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    找到一个心爱的文件夹
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    搭建站点
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#github-pages" class="md-nav__link">
+    链接到 GitHub Pages
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    自定义配置
+  </a>
+  
+    <nav class="md-nav" aria-label="自定义配置">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    主题设置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -829,27 +987,227 @@
                   
                 
                 
-                <h1 id="welcome-to-mkdocs">Welcome to MkDocs<a class="headerlink" href="#welcome-to-mkdocs" title="Permanent link">&para;</a></h1>
-<p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands<a class="headerlink" href="#commands" title="Permanent link">&para;</a></h2>
-<ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
-</ul>
-<h2 id="project-layout">Project layout<a class="headerlink" href="#project-layout" title="Permanent link">&para;</a></h2>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
+                  <h1>如何使用 MkDocs 建立一个博客</h1>
+                
+                <h2 id="_1">下载必要组件<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="python-python385">在 <a href="https://www.python.org/">Python 官网</a> 下载 python3.8.5<a class="headerlink" href="#python-python385" title="Permanent link">&para;</a></h3>
+<p>下载链接：<a href="https://www.python.org/ftp/python/3.8.5/python-3.8.5-amd64.exe">link</a></p>
+<p>安装完成后回到桌面，按下 <span class="keys"><kbd class="key-windows">Win</kbd><span>+</span><kbd class="key-r">R</kbd></span>，会出来一个「运行」；在框内输入</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cmd
 </code></pre></div>
 </td></tr></table>
 
-<p><span class="arithmatex">\(f(x) = \sum_{i = 1}^{j}\)</span></p>
+<p>按下回车，你会得到一个「命令行窗口」。</p>
+<p>输入</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>python --version
+</code></pre></div>
+</td></tr></table>
+
+<p>来查看 python 版本。如果输出是 <code>Python 3.8.5</code> 之类的东西，那么说明你已经安装完成 Python 了。</p>
+<h3 id="pip">安装 pip<a class="headerlink" href="#pip" title="Permanent link">&para;</a></h3>
+<p>继续在命令行里输入</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>python get-pip.py <span class="p">&amp;&amp;</span> pip install --upgrade pip
+</code></pre></div>
+</td></tr></table>
+
+<p>待它结束后，输入</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip --version
+</code></pre></div>
+</td></tr></table>
+
+<p>来查看 pip 版本。如果输出是 <code>pip 20.0.2 from /usr/local/lib/python3.8/site-packages/pip (python 3.8)</code> 之类的东西，那么说明你已经安装完成 pip 了。</p>
+<h3 id="mkdocs">安装 MkDocs<a class="headerlink" href="#mkdocs" title="Permanent link">&para;</a></h3>
+<p>继续在命令行中输入</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>pip install mkdocs
+</code></pre></div>
+</td></tr></table>
+
+<p>待它结束后，输入</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mkdocs --version
+</code></pre></div>
+</td></tr></table>
+
+<p>来查看 Mkdocs 版本。如果输出是 <code>mkdocs, version 0.15.3</code> 之类的东西，那么说明你已经安装完成 MkDocs 了。</p>
+<h3 id="git-git">在 <a href="https://git-scm.com/">Git 官网</a> 安装 git<a class="headerlink" href="#git-git" title="Permanent link">&para;</a></h3>
+<p>下载链接：<a href="https://github.com/git-for-windows/git/releases/download/v2.28.0.windows.1/Git-2.28.0-64-bit.exe">link</a></p>
+<h3 id="github-repo">创建 GitHub repo<a class="headerlink" href="#github-repo" title="Permanent link">&para;</a></h3>
+<p>访问 <a href="https://github.com/">GitHub</a>，注册一个账号。</p>
+<p>账号名以后 <strong>不能修改</strong>，而且假设你的账号名为 <code>username</code>，则你以后的博客地址将会为 <code>https://username.github.io/</code>。</p>
+<h2 id="_2">建立本地服务器<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">找到一个心爱的文件夹<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>举例：我们用 <code>E:\blog\</code> 为博客目录。</p>
+<p>打开命令行，输入</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>E<span class="p">:</span>
+<span class="k">mkdir</span> blog
+<span class="k">cd</span> blog
+mkdocs new my-blog <span class="p">&amp;&amp;</span> <span class="k">cd</span> my-blog
+</code></pre></div>
+</td></tr></table>
+
+<p>你会发现你的 E 盘里多了个 blog 文件夹，而且里面有个 my-blog 文件夹。</p>
+<h3 id="_4">搭建站点<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>在 <code>E:\blog\my-blog\</code> 下，输入</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>mkdocs serve
+</code></pre></div>
+</td></tr></table>
+
+<p>然后打开你的浏览器，输入 <code>http://127.0.0.1:8000/</code> 即可看到自己的博客啦！</p>
+<h3 id="github-pages">链接到 GitHub Pages<a class="headerlink" href="#github-pages" title="Permanent link">&para;</a></h3>
+<h2 id="_5">自定义配置<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="_6">主题设置<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>打开 <code>E:\blog\my-blog\mkdocs.yml</code>，将里面的内容替换为</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>site_name: Your Blog
+
+nav:
+    - 首页: README.md
+    - 题解:
+      - 概览: posts\editorials\index.md
+      - AtCoder: posts\editorials\atcoder.md
+      - BZOJ: posts\editorials\bzoj.md
+      - CodeForces:
+        - CF1393D: posts\editorials\codeforces\CF1393D.md
+      - 洛谷: posts\editorials\luogu.md
+      - POJ: posts\editorials\poj.md
+    - 学习笔记:
+      - 概览: posts\lectures\index.md
+      - Dancing Links: posts\lectures\dlx.md
+      - 回文树: posts\lectures\eertree.md
+      - AC 自动机: posts\lectures\ac-automaton.md
+      - 前缀函数与 KMP 算法: posts\lectures\kmp.md
+      - 配对堆: posts\lectures\pairing-heap.md
+    - 杂笔:
+      - 概览: posts\articles\index.md
+      - &#39;如何使用 MkDocs 建立属于自己的博客&#39;: posts\articles\build-this-site.md
+    - 说说:
+      - 概览: posts\mood\index.md
+      - &#39;2020.08&#39;: posts\mood\2020-08.md
+      - &#39;2020.09&#39;: posts\mood\2020-09.md
+    - 文化课:
+      - 概览: posts\whk\index.md
+      - 数学: posts\whk\maths.md
+    - 关于:
+      - 关于我: posts\about\intro.md
+      - 友情链接: posts\about\friends.md
+theme:
+    name: &#39;material&#39;
+    language: &#39;zh&#39;
+    favicon: &#39;assets/img/favicon.ico&#39;
+    features:
+      - tabs
+markdown_extensions:
+  - admonition                                   # 注解块支持
+  - footnotes
+  - meta                                         # 元数据支持
+  - pymdownx.arithmatex:                         # 数学公式的TeX语法支持
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:                              # 表情支持
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.highlight:
+      linenums_style: pymdownx.inline
+      linenums: true
+      use_pygments: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:                           # 任务清单支持
+      custom_checkbox: true
+  - pymdownx.tilde
+  - toc:
+      permalink: true
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - javascripts/config.js
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/default.min.css
+copyright: &#39;Copyright &amp;#169 2018 - 2020 Yourname&#39;
+</code></pre></div>
+</td></tr></table>
                 
               
               
@@ -883,13 +1241,13 @@ docs/
           </a>
         
         
-          <a href="../../about/intro/" title="关于我" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../mood/" title="概览" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   下一页
                 </span>
-                关于我
+                概览
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
@@ -905,7 +1263,7 @@ docs/
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &#169 2018 - 2020 Clever_Jimmy
+            Copyright &#169 2018 - 2020 <a href="https://github.com/LeverImmy/">Clever_Jimmy</a>
           </div>
         
         Made with

@@ -438,6 +438,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../ac-automaton/" title="AC 自动机" class="md-nav__link">
+      AC 自动机
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../dlx/" title="Dancing Links" class="md-nav__link">
       Dancing Links
     </a>
@@ -462,8 +474,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../ac-automaton/" title="AC 自动机" class="md-nav__link">
-      AC 自动机
+    <a href="../pairing-heap/" title="配对堆" class="md-nav__link">
+      配对堆
     </a>
   </li>
 
@@ -635,18 +647,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../pairing-heap/" title="配对堆" class="md-nav__link">
-      配对堆
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -695,8 +695,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../articles/build-this-site/" title="如何使用 MkDocs 建立属于自己的博客" class="md-nav__link">
-      如何使用 MkDocs 建立属于自己的博客
+    <a href="../../articles/how-to-build-this-fucking-blog/" title="如何使用 MkDocs 建立一个博客" class="md-nav__link">
+      如何使用 MkDocs 建立一个博客
     </a>
   </li>
 
@@ -805,18 +805,6 @@
   <li class="md-nav__item">
     <a href="../../whk/" title="概览" class="md-nav__link">
       概览
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../whk/maths/" title="数学" class="md-nav__link">
-      数学
     </a>
   </li>
 
@@ -1175,6 +1163,10 @@ $$
 当 <span class="arithmatex">\(\pi^{(t)}[q] = 0\)</span> 时 <span class="arithmatex">\(\pi^{\star}[q]\)</span> 中的序列终止。</p>
 <div class="admonition tip">
 <p class="admonition-title">引理 2（前缀函数迭代引理）</p>
+<p>对任意长度为 <span class="arithmatex">\(n\)</span> 的字符串 <span class="arithmatex">\(S\)</span>，有
+$$
+\forall q \in [1, n], \pi^{\star}[q] = \{k: k &lt; q \land S_k \sqsupset S_q\}
+$$</p>
 <details class="success"><summary>证明</summary><ul>
 <li>
 <p>先证明 <span class="arithmatex">\(\pi^{\star}[q] \subseteq \\{k:k &lt; q \land S_k \sqsupset S_q\\}\)</span>，</p>
@@ -1456,7 +1448,7 @@ $$
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../ac-automaton/" title="AC 自动机" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../pairing-heap/" title="配对堆" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1465,19 +1457,19 @@ $$
                 <span class="md-footer-nav__direction">
                   上一页
                 </span>
-                AC 自动机
+                配对堆
               </div>
             </div>
           </a>
         
         
-          <a href="../pairing-heap/" title="配对堆" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../articles/" title="概览" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   下一页
                 </span>
-                配对堆
+                概览
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
@@ -1493,7 +1485,7 @@ $$
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright &#169 2018 - 2020 Clever_Jimmy
+            Copyright &#169 2018 - 2020 <a href="https://github.com/LeverImmy/">Clever_Jimmy</a>
           </div>
         
         Made with
