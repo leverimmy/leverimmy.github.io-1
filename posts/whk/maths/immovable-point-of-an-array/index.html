@@ -137,13 +137,16 @@
     <ul class="md-tabs__list">
       
         
-  <li class="md-tabs__item">
-    
-      <a href="../../../.." class="md-tabs__link">
-        首页
-      </a>
-    
-  </li>
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../.." class="md-tabs__link">
+          首页
+        </a>
+      
+    </li>
+  
 
       
         
@@ -254,10 +257,76 @@
       
 
 
-  <li class="md-nav__item">
-    <a href="../../../.." title="首页" class="md-nav__link">
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
       首页
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="首页" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        首页
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../.." title="" class="md-nav__link">
+      
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../articles/how-to-build-this-fucking-blog/" title="如何使用 MkDocs 建立一个博客" class="md-nav__link">
+      如何使用 MkDocs 建立一个博客
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../lectures/dlx/" title="Dancing Links" class="md-nav__link">
+      Dancing Links
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../lectures/kmp/" title="前缀函数与 KMP 算法" class="md-nav__link">
+      前缀函数与 KMP 算法
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
     
@@ -423,10 +492,40 @@
           
 
 
-  <li class="md-nav__item">
-    <a href="../../../editorials/poj/" title="POJ" class="md-nav__link">
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2-6" type="checkbox" id="nav-2-6">
+    
+    <label class="md-nav__link" for="nav-2-6">
       POJ
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="POJ" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-6">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        POJ
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../editorials/poj/1961/" title="1961 - Period" class="md-nav__link">
+      1961 - Period
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -502,7 +601,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../lectures/eertree/" title="回文树" class="md-nav__link">
+    <a href="../../../lectures/pam/" title="回文树" class="md-nav__link">
       回文树
     </a>
   </li>
@@ -514,8 +613,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../../../lectures/pairing-heap/" title="配对堆" class="md-nav__link">
-      配对堆
+    <a href="../../../lectures/karatsuba/" title="Karatsuba 乘法" class="md-nav__link">
+      Karatsuba 乘法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../lectures/lyndon/" title="Lyndon 分解" class="md-nav__link">
+      Lyndon 分解
     </a>
   </li>
 
@@ -1060,8 +1171,8 @@
                   <h1>数列不动点浅探</h1>
                 
                 <p>数列不动点可以辅助我们快速解决与数列通项公式有关的问题。</p>
-<h2 id="_1">基础知识<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<h3 id="_2">定义<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h2 id="_1"><strong>基础知识</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2"><strong>定义</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p>已知函数 <span class="arithmatex">\(f(x)\)</span>，若存在 <span class="arithmatex">\(x_0\)</span> 使得 <span class="arithmatex">\(f(x_0) = x_0\)</span>，则称 <span class="arithmatex">\(x_0\)</span> 为 <span class="arithmatex">\(f(x)\)</span> 的一个不动点。</p>
@@ -1070,7 +1181,7 @@
 <p>若数列 <span class="arithmatex">\(\{a_n\}\)</span> 满足 <span class="arithmatex">\(a_{n + 1} = g(a_n) \quad(n \in \mathbb{N}^{*})\)</span>，则称 <span class="arithmatex">\(g(x)\)</span> 为数列 <span class="arithmatex">\(\{a_n\}\)</span> 的递推函数。</p>
 </li>
 </ol>
-<h3 id="_3">定理一<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h3 id="_3"><strong>定理一</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>若 <span class="arithmatex">\(f(x) = ax + b\quad(a \notin \{0, 1\})\)</span> 为数列 <span class="arithmatex">\(\{a_n\}\)</span> 的递推函数，且 <span class="arithmatex">\(p\)</span> 为 <span class="arithmatex">\(f(x)\)</span> 的不动点，则数列 <span class="arithmatex">\(\{a_n - p\}\)</span> 为公比为 <span class="arithmatex">\(a\)</span> 的等比数列。</p>
 <details class="success"><summary>证明</summary><p><span class="arithmatex">\(\because\)</span> <span class="arithmatex">\(p\)</span> 为 <span class="arithmatex">\(f(x)\)</span> 的不动点</p>
 <p><span class="arithmatex">\(\therefore p = f(p) = ap + b\)</span>，即 <span class="arithmatex">\(b - p = -ap\)</span></p>
@@ -1078,7 +1189,7 @@
 <p><span class="arithmatex">\(\begin{aligned}\therefore a_{n + 1} - p &amp; = a\cdot a_n + b - p \\ &amp; = a\cdot a_n - ap \\ &amp; = a(a_n - p)\end{aligned}\)</span></p>
 <p><span class="arithmatex">\(\therefore\)</span> <span class="arithmatex">\(\{a_n - p\}\)</span> 为公比为 <span class="arithmatex">\(a\)</span> 的等比数列</p>
 </details>
-<h3 id="_4">定理二<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<h3 id="_4"><strong>定理二</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <ol>
 <li>
 <p>若 <span class="arithmatex">\(f(x) = \dfrac{ax + b}{cx + d}\quad(c \neq 0, ad - bc \neq 0)\)</span> 为数列 <span class="arithmatex">\(\{a_n\}\)</span> 的递推函数，且 <span class="arithmatex">\(p, q\)</span> 为 <span class="arithmatex">\(f(x)\)</span> 的两 <strong>相异</strong> 不动点，则数列 <span class="arithmatex">\(\{\dfrac{a_n - p}{a_n - q}\}\)</span> 为公比为 <span class="arithmatex">\(\dfrac{a - pc}{a - qc}\)</span> 的等比数列。</p>
@@ -1098,36 +1209,36 @@
 </details>
 </li>
 </ol>
-<h3 id="_5">定理三<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h3 id="_5"><strong>定理三</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>若 <span class="arithmatex">\(f(x) = \dfrac{ax^2 + bx + c}{ex + f}\)</span> 为数列 <span class="arithmatex">\(\{a_n\}\)</span> 的递推函数，且 <span class="arithmatex">\(p, q\)</span> 为 <span class="arithmatex">\(f(x)\)</span> 的两 <strong>相异</strong> 不动点，则 <strong>当且仅当</strong> <span class="arithmatex">\(b = 0, e = 2a\)</span> 时有 <span class="arithmatex">\(\dfrac{a_{n + 1} - p}{a_{n + 1} - q} = (\dfrac{a_n - p}{a_n - q})^2\)</span>。</p>
 <details class="success"><summary>证明</summary><p><span class="arithmatex">\(\because\)</span> <span class="arithmatex">\(p, q\)</span> 为 <span class="arithmatex">\(f(x)\)</span> 的两相异不动点</p>
 <p><span class="arithmatex">\(\therefore \begin{cases}c - pf = (e - a)p^2 - bp \\ c - qf = (e - a)q^2 - bq\end{cases}\)</span></p>
 <p><span class="arithmatex">\(\begin{aligned}\therefore \dfrac{a_{n + 1} - p}{a_{n + 1} - q} &amp; = \dfrac{a\cdot a_n^2 + b\cdot a_n + c - p(e\cdot a_n + f)}{a\cdot a_n^2 + b\cdot a_n + c - q(e\cdot a_n + f)} \\ &amp; = \dfrac{a\cdot a_n^2 + (b - ep)\cdot a_n + c - pf}{a\cdot a_n^2 + (b - eq)\cdot a_n + c - qf} \\ &amp; = \dfrac{a\cdot a_n^2 + (b - ep)\cdot a_n + (e - a)\cdot p^2 - bp}{a\cdot a_n^2 - (b - eq)\cdot a_n + (e - a)\cdot q^2 - bq}\end{aligned}\)</span></p>
 <p><span class="arithmatex">\(\begin{aligned}\therefore \dfrac{a_{n + 1} - p}{a_{n + 1} - q} = (\dfrac{a_n - p}{a_n - q})^2 &amp; \iff \dfrac{a\cdot a_n^2 + (b - ep)\cdot a_n + (e - a)\cdot p^2 - bp}{a\cdot a_n^2 - (b - eq)\cdot a_n + (e - a)\cdot q^2 - bq} = \dfrac{a_n^2 - 2p\cdot a_n + p^2}{a_n^2 - 2q\cdot a_n + q^2} \\ &amp; \iff \begin{cases}b - ep = -2ap \\ b - eq = -2aq\end{cases} \\ &amp; \iff \begin{cases}(2a - e)p + b = 0 \\ (2a - e)q + b = 0\end{cases} \\ &amp; \iff \begin{cases}b = 0 \\ e = 2a\end{cases} \quad(p \neq q)\end{aligned}\)</span></p>
 </details>
-<h2 id="_6">例题讲解<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<h3 id="1">例1<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<h2 id="_6"><strong>例题讲解</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="1"><strong>例1</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>设数列 <span class="arithmatex">\(\{a_n\}\)</span> 满足 <span class="arithmatex">\(a_1 = 1, a_{n + 1} = \dfrac{a_n + 2}{a_n}\)</span>，求数列 <span class="arithmatex">\(\{a_n\}\)</span> 的通项公式。</p>
 <details class="note"><summary>解析</summary><p>特征方程为 <span class="arithmatex">\(x = \dfrac{x + 2}{x}\)</span>，解得 <span class="arithmatex">\(x_1 = -1, x_2 = 2\)</span></p>
 <p><span class="arithmatex">\(\therefore\)</span> <span class="arithmatex">\(\{\dfrac{a_n + 1}{a_n - 2}\}\)</span> 为首项为 <span class="arithmatex">\(-2\)</span>，公比为 <span class="arithmatex">\(-2\)</span> 的等比数列</p>
 <p><span class="arithmatex">\(\therefore \dfrac{a_n +1}{a_n - 2} = (-2)^n\)</span></p>
 <p><span class="arithmatex">\(\therefore a_n = \dfrac{2\cdot (-2)^n +1}{(-2)^n - 1}\)</span></p>
 </details>
-<h3 id="2">例2<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<h3 id="2"><strong>例2</strong><a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>数列 <span class="arithmatex">\(\{a_n\}\)</span> 满足下列关系：<span class="arithmatex">\(a_1 = 2a, a_{n + 1} = 2a - \dfrac{a^2}{a_n}\quad(a \neq 0)\)</span>，求数列 <span class="arithmatex">\(\{a_n\}\)</span> 的通项公式。</p>
 <details class="note"><summary>解析</summary><p>特征方程为 <span class="arithmatex">\(x = \dfrac{2ax - a^2}{x}\)</span>，解得 <span class="arithmatex">\(x_1 = x_2 = a\)</span></p>
 <p><span class="arithmatex">\(\therefore\)</span> <span class="arithmatex">\(\{\dfrac{1}{a_n - a}\}\)</span> 为首项为 <span class="arithmatex">\(\dfrac{1}{a}\)</span>，公比为 <span class="arithmatex">\(\dfrac{1}{a}\)</span> 的等比数列</p>
 <p><span class="arithmatex">\(\therefore \dfrac{1}{a_n - a} = \dfrac{n}{a}\)</span></p>
 <p><span class="arithmatex">\(\therefore a_n = \dfrac{a + na}{n}\)</span></p>
 </details>
-<h3 id="3">例3<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<h3 id="3"><strong>例3</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p>已知数列 <span class="arithmatex">\(\{a_n\}\)</span> 满足 <span class="arithmatex">\(a_1 = 2, a_{n + 1} = \dfrac{a_n^2 + 2}{2a_n}\)</span>，求数列 <span class="arithmatex">\(\{a_n\}\)</span> 的通项公式。</p>
 <details class="note"><summary>解析</summary><p>特征方程为 <span class="arithmatex">\(x = \dfrac{x^2 + 2}{2x}\)</span>，解得 <span class="arithmatex">\(x_1 = \sqrt{2}, x_2 = -\sqrt{2}\)</span></p>
 <p><span class="arithmatex">\(\therefore \dfrac{a_{n + 1} - \sqrt{2}}{a_{n + 1} + \sqrt{2}} = (\dfrac{a_n - \sqrt{2}}{a_n + \sqrt{2}})^2\)</span></p>
 <p><span class="arithmatex">\(\therefore \dfrac{a_n - \sqrt{2}}{a_n + \sqrt{2}} = (3 - 2\sqrt{2})^{2^{n - 1}} = (\sqrt{2} - 1)^{2^n}\)</span></p>
 <p><span class="arithmatex">\(\therefore a_n = \sqrt{2}\cdot\dfrac{1 + (\sqrt{2} - 1)^{2^n}}{1 - (\sqrt{2} - 1)^{2^n}}\)</span></p>
 </details>
-<h2 id="_7">总结<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h2 id="_7"><strong>总结</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>无技巧，就是套公式。</p>
                 
               
