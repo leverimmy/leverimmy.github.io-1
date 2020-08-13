@@ -957,8 +957,8 @@
 <h2 id="_2"><strong>解题思路</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>设 <span class="arithmatex">\(f(i, j)\)</span> 表示以 <span class="arithmatex">\((i, j)\)</span> 为最下方的边界，最大的合法的正方形，此边界到正方形中心的距离。</p>
 <p>不难发现答案为 <span class="arithmatex">\(\textrm{ans} = \sum_{i = 1}^{n}\sum_{j = 1}^{m}f(i, j)\)</span>。</p>
-<p>如果 <span class="arithmatex">\((i, j)\)</span> 能被左上方区域拓展出来，那么一定要满足 <span class="arithmatex">\(A_{i, j} = A_{i - 1, j - 1} = A_{i - 1, j} = A——{i - 1, j + 1} = A_{i - 2, j}\)</span>。</p>
-<p>递推式即为 <span class="arithmatex">\(f(i, j) = \min\\{f(i - 1, j - 1), f(i - 1, j), f(i - 2, j)\\} + 1\)</span>。</p>
+<p>如果 <span class="arithmatex">\((i, j)\)</span> 能被左上方区域拓展出来，那么一定要满足 <span class="arithmatex">\(A_{i, j} = A_{i - 1, j - 1} = A_{i - 1, j} = A_{i - 1, j + 1} = A_{i - 2, j}\)</span>。</p>
+<p>递推式即为 <span class="arithmatex">\(f(i, j) = \min\{f(i - 1, j - 1), f(i - 1, j), f(i - 2, j)\} + 1\)</span>。</p>
 <h2 id="_3"><strong>代码实现</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>核心部分已用高亮标出。</p>
 <details class="note"><summary>Code</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
