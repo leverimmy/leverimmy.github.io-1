@@ -1057,6 +1057,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../whk/maths/rubbish-formulas-of-calculation-geomatrics/" title="解析几何中对称问题公式" class="md-nav__link">
+      解析几何中对称问题公式
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1267,7 +1279,7 @@
 <p><span class="arithmatex">\(\mathtt{ab}\)</span> 是这棵 trie 树中最长的满足前缀（<span class="arithmatex">\(\mathtt{ab}\)</span>）与 <span class="arithmatex">\(\textrm{str}(5)\)</span> 的某一真后缀（<span class="arithmatex">\(\textrm{str}(5)[2..3] = \mathtt{ab}\)</span>）相等的节点。</p>
 <p><img alt="一个基于 trie 树结构的 AC 自动机，只标出了一个 fail 指针" src="trie_tree.png" /></p>
 <h2 id="_3"><strong>算法流程</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>一个 AC 自动机的建立以及使用包括三个流程：「trie 树的构建」、「fail 指针的连接，以及」和「对一个文本串进行匹配」。</p>
+<p>一个 AC 自动机的建立以及使用包括三个流程：「trie 树的构建」、「fail 指针的连接」和「对一个文本串进行匹配」。</p>
 <h3 id="trie"><strong>trie 树的构建</strong><a class="headerlink" href="#trie" title="Permanent link">&para;</a></h3>
 <p>刚才我们在定义中提到了「基于 trie 树的 AC 自动机」的结构，</p>
 <p>而「trie 树转化为 trie 图」的过程是在连接 fail 指针的时候进行的。</p>
@@ -1315,7 +1327,6 @@
 <p>如果不存在呢？那么这个节点对应着的其实是一个 <strong>非法状态</strong>，我们应该沿着 fail 指针跳至某一个合法状态。</p>
 <p>为了简便，我们 <strong>直接将这些非法状态等价到 fail 指针指向的节点</strong>！</p>
 <p>不难发现，这样 trie 树就变成了一棵 trie 图（每个节点除了指向父亲，还有指向深度小于等于自身的节点的出边）。</p>
-<p>{% folding "build" %}</p>
 <p>下面给出的是 AC 自动机的构建部分的代码。</p>
 <details class="note"><summary>Build</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
  2
