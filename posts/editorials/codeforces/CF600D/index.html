@@ -9,7 +9,7 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
       
-        <link rel="canonical" href="https://leverimmy.top/posts/editorials/codeforces/CF1393D/">
+        <link rel="canonical" href="https://leverimmy.top/posts/editorials/codeforces/CF600D/">
       
       
       <link rel="shortcut icon" href="../../../../assets/img/favicon.ico">
@@ -17,7 +17,7 @@
     
     
       
-        <title>CF1393D - Clever_Jimmy's Blog</title>
+        <title>CF600D - Clever_Jimmy's Blog</title>
       
     
     
@@ -81,7 +81,7 @@
           </span>
           <span class="md-header-nav__topic md-ellipsis">
             
-              CF1393D
+              CF600D
             
           </span>
         </div>
@@ -478,11 +478,63 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../CF600D/" title="CF600D" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        CF600D
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="CF600D" class="md-nav__link md-nav__link--active">
       CF600D
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    题意简述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    解题思路
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    代码实现
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -574,63 +626,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        CF1393D
-        <span class="md-nav__icon md-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
-        </span>
-      </label>
-    
-    <a href="./" title="CF1393D" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../CF1393D/" title="CF1393D" class="md-nav__link">
       CF1393D
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    题意简述
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    解题思路
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    代码实现
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1250,30 +1250,21 @@
                   
                 
                 
-                  <h1>CF1393D</h1>
+                  <h1>CF600D</h1>
                 
                 <div class="admonition abstract">
 <p class="admonition-title">知识点</p>
 <ul>
-<li>动态规划</li>
-<li>悬线法</li>
+<li>计算几何</li>
+<li>余弦定理</li>
 </ul>
 </div>
 <h2 id="_1"><strong>题意简述</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>给定一个 <span class="arithmatex">\(n \times m\)</span> 的矩阵 <span class="arithmatex">\(A\)</span>，求矩阵中所有的（可重叠）每个元素均相等的斜 <span class="arithmatex">\(45^{\circ}\)</span> 的正方形的边长的总个数<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>。</p>
-<p>数据范围：<span class="arithmatex">\(1 \le n, m \le 2\cdot 10^3\)</span>。</p>
-<div class="admonition example">
-<p class="admonition-title">一些「合法的斜正方形」和「不合法的斜正方形」的例子</p>
-<p>合法的斜正方形：</p>
-<p><img alt="合法的斜正方形" src="valid.png" /></p>
-<p>不合法的斜正方形：</p>
-<p><img alt="不合法的斜正方形" src="invalid.png" /></p>
-</div>
+<p>求两个圆的交的面积<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>。</p>
+<p>数据范围：<span class="arithmatex">\(-10^9 \le x_1, y_1, x_2, y_2 \le 10^9\)</span>，<span class="arithmatex">\(1 \le r_1, r_2 \le 10^9\)</span>。</p>
 <h2 id="_2"><strong>解题思路</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>设 <span class="arithmatex">\(f(i, j)\)</span> 表示以 <span class="arithmatex">\((i, j)\)</span> 为最下方的边界，最大的合法的正方形，此边界到正方形中心的距离。</p>
-<p>不难发现答案为 <span class="arithmatex">\(\textrm{ans} = \sum_{i = 1}^{n}\sum_{j = 1}^{m}f(i, j)\)</span>。</p>
-<p>如果 <span class="arithmatex">\((i, j)\)</span> 能被左上方区域拓展出来，那么一定要满足 <span class="arithmatex">\(A_{i, j} = A_{i - 1, j - 1} = A_{i - 1, j} = A_{i - 1, j + 1} = A_{i - 2, j}\)</span>。</p>
-<p>递推式即为 <span class="arithmatex">\(f(i, j) = \min\{f(i - 1, j - 1), f(i - 1, j), f(i - 2, j)\} + 1\)</span>。</p>
+<p>用余弦定理解三角形即可，然后用 <span class="arithmatex">\(S = \dfrac{1}{2}ab\sin C\)</span> 来求三角形面积，<span class="arithmatex">\(S = \dfrac{1}{2}\alpha r^2\)</span> 来求扇形面积，相减即可得到答案。</p>
+<p>卡精度。</p>
 <h2 id="_3"><strong>代码实现</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>核心部分已用高亮标出。</p>
 <details class="note"><summary>Code</summary><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span> 1
@@ -1312,65 +1303,41 @@
 34
 35
 36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cp">#include</span> <span class="cpf">&lt;bits/stdc++.h&gt;</span><span class="cp"></span>
-<span class="cp">#define LL long long</span>
+37</pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="cp">#include</span> <span class="cpf">&lt;bits/stdc++.h&gt;</span><span class="cp"></span>
+<span class="cp">#define LD long double</span>
 
-<span class="k">namespace</span> <span class="n">io</span> <span class="p">{</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">read</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span> <span class="n">_x</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ch</span><span class="p">;</span> <span class="n">_x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">isdigit</span><span class="p">(</span><span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">()))</span> <span class="n">f</span> <span class="o">|=</span> <span class="n">ch</span> <span class="o">==</span> <span class="sc">&#39;-&#39;</span><span class="p">;</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">isdigit</span><span class="p">(</span><span class="n">ch</span><span class="p">))</span> <span class="n">_x</span> <span class="o">=</span> <span class="n">_x</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">ch</span> <span class="o">-</span> <span class="sc">&#39;0&#39;</span><span class="p">,</span> <span class="n">ch</span> <span class="o">=</span> <span class="n">getchar</span><span class="p">();</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="n">_x</span> <span class="o">=</span> <span class="o">-</span><span class="n">_x</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="p">,</span> <span class="k">typename</span> <span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">read</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">_f</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;</span> <span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">read</span><span class="p">(</span><span class="n">_f</span><span class="p">),</span> <span class="n">read</span><span class="p">(</span><span class="n">args</span> <span class="p">...);</span>
-    <span class="p">}</span>
-    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">_deal</span><span class="p">(</span><span class="kt">char</span> <span class="n">ch</span><span class="p">)</span> <span class="p">{</span> <span class="n">putchar</span><span class="p">(</span><span class="n">ch</span><span class="p">);</span> <span class="p">}</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">_deal</span><span class="p">(</span><span class="n">T</span> <span class="n">_x</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">_x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">putchar</span><span class="p">(</span><span class="sc">&#39;-&#39;</span><span class="p">),</span> <span class="n">_x</span> <span class="o">=</span> <span class="o">-</span><span class="n">_x</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">_x</span> <span class="o">&gt;</span> <span class="mi">9</span><span class="p">)</span> <span class="n">_deal</span><span class="p">(</span><span class="n">_x</span> <span class="o">/</span> <span class="mi">10</span><span class="p">);</span>
-        <span class="n">putchar</span><span class="p">(</span><span class="n">_x</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">+</span> <span class="sc">&#39;0&#39;</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="kr">inline</span> <span class="kt">void</span> <span class="n">write</span><span class="p">()</span> <span class="p">{}</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="p">,</span> <span class="k">typename</span> <span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">write</span><span class="p">(</span><span class="n">T</span> <span class="n">_f</span><span class="p">,</span> <span class="n">Args</span> <span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">_deal</span><span class="p">(</span><span class="n">_f</span><span class="p">),</span> <span class="n">write</span><span class="p">(</span><span class="n">args</span><span class="p">...);</span>
-    <span class="p">}</span>
+<span class="k">const</span> <span class="n">LD</span> <span class="n">PI</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">acos</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="n">LD</span> <span class="n">ra</span><span class="p">,</span> <span class="n">rb</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">POINT</span> <span class="p">{</span>
+    <span class="n">LD</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">;</span>
+
+<span class="n">LD</span> <span class="nf">dist</span><span class="p">(</span><span class="n">POINT</span> <span class="n">a</span><span class="p">,</span> <span class="n">POINT</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">((</span><span class="n">a</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">));</span>
 <span class="p">}</span>
 
-<span class="k">const</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="mf">2e3</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">M</span> <span class="o">=</span> <span class="mf">2e3</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">f</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">M</span><span class="p">],</span> <span class="n">ans</span><span class="p">;</span>
-<span class="kt">char</span> <span class="n">a</span><span class="p">[</span><span class="n">N</span><span class="p">][</span><span class="n">M</span><span class="p">];</span>
+<span class="n">LD</span> <span class="nf">solve</span><span class="p">(</span><span class="n">LD</span> <span class="n">a</span><span class="p">,</span> <span class="n">LD</span> <span class="n">b</span><span class="p">,</span> <span class="n">LD</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+<span class="hll">    <span class="n">LD</span> <span class="n">cosC</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">-</span> <span class="n">c</span> <span class="o">*</span> <span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">);</span>
+</span><span class="hll">    <span class="n">LD</span> <span class="n">angC</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">acos</span><span class="p">(</span><span class="n">cosC</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class="hll">    <span class="n">LD</span> <span class="n">sin2C</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">sin</span><span class="p">(</span><span class="n">ang2C</span><span class="p">);</span>
+</span><span class="hll">    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">ang2C</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">sin2C</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class="p">}</span>
 
 <span class="kt">int32_t</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">io</span><span class="o">::</span><span class="n">read</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">scanf</span><span class="p">(</span><span class="s">&quot;%s&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">m</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="hll">            <span class="k">if</span><span class="p">(</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">&amp;&amp;</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">j</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">m</span>
-</span><span class="hll">            <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class="hll">            <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
-</span><span class="hll">            <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
-</span><span class="hll">            <span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
-</span><span class="hll">                <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span> <span class="n">std</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">][</span><span class="n">j</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</span>            <span class="n">ans</span> <span class="o">+=</span> <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
-        <span class="p">}</span>
-    <span class="n">io</span><span class="o">::</span><span class="n">write</span><span class="p">(</span><span class="n">ans</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">A</span><span class="p">.</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="n">A</span><span class="p">.</span><span class="n">y</span> <span class="o">&gt;&gt;</span> <span class="n">ra</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">B</span><span class="p">.</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="n">B</span><span class="p">.</span><span class="n">y</span> <span class="o">&gt;&gt;</span> <span class="n">rb</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">ra</span> <span class="o">&gt;</span> <span class="n">rb</span><span class="p">)</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">rb</span><span class="p">);</span>
+    <span class="n">LD</span> <span class="n">dis</span> <span class="o">=</span> <span class="n">dist</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">dis</span> <span class="o">&gt;=</span> <span class="n">ra</span> <span class="o">+</span> <span class="n">rb</span><span class="p">)</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;0&quot;</span><span class="p">);</span>
+    <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">dis</span> <span class="o">+</span> <span class="n">ra</span> <span class="o">&lt;=</span> <span class="n">rb</span><span class="p">)</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%.20f&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">PI</span> <span class="o">*</span> <span class="n">ra</span> <span class="o">*</span> <span class="n">ra</span><span class="p">));</span>
+    <span class="k">else</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%.20f&quot;</span><span class="p">,</span> <span class="p">(</span><span class="kt">double</span><span class="p">)(</span><span class="n">solve</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dis</span><span class="p">,</span> <span class="n">rb</span><span class="p">)</span> <span class="o">+</span> <span class="n">solve</span><span class="p">(</span><span class="n">rb</span><span class="p">,</span> <span class="n">dis</span><span class="p">,</span> <span class="n">ra</span><span class="p">)));</span>
+
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -1381,7 +1348,7 @@
 <hr />
 <ol>
 <li id="fn:1">
-<p>原题链接: <a href="https://codeforces.com/problemset/problem/1393/D">D. Rarity and New Dress</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>原题链接: <a href="http://codeforces.com/problemset/problem/600/D">D. Area of Two Circles' Intersection</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
@@ -1403,7 +1370,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="../CF1392E/" title="CF1392E" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../CF600A/" title="CF600A" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -1412,19 +1379,19 @@
                 <span class="md-footer-nav__direction">
                   上一页
                 </span>
-                CF1392E
+                CF600A
               </div>
             </div>
           </a>
         
         
-          <a href="../../luogu/" title="洛谷" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../CF600E/" title="CF600E" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   下一页
                 </span>
-                洛谷
+                CF600E
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
